@@ -1,0 +1,114 @@
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    align-items: start;
+}
+
+.pricing-card {
+    background: var(--color-dark-gray);
+    border: 1px solid var(--color-medium-gray);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-neon-green);
+    box-shadow: var(--shadow-neon);
+}
+
+.pricing-card.featured {
+    background: var(--gradient-dark);
+    border: 2px solid var(--color-neon-green);
+    box-shadow: var(--shadow-neon);
+    transform: scale(1.05);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.05) translateY(-8px);
+}
+
+.pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gradient-neon);
+    color: var(--color-black);
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pricing-icon {
+    font-size: 64px;
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.pricing-card h3 {
+    text-align: center;
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-lg);
+}
+
+.pricing-feature-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.pricing-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+}
+
+.check {
+    color: var(--color-neon-green);
+    font-weight: 700;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 255, 140, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.pricing-feature span:last-child {
+    font-size: var(--font-size-sm);
+    color: var(--color-light-gray);
+    line-height: 1.6;
+}
+
+.pricing-card .btn {
+    width: 100%;
+    justify-content: center;
+    margin-top: var(--spacing-md);
+}
+
+@media (max-width: 1024px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .pricing-card.featured {
+        transform: scale(1);
+    }
+
+    .pricing-card.featured:hover {
+        transform: translateY(-8px);
+    }
+}

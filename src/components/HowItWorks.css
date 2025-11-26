@@ -1,0 +1,113 @@
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-2xl);
+    position: relative;
+}
+
+.step-card {
+    background: var(--color-dark-gray);
+    border: 1px solid var(--color-medium-gray);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    text-align: center;
+    position: relative;
+    transition: all var(--transition-normal);
+}
+
+.step-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-neon-green);
+    box-shadow: var(--shadow-neon);
+}
+
+.step-number {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    color: var(--color-light-gray);
+    background: var(--color-medium-gray);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-icon {
+    font-size: 48px;
+    margin-bottom: var(--spacing-md);
+}
+
+.step-card h3 {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-white);
+}
+
+.step-card p {
+    font-size: var(--font-size-sm);
+    color: var(--color-light-gray);
+}
+
+.step-arrow {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: var(--font-size-2xl);
+    color: var(--color-neon-green);
+    z-index: 1;
+}
+
+.cta-box {
+    background: var(--gradient-dark);
+    border: 2px solid var(--color-neon-green);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-lg);
+    box-shadow: var(--shadow-neon);
+}
+
+.cta-content h3 {
+    font-size: var(--font-size-xl);
+    margin-bottom: var(--spacing-xs);
+}
+
+.cta-content p {
+    font-size: var(--font-size-md);
+    color: var(--color-light-gray);
+}
+
+@media (max-width: 1200px) {
+    .steps-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .step-card:nth-child(3) .step-arrow,
+    .step-card:nth-child(4) .step-arrow {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .steps-container {
+        grid-template-columns: 1fr;
+    }
+
+    .step-arrow {
+        display: none;
+    }
+
+    .cta-box {
+        flex-direction: column;
+        text-align: center;
+    }
+}

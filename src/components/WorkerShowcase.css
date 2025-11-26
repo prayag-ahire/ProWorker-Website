@@ -1,0 +1,120 @@
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+}
+
+.showcase-item {
+    background: var(--color-dark-gray);
+    border: 1px solid var(--color-medium-gray);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.showcase-item:hover {
+    transform: translateY(-8px);
+    border-color: var(--color-neon-green);
+    box-shadow: var(--shadow-neon);
+}
+
+.showcase-item.large {
+    grid-column: span 2;
+    grid-row: span 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: var(--gradient-neon);
+    color: var(--color-black);
+    padding: var(--spacing-xl);
+}
+
+.showcase-item.large-horizontal {
+    grid-column: span 2;
+}
+
+.showcase-badge {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: var(--color-black);
+    color: var(--color-white);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+}
+
+.showcase-content h3 {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-black);
+}
+
+.showcase-content p {
+    font-size: var(--font-size-md);
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.showcase-icon {
+    font-size: 48px;
+    margin-bottom: var(--spacing-md);
+}
+
+.showcase-item h4 {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-white);
+}
+
+.showcase-item p {
+    font-size: var(--font-size-sm);
+    color: var(--color-light-gray);
+}
+
+.showcase-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-light-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+@media (max-width: 1024px) {
+    .showcase-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .showcase-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .showcase-item.large,
+    .showcase-item.large-horizontal {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .showcase-stats {
+        grid-template-columns: 1fr;
+    }
+}
