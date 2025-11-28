@@ -1,7 +1,7 @@
 .section-cta {
     position: relative;
     overflow: hidden;
-    background: var(--gradient-dark);
+    background: var(--color-gray-900);
 }
 
 .cta-background {
@@ -15,7 +15,7 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(120px);
-    opacity: 0.4;
+    opacity: 0.15;
     animation: pulse 5s ease-in-out infinite;
 }
 
@@ -24,7 +24,7 @@
     left: -10%;
     width: 600px;
     height: 600px;
-    background: var(--color-neon-green);
+    background: var(--color-gray-600);
 }
 
 .cta-glow-2 {
@@ -32,7 +32,7 @@
     right: -10%;
     width: 700px;
     height: 700px;
-    background: var(--color-electric-blue);
+    background: var(--color-gray-700);
     animation-delay: 2.5s;
 }
 
@@ -48,11 +48,12 @@
     font-size: var(--font-size-3xl);
     margin-bottom: var(--spacing-md);
     line-height: 1.2;
+    color: var(--color-white);
 }
 
 .cta-subtitle {
     font-size: var(--font-size-lg);
-    color: var(--color-light-gray);
+    color: var(--color-gray-400);
     margin-bottom: var(--spacing-2xl);
     max-width: 700px;
     margin-left: auto;
@@ -79,8 +80,8 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    background: var(--color-dark-gray);
-    border: 1px solid var(--color-medium-gray);
+    background: var(--color-gray-800);
+    border: 1px solid var(--color-gray-700);
     border-radius: var(--radius-md);
     padding: var(--spacing-sm) var(--spacing-lg);
     transition: all var(--transition-normal);
@@ -88,9 +89,9 @@
 }
 
 .badge-item:hover {
-    border-color: var(--color-neon-green);
+    border-color: var(--color-white);
     transform: translateY(-4px);
-    box-shadow: var(--shadow-neon);
+    box-shadow: var(--shadow-lg);
 }
 
 .badge-icon {
@@ -103,7 +104,7 @@
 
 .badge-label {
     font-size: 11px;
-    color: var(--color-light-gray);
+    color: var(--color-gray-400);
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -120,7 +121,7 @@
     justify-content: center;
     flex-wrap: wrap;
     padding-top: var(--spacing-xl);
-    border-top: 1px solid var(--color-medium-gray);
+    border-top: 1px solid var(--color-gray-700);
 }
 
 .trust-item {
@@ -135,7 +136,7 @@
 
 .trust-text {
     font-size: var(--font-size-sm);
-    color: var(--color-light-gray);
+    color: var(--color-gray-400);
     font-weight: 500;
 }
 

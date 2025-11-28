@@ -1,11 +1,44 @@
+import { useEffect, useRef } from 'react';
 import './Hero.css';
+import Counter from './Counter';
 
 function Hero() {
+    const mockupsRef = useRef(null);
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            if (!mockupsRef.current) return;
+
+            const { clientX, clientY } = e;
+            const { innerWidth, innerHeight } = window;
+
+            const xPercent = (clientX / innerWidth - 0.5) * 2;
+            const yPercent = (clientY / innerHeight - 0.5) * 2;
+
+            const mockups = mockupsRef.current.querySelectorAll('.mockup');
+            mockups.forEach((mockup, index) => {
+                const depth = (index + 1) * 5;
+                const xTilt = xPercent * depth;
+                const yTilt = yPercent * depth;
+
+                mockup.style.transform = `
+          translate(${mockup.dataset.originalTransform || ''}) 
+          rotateY(${xTilt}deg) 
+          rotateX(${-yTilt}deg)
+        `;
+            });
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
     return (
         <section className="hero">
             <div className="hero-background">
                 <div className="hero-glow hero-glow-1"></div>
                 <div className="hero-glow hero-glow-2"></div>
+                <div className="hero-glow hero-glow-3"></div>
             </div>
 
             <div className="container">
@@ -15,7 +48,7 @@ function Hero() {
                             ⚡ Trusted by 10,000+ Users
                         </div>
 
-                        <h1 className="animate-fade-in-up delay-100">
+                        <h1 className="hero-title animate-fade-in-up delay-100">
                             Professional Workers.<br />
                             Anytime. Anywhere.
                         </h1>
@@ -39,37 +72,43 @@ function Hero() {
 
                         <div className="hero-stats animate-fade-in-up delay-400">
                             <div className="stat">
-                                <div className="stat-number text-gradient">50K+</div>
+                                <div className="stat-number">
+                                    <Counter end={50} suffix="K+" />
+                                </div>
                                 <div className="stat-label">Active Users</div>
                             </div>
                             <div className="stat">
-                                <div className="stat-number text-gradient">5K+</div>
+                                <div className="stat-number">
+                                    <Counter end={5} suffix="K+" />
+                                </div>
                                 <div className="stat-label">Verified Workers</div>
                             </div>
                             <div className="stat">
-                                <div className="stat-number text-gradient">4.8★</div>
+                                <div className="stat-number">
+                                    <Counter end={4.8} decimals={1} suffix="★" />
+                                </div>
                                 <div className="stat-label">Average Rating</div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="hero-mockups animate-fade-in delay-300">
-                        <div className="mockup mockup-1 animate-float">
+                    <div className="hero-mockups animate-fade-in delay-300" ref={mockupsRef}>
+                        <div className="mockup mockup-1 animate-float" data-original-transform="-50%, 0">
                             <img
-                                src="C:/Users/PrayagAhire/.gemini/antigravity/brain/2570e0f3-b515-4146-92ef-cab04b342cea/proworker_app_mockup_1764183214957.png"
-                                alt="ProWorker App - Worker List"
+                                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=800&fit=crop&q=90"
+                                alt="ProWorker App - Profiles"
                             />
                         </div>
-                        <div className="mockup mockup-2 animate-float delay-200">
+                        <div className="mockup mockup-2 animate-float delay-200" data-original-transform="-50%, -50%">
                             <img
-                                src="C:/Users/PrayagAhire/.gemini/antigravity/brain/2570e0f3-b515-4146-92ef-cab04b342cea/worker_profile_screen_1764183233512.png"
-                                alt="ProWorker App - Worker Profile"
+                                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=800&fit=crop&q=90"
+                                alt="ProWorker App - Dashboard"
                             />
                         </div>
-                        <div className="mockup mockup-3 animate-float delay-400">
+                        <div className="mockup mockup-3 animate-float delay-400" data-original-transform="0, -50%">
                             <img
-                                src="C:/Users/PrayagAhire/.gemini/antigravity/brain/2570e0f3-b515-4146-92ef-cab04b342cea/booking_screen_1764183248978.png"
-                                alt="ProWorker App - Booking Screen"
+                                src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=800&fit=crop&q=90"
+                                alt="ProWorker App - Booking"
                             />
                         </div>
                     </div>

@@ -7,8 +7,8 @@
 }
 
 .step-card {
-    background: var(--color-dark-gray);
-    border: 1px solid var(--color-medium-gray);
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
     border-radius: var(--radius-lg);
     padding: var(--spacing-lg);
     text-align: center;
@@ -18,8 +18,8 @@
 
 .step-card:hover {
     transform: translateY(-8px);
-    border-color: var(--color-neon-green);
-    box-shadow: var(--shadow-neon);
+    border-color: var(--color-black);
+    box-shadow: var(--shadow-xl);
 }
 
 .step-number {
@@ -28,8 +28,8 @@
     right: var(--spacing-md);
     font-size: var(--font-size-xs);
     font-weight: 700;
-    color: var(--color-light-gray);
-    background: var(--color-medium-gray);
+    color: var(--color-white);
+    background: var(--color-black);
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -46,12 +46,12 @@
 .step-card h3 {
     font-size: var(--font-size-md);
     margin-bottom: var(--spacing-sm);
-    color: var(--color-white);
+    color: var(--color-black);
 }
 
 .step-card p {
     font-size: var(--font-size-sm);
-    color: var(--color-light-gray);
+    color: var(--color-gray-600);
 }
 
 .step-arrow {
@@ -60,20 +60,20 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: var(--font-size-2xl);
-    color: var(--color-neon-green);
+    color: var(--color-gray-400);
     z-index: 1;
 }
 
 .cta-box {
-    background: var(--gradient-dark);
-    border: 2px solid var(--color-neon-green);
+    background: var(--color-gray-50);
+    border: 2px solid var(--color-black);
     border-radius: var(--radius-xl);
     padding: var(--spacing-xl);
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--spacing-lg);
-    box-shadow: var(--shadow-neon);
+    box-shadow: var(--shadow-md);
 }
 
 .cta-content h3 {
@@ -83,7 +83,7 @@
 
 .cta-content p {
     font-size: var(--font-size-md);
-    color: var(--color-light-gray);
+    color: var(--color-gray-600);
 }
 
 @media (max-width: 1200px) {

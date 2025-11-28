@@ -6,8 +6,8 @@
 }
 
 .pricing-card {
-    background: var(--color-dark-gray);
-    border: 1px solid var(--color-medium-gray);
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
     border-radius: var(--radius-xl);
     padding: var(--spacing-xl);
     transition: all var(--transition-normal);
@@ -16,14 +16,14 @@
 
 .pricing-card:hover {
     transform: translateY(-8px);
-    border-color: var(--color-neon-green);
-    box-shadow: var(--shadow-neon);
+    border-color: var(--color-black);
+    box-shadow: var(--shadow-xl);
 }
 
 .pricing-card.featured {
-    background: var(--gradient-dark);
-    border: 2px solid var(--color-neon-green);
-    box-shadow: var(--shadow-neon);
+    background: var(--color-gray-50);
+    border: 2px solid var(--color-black);
+    box-shadow: var(--shadow-lg);
     transform: scale(1.05);
 }
 
@@ -36,8 +36,8 @@
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--gradient-neon);
-    color: var(--color-black);
+    background: var(--color-black);
+    color: var(--color-white);
     padding: 6px 16px;
     border-radius: var(--radius-full);
     font-size: var(--font-size-xs);
@@ -72,12 +72,12 @@
 }
 
 .check {
-    color: var(--color-neon-green);
+    color: var(--color-white);
+    background: var(--color-black);
     font-weight: 700;
     flex-shrink: 0;
     width: 20px;
     height: 20px;
-    background: rgba(0, 255, 140, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -87,7 +87,7 @@
 
 .pricing-feature span:last-child {
     font-size: var(--font-size-sm);
-    color: var(--color-light-gray);
+    color: var(--color-gray-600);
     line-height: 1.6;
 }
 

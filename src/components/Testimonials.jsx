@@ -1,6 +1,10 @@
+import { useState, useEffect } from 'react';
 import './Testimonials.css';
 
 function Testimonials() {
+    const [activeClientIndex, setActiveClientIndex] = useState(0);
+    const [activeWorkerIndex, setActiveWorkerIndex] = useState(0);
+
     const clientTestimonials = [
         {
             name: 'Sarah Johnson',
@@ -22,6 +26,13 @@ function Testimonials() {
             rating: 5,
             text: 'The rescheduling feature saved me when plans changed. Customer support was amazing too!',
             avatar: '👩‍💼'
+        },
+        {
+            name: 'James Wilson',
+            role: 'Property Manager',
+            rating: 5,
+            text: 'Managing multiple properties is easy now. I can book different workers for different locations seamlessly.',
+            avatar: '👨‍💼'
         }
     ];
 
@@ -46,11 +57,33 @@ function Testimonials() {
             rating: 5,
             text: 'The training videos helped me improve my skills. Now I get more 5-star reviews!',
             avatar: '👨‍🔧'
+        },
+        {
+            name: 'Isabella Chen',
+            role: 'Tutor',
+            rating: 5,
+            text: 'ProWorker connects me with families looking for quality tutoring. My calendar is always full!',
+            avatar: '👩‍🏫'
         }
     ];
 
-    const TestimonialCard = ({ testimonial, type }) => (
-        <div className={`testimonial-card ${type}`}>
+    useEffect(() => {
+        const clientInterval = setInterval(() => {
+            setActiveClientIndex((prev) => (prev + 1) % clientTestimonials.length);
+        }, 5000);
+
+        const workerInterval = setInterval(() => {
+            setActiveWorkerIndex((prev) => (prev + 1) % workerTestimonials.length);
+        }, 5500);
+
+        return () => {
+            clearInterval(clientInterval);
+            clearInterval(workerInterval);
+        };
+    }, [clientTestimonials.length, workerTestimonials.length]);
+
+    const TestimonialCard = ({ testimonial, type, isActive }) => (
+        <div className={`testimonial-card ${type} ${isActive ? 'active' : ''}`}>
             <div className="testimonial-header">
                 <div className="avatar">{testimonial.avatar}</div>
                 <div className="testimonial-info">
@@ -81,9 +114,24 @@ function Testimonials() {
                             <span className="title-icon">👥</span>
                             Client Reviews
                         </h3>
-                        <div className="testimonials-list">
+                        <div className="testimonials-carousel">
                             {clientTestimonials.map((testimonial, index) => (
-                                <TestimonialCard key={index} testimonial={testimonial} type="client" />
+                                <TestimonialCard
+                                    key={index}
+                                    testimonial={testimonial}
+                                    type="client"
+                                    isActive={index === activeClientIndex}
+                                />
+                            ))}
+                        </div>
+                        <div className="carousel-dots">
+                            {clientTestimonials.map((_, index) => (
+                                <button
+                                    key={index}
+                                    className={`dot ${index === activeClientIndex ? 'active' : ''}`}
+                                    onClick={() => setActiveClientIndex(index)}
+                                    aria-label={`Go to testimonial ${index + 1}`}
+                                />
                             ))}
                         </div>
                     </div>
@@ -93,9 +141,24 @@ function Testimonials() {
                             <span className="title-icon">🔧</span>
                             Worker Reviews
                         </h3>
-                        <div className="testimonials-list">
+                        <div className="testimonials-carousel">
                             {workerTestimonials.map((testimonial, index) => (
-                                <TestimonialCard key={index} testimonial={testimonial} type="worker" />
+                                <TestimonialCard
+                                    key={index}
+                                    testimonial={testimonial}
+                                    type="worker"
+                                    isActive={index === activeWorkerIndex}
+                                />
+                            ))}
+                        </div>
+                        <div className="carousel-dots">
+                            {workerTestimonials.map((_, index) => (
+                                <button
+                                    key={index}
+                                    className={`dot ${index === activeWorkerIndex ? 'active' : ''}`}
+                                    onClick={() => setActiveWorkerIndex(index)}
+                                    aria-label={`Go to testimonial ${index + 1}`}
+                                />
                             ))}
                         </div>
                     </div>

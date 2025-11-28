@@ -5,8 +5,8 @@
 }
 
 .feature-card {
-    background: var(--color-dark-gray);
-    border: 1px solid var(--color-medium-gray);
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
     border-radius: var(--radius-lg);
     padding: var(--spacing-xl);
     text-align: center;
@@ -22,30 +22,15 @@
     left: 0;
     right: 0;
     height: 3px;
+    background: var(--color-black);
     transform: scaleX(0);
     transition: transform var(--transition-normal);
 }
 
-.feature-card.neon::before {
-    background: var(--color-neon-green);
-}
-
-.feature-card.blue::before {
-    background: var(--color-electric-blue);
-}
-
 .feature-card:hover {
     transform: translateY(-8px);
-}
-
-.feature-card.neon:hover {
-    border-color: var(--color-neon-green);
-    box-shadow: var(--shadow-neon);
-}
-
-.feature-card.blue:hover {
-    border-color: var(--color-electric-blue);
-    box-shadow: var(--shadow-blue);
+    border-color: var(--color-black);
+    box-shadow: var(--shadow-xl);
 }
 
 .feature-card:hover::before {
@@ -66,12 +51,12 @@
 .feature-card h3 {
     font-size: var(--font-size-md);
     margin-bottom: var(--spacing-sm);
-    color: var(--color-white);
+    color: var(--color-black);
 }
 
 .feature-card p {
     font-size: var(--font-size-sm);
-    color: var(--color-light-gray);
+    color: var(--color-gray-600);
     line-height: 1.6;
 }
 

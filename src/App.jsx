@@ -31,7 +31,23 @@ function App() {
     const animatedElements = document.querySelectorAll('.scroll-animate');
     animatedElements.forEach(el => observer.observe(el));
 
-    return () => observer.disconnect();
+    // Parallax scrolling effect
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const parallaxElements = document.querySelectorAll('.section-glow::before, .hero-glow');
+
+      parallaxElements.forEach((el, index) => {
+        const speed = (index + 1) * 0.1;
+        el.style.transform = `translateY(${scrolled * speed}px)`;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
