@@ -57,7 +57,6 @@ function App() {
       <WhyProWorker />
       <HowItWorks />
       <WorkerShowcase />
-      <Features />
       <Testimonials />
       <Pricing />
       <FAQ />

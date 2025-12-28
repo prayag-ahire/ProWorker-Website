@@ -21,10 +21,10 @@
 }
 
 .faq-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 800px;
     margin: 0 auto;
 }
 
@@ -48,6 +48,10 @@
     align-items: center;
     cursor: pointer;
     background: var(--color-white);
+}
+
+.faq-header-card:hover {
+    background: var(--color-gray-50);
 }
 
 .faq-header-card h3 {
@@ -77,6 +81,11 @@
     padding: 0 24px 24px;
     background: var(--color-gray-50);
     border-top: 1px solid var(--color-gray-200);
+    cursor: default !important;
+}
+
+.faq-content * {
+    cursor: default !important;
 }
 
 .faq-content p {
@@ -85,6 +94,8 @@
     color: var(--color-gray-700);
     margin: 0;
     padding-top: 16px;
+    cursor: default !important;
+    user-select: text;
 }
 
 .faq-contact {
@@ -129,8 +140,7 @@
 
 @media (max-width: 768px) {
     .faq-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 12px;
     }
     
     .faq-header h2 {

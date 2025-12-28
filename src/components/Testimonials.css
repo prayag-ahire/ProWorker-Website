@@ -112,9 +112,13 @@
 
 .testimonial-text {
     font-size: var(--font-size-sm);
-    line-height: 1.7;
+    line-height: 1.6;
     color: var(--color-gray-600);
     font-style: italic;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 
 .carousel-dots {

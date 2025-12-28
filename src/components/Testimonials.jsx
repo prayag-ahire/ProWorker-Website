@@ -70,11 +70,11 @@ function Testimonials() {
     useEffect(() => {
         const clientInterval = setInterval(() => {
             setActiveClientIndex((prev) => (prev + 1) % clientTestimonials.length);
-        }, 5000);
+        }, 4000);
 
         const workerInterval = setInterval(() => {
             setActiveWorkerIndex((prev) => (prev + 1) % workerTestimonials.length);
-        }, 5500);
+        }, 4000);
 
         return () => {
             clearInterval(clientInterval);

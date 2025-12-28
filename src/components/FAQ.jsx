@@ -48,24 +48,27 @@ function FAQ() {
                 </div>
 
                 <div className="faq-grid">
-                    {faqs.map((faq, index) => (
-                        <div key={index} className="faq-card">
-                            <div 
-                                className="faq-header-card"
-                                onClick={() => toggleFAQ(index)}
-                            >
-                                <h3>{faq.question}</h3>
-                                <span className="faq-icon">
-                                    {openItems.includes(index) ? '−' : '+'}
-                                </span>
-                            </div>
-                            {openItems.includes(index) && (
-                                <div className="faq-content">
-                                    <p>{faq.answer}</p>
+                    {faqs.map((faq, index) => {
+                        const isOpen = openItems.includes(index);
+                        return (
+                            <div key={`faq-${index}`} className="faq-card">
+                                <div 
+                                    className="faq-header-card"
+                                    onClick={() => toggleFAQ(index)}
+                                >
+                                    <h3>{faq.question}</h3>
+                                    <span className="faq-icon">
+                                        {isOpen ? '−' : '+'}
+                                    </span>
                                 </div>
-                            )}
-                        </div>
-                    ))}
+                                {isOpen && (
+                                    <div className="faq-content">
+                                        <p>{faq.answer}</p>
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
 
                 <div className="faq-contact">

@@ -34,7 +34,7 @@
 .logo-text {
     font-size: var(--font-size-lg);
     font-weight: 800;
-    color: var(--color-black);
+    color: var(--color-black) !important;
     letter-spacing: -0.02em;
 }
 
