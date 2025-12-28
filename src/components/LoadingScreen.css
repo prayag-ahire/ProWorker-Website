@@ -1,0 +1,91 @@
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--color-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeOut 0.5s ease-out 1s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+.loading-content {
+    text-align: center;
+    max-width: 400px;
+}
+
+.logo-animation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xl);
+    animation: logoFadeIn 0.8s ease-out;
+}
+
+@keyframes logoFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.logo-animation .logo-text {
+    font-size: 48px;
+    font-weight: 800;
+    background: var(--gradient-neon);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.02em;
+}
+
+.logo-animation .logo-badge {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 12px;
+    background: var(--color-neon-green);
+    color: var(--color-black);
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.05em;
+}
+
+.loading-bar-container {
+    width: 100%;
+    height: 4px;
+    background: var(--color-medium-gray);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+}
+
+.loading-bar {
+    height: 100%;
+    background: var(--gradient-neon);
+    transition: width 0.3s ease-out;
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 10px rgba(0, 255, 140, 0.5);
+}
+
+.loading-text {
+    font-size: var(--font-size-sm);
+    color: var(--color-light-gray);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Note: To use this loading screen, import it in App.jsx and add it at the top of the component tree */
