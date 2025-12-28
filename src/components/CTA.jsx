@@ -2,73 +2,60 @@ import './CTA.css';
 
 function CTA() {
     return (
-        <section id="download" className="section section-cta">
-            <div className="cta-background">
-                <div className="cta-glow cta-glow-1"></div>
-                <div className="cta-glow cta-glow-2"></div>
-            </div>
-
+        <section className="cta-section">
             <div className="container">
-                <div className="cta-content scroll-animate">
-                    <h2>
-                        Join Thousands of Clients & Workers<br />Using ProWorker
-                    </h2>
-                    <p className="cta-subtitle">
-                        Download the app now and experience the future of professional home services.
-                        Whether you're looking for trusted workers or want to grow your business, ProWorker is here for you.
-                    </p>
-
-                    <div className="cta-buttons">
-                        <a href="#" className="btn btn-primary btn-large">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M17.6 10.4L13 15V3H11V15L6.4 10.4L5 12L12 19L19 12L17.6 10.4Z" fill="currentColor" />
-                                <path d="M5 21H19V19H5V21Z" fill="currentColor" />
-                            </svg>
-                            Download for Clients
-                        </a>
-                        <a href="#worker" className="btn btn-secondary btn-large">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M20 6H12L10 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6ZM20 18H4V8H20V18Z" fill="currentColor" />
-                                <path d="M12 12C13.1 12 14 11.1 14 10C14 8.9 13.1 8 12 8C10.9 8 10 8.9 10 10C10 11.1 10.9 12 12 12Z" fill="currentColor" />
-                                <path d="M16.5 16.25C16.5 14.75 13.5 14 12 14C10.5 14 7.5 14.75 7.5 16.25V17H16.5V16.25Z" fill="currentColor" />
-                            </svg>
-                            Join as Worker
-                        </a>
+                <div className="cta-content">
+                    <div className="cta-header">
+                        <h2>Join Thousands of Clients & Workers Using ProWorker</h2>
+                        <p>Download the app now and experience the future of professional home services. Whether you're looking for trusted workers or want to grow your business, ProWorker is here for you.</p>
                     </div>
 
-                    <div className="download-badges">
-                        <div className="badge-item">
-                            <div className="badge-icon">📱</div>
-                            <div className="badge-text">
-                                <div className="badge-label">Download on the</div>
-                                <div className="badge-name">App Store</div>
-                            </div>
+                    <div className="cta-actions">
+                        <div className="action-buttons">
+                            <a href="#" className="cta-btn primary">
+                                <span className="btn-icon">📱</span>
+                                <span className="btn-text">Download for Clients</span>
+                            </a>
+                            <a href="#worker" className="cta-btn secondary">
+                                <span className="btn-icon">👨‍💼</span>
+                                <span className="btn-text">Join as Worker</span>
+                            </a>
                         </div>
-                        <div className="badge-item">
-                            <div className="badge-icon">🤖</div>
-                            <div className="badge-text">
-                                <div className="badge-label">Get it on</div>
-                                <div className="badge-name">Google Play</div>
+
+                        <div className="download-options">
+                            <div className="download-item">
+                                <span className="download-icon">📱</span>
+                                <div className="download-text">
+                                    <span className="download-label">Download on the</span>
+                                    <span className="download-name">App Store</span>
+                                </div>
+                            </div>
+                            <div className="download-item">
+                                <span className="download-icon">🤖</span>
+                                <div className="download-text">
+                                    <span className="download-label">Get it on</span>
+                                    <span className="download-name">Google Play</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="trust-indicators">
-                        <div className="trust-item">
-                            <div className="trust-icon">🔒</div>
-                            <div className="trust-text">Secure & Encrypted</div>
+                    <div className="trust-features">
+                        <div className="feature-item">
+                            <span className="feature-icon">🔒</span>
+                            <span className="feature-text">Secure & Encrypted</span>
                         </div>
-                        <div className="trust-item">
-                            <div className="trust-icon">✓</div>
-                            <div className="trust-text">Verified Workers</div>
+                        <div className="feature-item">
+                            <span className="feature-icon">✓</span>
+                            <span className="feature-text">Verified Workers</span>
                         </div>
-                        <div className="trust-item">
-                            <div className="trust-icon">⭐</div>
-                            <div className="trust-text">4.8 Average Rating</div>
+                        <div className="feature-item">
+                            <span className="feature-icon">⭐</span>
+                            <span className="feature-text">4.8 Average Rating</span>
                         </div>
-                        <div className="trust-item">
-                            <div className="trust-icon">👥</div>
-                            <div className="trust-text">50K+ Active Users</div>
+                        <div className="feature-item">
+                            <span className="feature-icon">👥</span>
+                            <span className="feature-text">50K+ Active Users</span>
                         </div>
                     </div>
                 </div>

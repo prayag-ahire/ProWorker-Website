@@ -7,28 +7,28 @@ function Testimonials() {
 
     const clientTestimonials = [
         {
-            name: 'Sarah Johnson',
+            name: 'Priya Sharma',
             role: 'Homeowner',
             rating: 5,
             text: 'Booked a plumber in 2 minutes! The pricing was transparent and the worker arrived exactly on time. Best service app ever!',
             avatar: '👩‍💼'
         },
         {
-            name: 'Michael Chen',
+            name: 'Arjun Patel',
             role: 'Apartment Owner',
             rating: 5,
             text: 'Loved the clean UI and pricing transparency. Being able to see reviews with actual photos gave me confidence to book.',
             avatar: '👨‍💻'
         },
         {
-            name: 'Emily Rodriguez',
+            name: 'Kavya Reddy',
             role: 'Small Business Owner',
             rating: 5,
             text: 'The rescheduling feature saved me when plans changed. Customer support was amazing too!',
             avatar: '👩‍💼'
         },
         {
-            name: 'James Wilson',
+            name: 'Rohit Gupta',
             role: 'Property Manager',
             rating: 5,
             text: 'Managing multiple properties is easy now. I can book different workers for different locations seamlessly.',
@@ -45,21 +45,21 @@ function Testimonials() {
             avatar: '👨‍🔧'
         },
         {
-            name: 'Maria Santos',
+            name: 'Sunita Singh',
             role: 'House Cleaner',
             rating: 5,
             text: 'This app really improved my income. I love managing my schedule and getting paid fairly.',
             avatar: '👩‍🦰'
         },
         {
-            name: 'David Thompson',
+            name: 'Vikram Joshi',
             role: 'Plumber',
             rating: 5,
             text: 'The training videos helped me improve my skills. Now I get more 5-star reviews!',
             avatar: '👨‍🔧'
         },
         {
-            name: 'Isabella Chen',
+            name: 'Meera Agarwal',
             role: 'Tutor',
             rating: 5,
             text: 'ProWorker connects me with families looking for quality tutoring. My calendar is always full!',

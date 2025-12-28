@@ -148,11 +148,43 @@
 
 @media (max-width: 768px) {
     .testimonials-container {
-        grid-template-columns: 1fr;
-        gap: var(--spacing-xl);
+        display: block;
+        gap: 0;
+    }
+
+    .testimonials-column {
+        margin-bottom: var(--spacing-xl);
     }
 
     .testimonials-carousel {
         height: 280px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        display: flex;
+        gap: var(--spacing-md);
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: var(--spacing-sm);
+    }
+
+    .testimonial-card {
+        position: relative;
+        min-width: 280px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        opacity: 1;
+        transform: none;
+        pointer-events: all;
+    }
+
+    .testimonial-header {
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+    }
+
+    .rating {
+        font-size: 14px;
+        flex-shrink: 0;
+        min-width: 80px;
     }
 }

@@ -1,167 +1,212 @@
-.section-cta {
-    position: relative;
-    overflow: hidden;
-    background: var(--color-gray-900);
-}
-
-.cta-background {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-}
-
-.cta-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.15;
-    animation: pulse 5s ease-in-out infinite;
-}
-
-.cta-glow-1 {
-    top: -20%;
-    left: -10%;
-    width: 600px;
-    height: 600px;
-    background: var(--color-gray-600);
-}
-
-.cta-glow-2 {
-    bottom: -20%;
-    right: -10%;
-    width: 700px;
-    height: 700px;
-    background: var(--color-gray-700);
-    animation-delay: 2.5s;
+.cta-section {
+    background: var(--color-white);
+    padding: 80px 0;
+    border-top: 1px solid var(--color-gray-200);
 }
 
 .cta-content {
-    text-align: center;
     max-width: 900px;
     margin: 0 auto;
-    position: relative;
-    z-index: 1;
+    text-align: center;
 }
 
-.cta-content h2 {
-    font-size: var(--font-size-3xl);
-    margin-bottom: var(--spacing-md);
+.cta-header {
+    margin-bottom: 50px;
+}
+
+.cta-header h2 {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--color-black);
+    margin-bottom: 20px;
     line-height: 1.2;
-    color: var(--color-white) !important;
 }
 
-.cta-subtitle {
-    font-size: var(--font-size-lg);
-    color: var(--color-gray-400);
-    margin-bottom: var(--spacing-2xl);
+.cta-header p {
+    font-size: 20px;
+    color: var(--color-gray-600);
+    line-height: 1.6;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 }
 
-.cta-buttons {
-    display: flex;
-    gap: var(--spacing-md);
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: var(--spacing-2xl);
+.cta-actions {
+    margin-bottom: 60px;
 }
 
-.download-badges {
+.action-buttons {
     display: flex;
-    gap: var(--spacing-lg);
+    gap: 20px;
     justify-content: center;
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: 40px;
     flex-wrap: wrap;
 }
 
-.badge-item {
+.cta-btn {
     display: flex;
     align-items: center;
-    gap: var(--spacing-sm);
-    background: var(--color-gray-800);
-    border: 1px solid var(--color-gray-700);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    transition: all var(--transition-normal);
-    cursor: pointer;
+    gap: 12px;
+    padding: 18px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    justify-content: center;
 }
 
-.badge-item:hover {
-    border-color: var(--color-white);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-}
-
-.badge-icon {
-    font-size: 40px;
-}
-
-.badge-text {
-    text-align: left;
-}
-
-.badge-label {
-    font-size: 11px;
-    color: var(--color-gray-400);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.badge-name {
-    font-size: var(--font-size-md);
-    font-weight: 700;
+.cta-btn.primary {
+    background: var(--color-black);
     color: var(--color-white);
 }
 
-.trust-indicators {
+.cta-btn.primary:hover {
+    background: var(--color-gray-800);
+    transform: translateY(-2px);
+}
+
+.cta-btn.secondary {
+    background: var(--color-white);
+    color: var(--color-black);
+    border: 2px solid var(--color-black);
+}
+
+.cta-btn.secondary:hover {
+    background: var(--color-black);
+    color: var(--color-white);
+    transform: translateY(-2px);
+}
+
+.btn-icon {
+    font-size: 20px;
+}
+
+.download-options {
     display: flex;
-    gap: var(--spacing-xl);
+    gap: 30px;
     justify-content: center;
     flex-wrap: wrap;
-    padding-top: var(--spacing-xl);
-    border-top: 1px solid var(--color-gray-700);
 }
 
-.trust-item {
+.download-item {
     display: flex;
     align-items: center;
-    gap: var(--spacing-xs);
+    gap: 16px;
+    padding: 16px 24px;
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 200px;
 }
 
-.trust-icon {
-    font-size: 24px;
+.download-item:hover {
+    border-color: var(--color-black);
+    transform: translateY(-2px);
 }
 
-.trust-text {
-    font-size: var(--font-size-sm);
-    color: var(--color-gray-400);
-    font-weight: 500;
+.download-icon {
+    font-size: 32px;
+}
+
+.download-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.download-label {
+    font-size: 12px;
+    color: var(--color-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.download-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-black);
+}
+
+.trust-features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding-top: 40px;
+    border-top: 1px solid var(--color-gray-200);
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    background: var(--color-gray-50);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    transform: translateY(-4px);
+}
+
+.feature-icon {
+    font-size: 28px;
+}
+
+.feature-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-gray-700);
+    text-align: center;
 }
 
 @media (max-width: 768px) {
-    .cta-content h2 {
-        font-size: var(--font-size-2xl);
+    .cta-section {
+        padding: 60px 0;
     }
-
-    .cta-buttons {
+    
+    .cta-header h2 {
+        font-size: 32px;
+    }
+    
+    .cta-header p {
+        font-size: 18px;
+    }
+    
+    .action-buttons {
         flex-direction: column;
         align-items: center;
     }
-
-    .cta-buttons .btn {
+    
+    .cta-btn {
         width: 100%;
         max-width: 300px;
     }
-
-    .trust-indicators {
-        gap: var(--spacing-md);
-    }
-
-    .trust-item {
+    
+    .download-options {
         flex-direction: column;
-        text-align: center;
-        gap: 4px;
+        align-items: center;
+    }
+    
+    .download-item {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .trust-features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .trust-features {
+        grid-template-columns: 1fr;
     }
 }

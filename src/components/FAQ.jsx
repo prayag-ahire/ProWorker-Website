@@ -2,7 +2,15 @@ import { useState } from 'react';
 import './FAQ.css';
 
 function FAQ() {
-    const [openIndex, setOpenIndex] = useState(null);
+    const [openItems, setOpenItems] = useState([]);
+
+    const toggleFAQ = (index) => {
+        setOpenItems(prev => 
+            prev.includes(index) 
+                ? prev.filter(item => item !== index)
+                : [...prev, index]
+        );
+    };
 
     const faqs = [
         {
@@ -28,50 +36,42 @@ function FAQ() {
         {
             question: 'How do reviews work?',
             answer: 'After each service, clients can leave reviews with ratings and upload photos or videos. This helps maintain quality and lets other clients make informed decisions. Workers with better reviews get more visibility.'
-        },
-        {
-            question: 'Can workers set their own prices?',
-            answer: 'Yes! Workers have full control over their pricing. They can set hourly rates or per-visit charges based on the service type and their experience level.'
-        },
-        {
-            question: 'Is my personal data secure?',
-            answer: 'Absolutely. We use bank-level encryption to protect all user data. Your personal information, payment details, and communications are fully encrypted and never shared with third parties.'
         }
     ];
 
     return (
-        <section id="faq" className="section section-dark">
+        <section className="faq-section">
             <div className="container">
-                <div className="section-header text-center scroll-animate">
-                    <h2 className="text-gradient mb-md">Frequently Asked Questions</h2>
-                    <p className="section-subtitle">
-                        Everything you need to know about ProWorker
-                    </p>
+                <div className="faq-header">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Everything you need to know about ProWorker</p>
                 </div>
 
-                <div className="faq-container">
+                <div className="faq-grid">
                     {faqs.map((faq, index) => (
-                        <div
-                            key={index}
-                            className={`faq-item scroll-animate delay-${((index % 4) + 1) * 100} ${openIndex === index ? 'open' : ''}`}
-                            onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                        >
-                            <div className="faq-question">
-                                <h4>{faq.question}</h4>
-                                <div className="faq-toggle">
-                                    {openIndex === index ? '−' : '+'}
+                        <div key={index} className="faq-card">
+                            <div 
+                                className="faq-header-card"
+                                onClick={() => toggleFAQ(index)}
+                            >
+                                <h3>{faq.question}</h3>
+                                <span className="faq-icon">
+                                    {openItems.includes(index) ? '−' : '+'}
+                                </span>
+                            </div>
+                            {openItems.includes(index) && (
+                                <div className="faq-content">
+                                    <p>{faq.answer}</p>
                                 </div>
-                            </div>
-                            <div className="faq-answer">
-                                <p>{faq.answer}</p>
-                            </div>
+                            )}
                         </div>
                     ))}
                 </div>
 
-                <div className="faq-cta scroll-animate delay-500">
-                    <p>Still have questions?</p>
-                    <a href="#contact" className="btn btn-secondary">Contact Support</a>
+                <div className="faq-contact">
+                    <h3>Still have questions?</h3>
+                    <p>Contact our support team for personalized assistance</p>
+                    <a href="#contact" className="contact-btn">Get Help</a>
                 </div>
             </div>
         </section>
