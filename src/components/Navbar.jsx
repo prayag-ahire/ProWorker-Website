@@ -19,8 +19,9 @@ function Navbar() {
             <div className="container">
                 <div className="navbar-content">
                     <div className="navbar-logo">
+                        {/* <span className="kite-icon"></span> */}
                         <span className="logo-text">ProWorker</span>
-                        <span className="logo-badge">BETA</span>
+                        {/* <span className="logo-badge festival-badge">UTTARAYAN THEME</span> */}
                     </div>
 
                     <ul className={`navbar-menu ${mobileMenuOpen ? 'open' : ''}`}>
@@ -32,8 +33,11 @@ function Navbar() {
                     </ul>
 
                     <div className="navbar-actions">
-                        <a href="#download" className="btn btn-primary">Download App</a>
-                        <a href="#worker" className="btn btn-secondary">For Workers</a>
+                        <a href="#download" className="btn btn-festival">Download App</a>
+                        <a href="#worker" className="btn btn-secondary wind-effect">
+                            {/* <span className="kite-icon"></span> */}
+                            For Workers
+                        </a>
                     </div>
 
                     <button

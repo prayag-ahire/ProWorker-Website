@@ -45,13 +45,14 @@ function Hero() {
                 <div className="hero-content">
                     <div className="hero-text">
                         <div className="hero-badge animate-fade-in">
-                            ⚡ Trusted by 10,000+ Users
+                            {/* <span className="kite-icon"></span> */}
+                            🪁 Celebrating Uttarayan - Trusted by 10,000+ Users
                         </div>
 
                         <div className="hero-main-content">
                             <div className="hero-left">
                                 <h1 className="hero-title animate-fade-in-up delay-100">
-                                    Professional Workers.<br />
+                                    <span className="text-festival">Professional Workers.</span><br />
                                     Anytime. Anywhere.
                                 </h1>
 
@@ -62,14 +63,15 @@ function Hero() {
 
                             <div className="hero-right">
                                 <div className="hero-buttons animate-fade-in-up delay-300">
-                                    <a href="#download" className="btn btn-primary btn-large">
+                                    <a href="#download" className="btn btn-festival btn-large">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                                             <path d="M10 2V14M10 14L6 10M10 14L14 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                                             <path d="M3 18H17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                                         </svg>
                                         Download App
                                     </a>
-                                    <a href="#worker" className="btn btn-secondary btn-large">
+                                    <a href="#worker" className="btn btn-secondary btn-large wind-effect">
+                                        {/* <span className="kite-icon"></span> */}
                                         Become a Worker →
                                     </a>
                                 </div>

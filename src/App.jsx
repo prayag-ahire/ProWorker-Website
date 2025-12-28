@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import './App.css';
+import './uttarayan-theme.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import WhyProWorker from './components/WhyProWorker';
@@ -11,6 +12,8 @@ import Pricing from './components/Pricing';
 import CTA from './components/CTA';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
+import UttarayanBackground from './components/UttarayanBackground';
+import KiteAnimation from './components/KiteAnimation';
 
 function App() {
   useEffect(() => {
@@ -51,7 +54,9 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App uttarayan-theme">
+      <UttarayanBackground />
+      <KiteAnimation />
       <Navbar />
       <Hero />
       <WhyProWorker />

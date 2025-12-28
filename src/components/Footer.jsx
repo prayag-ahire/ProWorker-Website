@@ -10,7 +10,7 @@ function Footer() {
                     <div className="footer-brand">
                         <div className="brand-logo">
                             <span className="logo-text">ProWorker</span>
-                            <span className="logo-badge">BETA</span>
+                            {/* <span className="logo-badge">BETA</span> */}
                         </div>
                         <p className="brand-description">
                             Connecting clients with verified professional workers for all home service needs.

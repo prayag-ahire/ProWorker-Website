@@ -6,7 +6,7 @@
     position: relative;
     overflow: hidden;
     padding-top: 100px;
-    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+    background: transparent;
 }
 
 .hero-background {
@@ -81,14 +81,28 @@
     display: inline-flex;
     align-items: center;
     gap: var(--spacing-xs);
-    padding: 8px 16px;
-    background: var(--color-gray-100);
-    border: 1px solid var(--color-gray-300);
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--kite-yellow);
     border-radius: var(--radius-full);
     color: var(--color-black);
     font-size: var(--font-size-xs);
     font-weight: 600;
     margin-bottom: var(--spacing-md);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    animation: festivalGlow 3s ease-in-out infinite;
+}
+
+@keyframes festivalGlow {
+    0%, 100% { 
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        border-color: var(--kite-yellow);
+    }
+    50% { 
+        box-shadow: 0 6px 25px rgba(255, 140, 0, 0.5);
+        border-color: var(--kite-orange);
+    }
 }
 
 .hero-title {
@@ -117,10 +131,25 @@
     grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-md);
     padding: var(--spacing-md);
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid var(--color-gray-200);
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid transparent;
     border-radius: var(--radius-lg);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-stats::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--festival-gradient);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.7;
 }
 
 .stat {
@@ -156,9 +185,27 @@
     box-shadow: var(--shadow-xl);
     transition: transform var(--transition-slow);
     background: var(--color-white);
-    border: 8px solid var(--color-white);
+    border: 6px solid rgba(255, 255, 255, 0.9);
     width: 250px;
     height: 500px;
+}
+
+.mockup::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+    background: var(--festival-gradient);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.mockup:hover::before {
+    opacity: 0.8;
 }
 
 .mockup:hover {
