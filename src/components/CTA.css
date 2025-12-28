@@ -48,7 +48,7 @@
     font-size: var(--font-size-3xl);
     margin-bottom: var(--spacing-md);
     line-height: 1.2;
-    color: var(--color-white);
+    color: var(--color-white) !important;
 }
 
 .cta-subtitle {

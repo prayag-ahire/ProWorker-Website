@@ -10,7 +10,7 @@ function CTA() {
 
             <div className="container">
                 <div className="cta-content scroll-animate">
-                    <h2 className="text-gradient">
+                    <h2>
                         Join Thousands of Clients & Workers<br />Using ProWorker
                     </h2>
                     <p className="cta-subtitle">
