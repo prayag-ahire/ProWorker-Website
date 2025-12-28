@@ -19,6 +19,8 @@ function Navbar() {
             <div className="container">
                 <div className="navbar-content">
                     <div className="navbar-logo">
+                        <span className="christmas-icon">🎄</span>
+                        <span className="christmas-gift">🎁</span>
                         <span className="logo-text">ProWorker</span>
                         <span className="logo-badge">BETA</span>
                     </div>

@@ -10,6 +10,7 @@ import Testimonials from './components/Testimonials';
 import Pricing from './components/Pricing';
 import CTA from './components/CTA';
 import FAQ from './components/FAQ';
+import ChristmasSnow from './components/ChristmasSnow';
 import Footer from './components/Footer';
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
 
   return (
     <div className="App">
+      <ChristmasSnow />
       <Navbar />
       <Hero />
       <WhyProWorker />
