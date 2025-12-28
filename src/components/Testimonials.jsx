@@ -1,9 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './Testimonials.css';
 
 function Testimonials() {
     const [activeClientIndex, setActiveClientIndex] = useState(0);
     const [activeWorkerIndex, setActiveWorkerIndex] = useState(0);
+    const clientCarouselRef = useRef(null);
+    const workerCarouselRef = useRef(null);
 
     const clientTestimonials = [
         {
@@ -68,15 +70,48 @@ function Testimonials() {
     ];
 
     useEffect(() => {
+        const handleScroll = (carousel, setActiveIndex, testimonials) => {
+            if (carousel && window.innerWidth <= 768) {
+                const scrollLeft = carousel.scrollLeft;
+                const cardWidth = carousel.querySelector('.testimonial-card')?.offsetWidth || 280;
+                const gap = 24;
+                const index = Math.round(scrollLeft / (cardWidth + gap));
+                setActiveIndex(Math.min(index, testimonials.length - 1));
+            }
+        };
+
+        const clientCarousel = clientCarouselRef.current;
+        const workerCarousel = workerCarouselRef.current;
+
+        const clientScrollHandler = () => handleScroll(clientCarousel, setActiveClientIndex, clientTestimonials);
+        const workerScrollHandler = () => handleScroll(workerCarousel, setActiveWorkerIndex, workerTestimonials);
+
+        if (clientCarousel) {
+            clientCarousel.addEventListener('scroll', clientScrollHandler);
+        }
+        if (workerCarousel) {
+            workerCarousel.addEventListener('scroll', workerScrollHandler);
+        }
+
         const clientInterval = setInterval(() => {
-            setActiveClientIndex((prev) => (prev + 1) % clientTestimonials.length);
+            if (window.innerWidth > 768) {
+                setActiveClientIndex((prev) => (prev + 1) % clientTestimonials.length);
+            }
         }, 4000);
 
         const workerInterval = setInterval(() => {
-            setActiveWorkerIndex((prev) => (prev + 1) % workerTestimonials.length);
+            if (window.innerWidth > 768) {
+                setActiveWorkerIndex((prev) => (prev + 1) % workerTestimonials.length);
+            }
         }, 4000);
 
         return () => {
+            if (clientCarousel) {
+                clientCarousel.removeEventListener('scroll', clientScrollHandler);
+            }
+            if (workerCarousel) {
+                workerCarousel.removeEventListener('scroll', workerScrollHandler);
+            }
             clearInterval(clientInterval);
             clearInterval(workerInterval);
         };
@@ -114,7 +149,7 @@ function Testimonials() {
                             <span className="title-icon">👥</span>
                             Client Reviews
                         </h3>
-                        <div className="testimonials-carousel">
+                        <div className="testimonials-carousel" ref={clientCarouselRef}>
                             {clientTestimonials.map((testimonial, index) => (
                                 <TestimonialCard
                                     key={index}
@@ -141,7 +176,7 @@ function Testimonials() {
                             <span className="title-icon">🔧</span>
                             Worker Reviews
                         </h3>
-                        <div className="testimonials-carousel">
+                        <div className="testimonials-carousel" ref={workerCarouselRef}>
                             {workerTestimonials.map((testimonial, index) => (
                                 <TestimonialCard
                                     key={index}
