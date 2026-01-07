@@ -13,7 +13,6 @@ import CTA from './components/CTA';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import UttarayanBackground from './components/UttarayanBackground';
-import KiteAnimation from './components/KiteAnimation';
 
 function App() {
   useEffect(() => {
@@ -56,14 +55,13 @@ function App() {
   return (
     <div className="App uttarayan-theme">
       <UttarayanBackground />
-      <KiteAnimation />
       <Navbar />
       <Hero />
       <WhyProWorker />
       <HowItWorks />
-      <WorkerShowcase />
+      {/* <WorkerShowcase /> */}
       <Testimonials />
-      <Pricing />
+      {/* <Pricing /> */}
       <FAQ />
       <CTA />
       <Footer />

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import './Hero.css';
 import Counter from './Counter';
+import KiteAnimation from './KiteAnimation';
 
 function Hero() {
     const mockupsRef = useRef(null);
@@ -35,6 +36,7 @@ function Hero() {
 
     return (
         <section className="hero">
+            <KiteAnimation />
             <div className="hero-background">
                 <div className="hero-glow hero-glow-1"></div>
                 <div className="hero-glow hero-glow-2"></div>
@@ -103,19 +105,19 @@ function Hero() {
                     <div className="hero-mockups animate-fade-in delay-300" ref={mockupsRef}>
                         <div className="mockup mockup-1 animate-float" data-original-transform="0, 0">
                             <img
-                                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=800&fit=crop&q=90"
+                                src="/pro1.jpeg"
                                 alt="ProWorker App - Profiles"
                             />
                         </div>
                         <div className="mockup mockup-2 animate-float delay-200" data-original-transform="0, 0">
                             <img
-                                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=800&fit=crop&q=90"
+                                src="/pro2.jpeg"
                                 alt="ProWorker App - Dashboard"
                             />
                         </div>
                         <div className="mockup mockup-3 animate-float delay-400" data-original-transform="0, 0">
                             <img
-                                src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=800&fit=crop&q=90"
+                                src="/pro3.jpeg"
                                 alt="ProWorker App - Booking"
                             />
                         </div>
