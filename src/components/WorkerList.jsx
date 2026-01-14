@@ -8,34 +8,19 @@ function WorkerList({ workers }) {
     setExpandedWorkerId(expandedWorkerId === workerId ? null : workerId);
   };
 
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Earth's radius in km
-    const dLat = ((lat2 - lat1) * Math.PI) / 180;
-    const dLon = ((lon2 - lon1) * Math.PI) / 180;
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos((lat1 * Math.PI) / 180) *
-        Math.cos((lat2 * Math.PI) / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c;
-    return distance.toFixed(1);
-  };
-
   return (
     <div className="worker-list">
       {workers.map((worker) => (
         <div key={worker.id} className="worker-card">
           <div className="worker-header">
             <div className="worker-avatar">
-              {worker.profileImage ? (
-                <img src={worker.profileImage} alt={worker.name} />
-              ) : (
-                <div className="avatar-placeholder">
-                  {worker.name.charAt(0).toUpperCase()}
-                </div>
-              )}
+              <div className="avatar-placeholder">
+                {worker.name
+                  .split(' ')
+                  .slice(0, 2)
+                  .map(word => word.charAt(0).toUpperCase())
+                  .join('')}
+              </div>
             </div>
 
             <div className="worker-info">
@@ -47,7 +32,7 @@ function WorkerList({ workers }) {
                     📍 {worker.distance} km away
                   </span>
                 )}
-                {worker.rating && (
+                {worker.rating !== undefined && worker.rating > 0 && (
                   <span className="rating">
                     ⭐ {worker.rating} ({worker.reviewCount || 0} reviews)
                   </span>
@@ -57,26 +42,20 @@ function WorkerList({ workers }) {
 
             <div className="worker-price">
               {worker.hourlyRate && (
-                <p className="price">₹{worker.hourlyRate}/hr</p>
+                <p className="price">₹{worker.hourlyRate}/visit</p>
               )}
-              {worker.rating && (
-                <div className="rating-badge">{worker.rating}</div>
-              )}
+              <div className="rating-stars">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <span key={star} className={`star ${star <= (worker.rating || 0) ? 'filled' : 'empty'}`}>
+                    ★
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
           {worker.bio && (
             <p className="worker-bio">{worker.bio}</p>
-          )}
-
-          {worker.skills && worker.skills.length > 0 && (
-            <div className="worker-skills">
-              {worker.skills.map((skill, index) => (
-                <span key={index} className="skill-tag">
-                  {skill}
-                </span>
-              ))}
-            </div>
           )}
 
           <div className="worker-actions">
@@ -86,39 +65,29 @@ function WorkerList({ workers }) {
             >
               {expandedWorkerId === worker.id ? 'Hide Details' : 'View Details'}
             </button>
-            <button className="btn btn-primary">Contact Worker</button>
+            <button className="btn btn-primary">Book Now</button>
           </div>
 
           {expandedWorkerId === worker.id && (
             <div className="worker-details">
-              {worker.experience && (
+              {worker.age && (
                 <div className="detail-item">
-                  <strong>Experience:</strong> {worker.experience} years
+                  <strong>Age:</strong> {worker.age} years
                 </div>
               )}
-              {worker.location && (
+              {worker.gender && (
                 <div className="detail-item">
-                  <strong>Location:</strong> {worker.location}
+                  <strong>Gender:</strong> {worker.gender}
                 </div>
               )}
-              {worker.availability && (
+              {worker.hourlyRate && (
                 <div className="detail-item">
-                  <strong>Availability:</strong> {worker.availability}
+                  <strong>Charges:</strong> ₹{worker.hourlyRate} per visit
                 </div>
               )}
-              {worker.languages && worker.languages.length > 0 && (
+              {worker.distanceCharges && (
                 <div className="detail-item">
-                  <strong>Languages:</strong> {worker.languages.join(', ')}
-                </div>
-              )}
-              {worker.certifications && worker.certifications.length > 0 && (
-                <div className="detail-item">
-                  <strong>Certifications:</strong>
-                  <ul>
-                    {worker.certifications.map((cert, index) => (
-                      <li key={index}>{cert}</li>
-                    ))}
-                  </ul>
+                  <strong>Distance Charges:</strong> ₹{worker.distanceCharges} per km
                 </div>
               )}
             </div>

@@ -1,5 +1,5 @@
 // API service for worker-related requests
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = 'https://proworker.onrender.com/api/v1/website';
 
 export const workerService = {
   // Get current user location
@@ -29,18 +29,18 @@ export const workerService = {
     });
   },
 
-  // Search workers by profession and location
-  searchWorkers: async (profession, latitude, longitude, limit = 7) => {
+  // Search workers by profession and location with pagination
+  searchWorkers: async (profession, latitude, longitude, page = 1) => {
     try {
       const params = new URLSearchParams({
         profession,
         latitude,
         longitude,
-        limit
+        page
       });
 
       const response = await fetch(
-        `${API_BASE_URL}/workers/search?${params.toString()}`,
+        `${API_BASE_URL}/find-workers?${params.toString()}`,
         {
           method: 'GET',
           headers: {
@@ -54,6 +54,29 @@ export const workerService = {
       }
 
       const data = await response.json();
+      
+      // Transform API response to match component expectations
+      if (data.success && data.data) {
+        return {
+          workers: (data.data.workers || []).map(worker => ({
+            id: worker.id,
+            name: worker.username,
+            email: worker.email,
+            age: worker.age,
+            gender: worker.gender,
+            profileImage: worker.imageUrl,
+            bio: worker.description,
+            profession: worker.profession,
+            hourlyRate: worker.charges_per_visit,
+            distanceCharges: worker.distance_charges,
+            distance: worker.distance_km,
+            rating: worker.rating,
+            reviewCount: worker.review_count
+          })),
+          pagination: data.data.pagination
+        };
+      }
+      
       return data;
     } catch (error) {
       console.error('Error searching workers:', error);
@@ -76,6 +99,17 @@ export const workerService = {
       }
 
       const data = await response.json();
+      
+      // Transform profession data
+      if (data.success && Array.isArray(data.data)) {
+        return {
+          professions: data.data.map(prof => ({
+            id: prof.id,
+            name: prof.name
+          }))
+        };
+      }
+      
       return data;
     } catch (error) {
       console.error('Error fetching professions:', error);
