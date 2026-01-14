@@ -1,34 +1,58 @@
 .pricing-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-lg);
-    align-items: start;
+    gap: 32px;
+    align-items: flex-start;
 }
 
 .pricing-card {
-    background: var(--color-white);
+    background: white;
     border: 1px solid var(--color-gray-200);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-xl);
-    transition: all var(--transition-normal);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px;
+    transition: all 0.3s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .pricing-card:hover {
     transform: translateY(-8px);
     border-color: var(--color-black);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 .pricing-card.featured {
-    background: var(--color-gray-50);
-    border: 2px solid var(--color-black);
-    box-shadow: var(--shadow-lg);
+    background: var(--color-black);
+    color: white;
+    border: 1px solid var(--color-black);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
+    z-index: 2;
 }
 
 .pricing-card.featured:hover {
     transform: scale(1.05) translateY(-8px);
+}
+
+.pricing-card.featured h3,
+.pricing-card.featured .pricing-icon,
+.pricing-card.featured .pricing-feature span {
+    color: white;
+}
+
+.pricing-card.featured .check {
+    background: white;
+    color: var(--color-black);
+}
+
+.pricing-card.featured .btn {
+    background: white;
+    color: var(--color-black);
+}
+
+.pricing-card.featured .btn:hover {
+    background: var(--color-gray-200);
 }
 
 .pricing-badge {
@@ -36,79 +60,90 @@
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--color-black);
-    color: var(--color-white);
+    background: white;
+    color: var(--color-black);
+    border: 2px solid var(--color-black);
     padding: 6px 16px;
-    border-radius: var(--radius-full);
-    font-size: var(--font-size-xs);
-    font-weight: 700;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 1px;
 }
 
 .pricing-icon {
-    font-size: 64px;
+    font-size: 48px;
     text-align: center;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: 24px;
+    color: var(--color-black);
 }
 
 .pricing-card h3 {
     text-align: center;
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--spacing-lg);
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: var(--color-black);
 }
 
 .pricing-feature-list {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-lg);
+    gap: 16px;
+    margin-bottom: 40px;
+    flex: 1;
 }
 
 .pricing-feature {
     display: flex;
     align-items: flex-start;
-    gap: var(--spacing-sm);
+    gap: 12px;
+    font-size: 15px;
+    color: var(--color-gray-700);
 }
 
 .check {
-    color: var(--color-white);
-    background: var(--color-black);
-    font-weight: 700;
-    flex-shrink: 0;
     width: 20px;
     height: 20px;
+    background: var(--color-black);
+    color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
-}
-
-.pricing-feature span:last-child {
-    font-size: var(--font-size-sm);
-    color: var(--color-gray-600);
-    line-height: 1.6;
+    font-size: 10px;
+    flex-shrink: 0;
+    margin-top: 2px;
 }
 
 .pricing-card .btn {
     width: 100%;
-    justify-content: center;
-    margin-top: var(--spacing-md);
 }
 
 @media (max-width: 1024px) {
     .pricing-grid {
-        grid-template-columns: 1fr;
-        max-width: 500px;
-        margin: 0 auto;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
     }
 
     .pricing-card.featured {
-        transform: scale(1);
+        transform: none;
+        grid-column: 1 / -1;
+        max-width: 400px;
+        margin: 0 auto;
     }
 
     .pricing-card.featured:hover {
         transform: translateY(-8px);
+    }
+}
+
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-card.featured {
+        max-width: 100%;
     }
 }

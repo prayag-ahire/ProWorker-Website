@@ -2,55 +2,84 @@ import './WorkerShowcase.css';
 
 function WorkerShowcase() {
     return (
-        <section className="section section-dark">
+        <section className="section section-light">
             <div className="container">
                 <div className="section-header text-center scroll-animate">
-                    <h2 className="text-gradient mb-md">Worker Portfolio Showcase</h2>
+                    <h2 className="text-gradient mb-md">How It Works</h2>
                     <p className="section-subtitle">
-                        Browse verified professionals with complete portfolios, certificates, and real reviews
+                        Experience the easiest way to find and hire professionals
                     </p>
                 </div>
 
-                <div className="showcase-grid scroll-animate delay-200">
-                    <div className="showcase-item large">
-                        <div className="showcase-badge">⭐ 4.9 Rating</div>
-                        <div className="showcase-content">
-                            <h3>Certified Professionals</h3>
-                            <p>All workers undergo verification and background checks</p>
+                <div className="app-showcase-grid scroll-animate delay-200">
+                    {/* Screen 1 */}
+                    <div className="mobile-screen fade-up">
+                        <div className="mobile-bezel">
+                            <div className="mobile-notch"></div>
+                            <div className="screen-content">
+                                <div className="screen-header">
+                                    <div className="screen-avatar"></div>
+                                    <div className="screen-title-bar"></div>
+                                </div>
+                                <div className="screen-body">
+                                    <div className="screen-illustration illustration-search">
+                                        <div className="circle-bg"></div>
+                                        <div className="person-figure"></div>
+                                    </div>
+                                    <div className="screen-text">
+                                        <h3>Explore</h3>
+                                        <p>Browse various categories and find the perfect match for your needs.</p>
+                                    </div>
+                                    <div className="screen-button"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="showcase-item">
-                        <div className="showcase-icon">📸</div>
-                        <h4>Photos & Videos</h4>
-                        <p>View work samples from real projects</p>
-                    </div>
-
-                    <div className="showcase-item">
-                        <div className="showcase-icon">🎓</div>
-                        <h4>Certificates</h4>
-                        <p>Verified qualifications and licenses</p>
-                    </div>
-
-                    <div className="showcase-item">
-                        <div className="showcase-icon">💬</div>
-                        <h4>Client Reviews</h4>
-                        <p>Authentic feedback with media proof</p>
-                    </div>
-
-                    <div className="showcase-item large-horizontal">
-                        <div className="showcase-stats">
-                            <div className="stat-item">
-                                <div className="stat-value text-neon">5K+</div>
-                                <div className="stat-label">Verified Workers</div>
+                    {/* Screen 2 */}
+                    <div className="mobile-screen fade-up delay-100">
+                        <div className="mobile-bezel">
+                            <div className="mobile-notch"></div>
+                            <div className="screen-content">
+                                <div className="screen-header">
+                                    <div className="screen-avatar"></div>
+                                    <div className="screen-title-bar"></div>
+                                </div>
+                                <div className="screen-body">
+                                    <div className="screen-illustration illustration-book">
+                                        <div className="circle-bg orange"></div>
+                                        <div className="person-figure sitting"></div>
+                                    </div>
+                                    <div className="screen-text">
+                                        <h3>Discovery</h3>
+                                        <p>Discover top-rated professionals verified by our team.</p>
+                                    </div>
+                                    <div className="screen-button"></div>
+                                </div>
                             </div>
-                            <div className="stat-item">
-                                <div className="stat-value text-blue">50K+</div>
-                                <div className="stat-label">Completed Jobs</div>
-                            </div>
-                            <div className="stat-item">
-                                <div className="stat-value text-gradient">4.8★</div>
-                                <div className="stat-label">Avg Rating</div>
+                        </div>
+                    </div>
+
+                    {/* Screen 3 */}
+                    <div className="mobile-screen fade-up delay-200">
+                        <div className="mobile-bezel">
+                            <div className="mobile-notch"></div>
+                            <div className="screen-content">
+                                <div className="screen-header">
+                                    <div className="screen-avatar"></div>
+                                    <div className="screen-title-bar"></div>
+                                </div>
+                                <div className="screen-body">
+                                    <div className="screen-illustration illustration-calor">
+                                        <div className="circle-bg dark"></div>
+                                        <div className="person-figure walking"></div>
+                                    </div>
+                                    <div className="screen-text">
+                                        <h3>Create</h3>
+                                        <p>Book quickly, track real-time progress, and enjoy great service.</p>
+                                    </div>
+                                    <div className="screen-button filled"></div>
+                                </div>
                             </div>
                         </div>
                     </div>

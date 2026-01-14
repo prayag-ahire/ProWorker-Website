@@ -120,21 +120,23 @@ function Testimonials() {
     const TestimonialCard = ({ testimonial, type, isActive }) => (
         <div className={`testimonial-card ${type} ${isActive ? 'active' : ''}`}>
             <div className="testimonial-header">
-                <div className="avatar">{testimonial.avatar}</div>
-                <div className="testimonial-info">
-                    <div className="name">{testimonial.name}</div>
-                    <div className="role">{testimonial.role}</div>
+                <div className="testimonial-user">
+                    <div className="avatar">{testimonial.avatar}</div>
+                    <div className="testimonial-info">
+                        <div className="name">{testimonial.name}</div>
+                        <div className="role">{testimonial.role}</div>
+                    </div>
                 </div>
                 <div className="rating">
                     {'⭐'.repeat(testimonial.rating)}
                 </div>
             </div>
-            <p className="testimonial-text">"{testimonial.text}"</p>
+            <p className="testimonial-text">{testimonial.text}</p>
         </div>
     );
 
     return (
-        <section id="testimonials" className="section section-dark">
+        <section id="testimonials" className="section section-light">
             <div className="container">
                 <div className="section-header text-center scroll-animate">
                     <h2 className="text-gradient mb-md">What People Say</h2>
@@ -145,7 +147,7 @@ function Testimonials() {
 
                 <div className="testimonials-container">
                     <div className="testimonials-column scroll-animate delay-100">
-                        <h3 className="testimonials-title text-neon">
+                        <h3 className="testimonials-title">
                             <span className="title-icon">👥</span>
                             Client Reviews
                         </h3>
@@ -159,20 +161,10 @@ function Testimonials() {
                                 />
                             ))}
                         </div>
-                        <div className="carousel-dots">
-                            {clientTestimonials.map((_, index) => (
-                                <button
-                                    key={index}
-                                    className={`dot ${index === activeClientIndex ? 'active' : ''}`}
-                                    onClick={() => setActiveClientIndex(index)}
-                                    aria-label={`Go to testimonial ${index + 1}`}
-                                />
-                            ))}
-                        </div>
                     </div>
 
                     <div className="testimonials-column scroll-animate delay-200">
-                        <h3 className="testimonials-title text-blue">
+                        <h3 className="testimonials-title">
                             <span className="title-icon">🔧</span>
                             Worker Reviews
                         </h3>
@@ -183,16 +175,6 @@ function Testimonials() {
                                     testimonial={testimonial}
                                     type="worker"
                                     isActive={index === activeWorkerIndex}
-                                />
-                            ))}
-                        </div>
-                        <div className="carousel-dots">
-                            {workerTestimonials.map((_, index) => (
-                                <button
-                                    key={index}
-                                    className={`dot ${index === activeWorkerIndex ? 'active' : ''}`}
-                                    onClick={() => setActiveWorkerIndex(index)}
-                                    aria-label={`Go to testimonial ${index + 1}`}
                                 />
                             ))}
                         </div>

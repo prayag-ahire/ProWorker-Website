@@ -1,77 +1,64 @@
 import './Features.css';
+import ModernCard from './ModernCard';
 
 function Features() {
     const features = [
         {
-            icon: '⚡',
-            title: 'Instant Booking',
-            description: 'Real-time availability with instant confirmation',
-            color: 'neon'
+            icon: '🔍',
+            title: 'Smart Discovery',
+            description: 'Find verified professionals matched to your exact needs in seconds.'
+        },
+        {
+            icon: '⭐',
+            title: 'Verified Reviews',
+            description: 'Real ratings & feedback from customers just like you.'
         },
         {
             icon: '📅',
-            title: 'Smart Scheduling',
-            description: 'Manage holidays, reschedule, and track appointments',
-            color: 'blue'
+            title: 'Flexible Booking',
+            description: 'Choose when and how with instant availability and real-time scheduling.'
         },
         {
-            icon: '🔔',
-            title: 'Live Notifications',
-            description: 'Instant updates for bookings, confirmations, and reminders',
-            color: 'neon'
-        },
-        {
-            icon: '🕐',
-            title: 'Real-Time Slots',
-            description: 'See available time slots updated live',
-            color: 'blue'
-        },
-        {
-            icon: '📸',
-            title: 'Media Reviews',
-            description: 'Photos and videos in client reviews for authenticity',
-            color: 'neon'
-        },
-        {
-            icon: '🔐',
-            title: 'Secure Authentication',
-            description: 'Bank-level security with encrypted data protection',
-            color: 'blue'
-        },
-        {
-            icon: '🎓',
-            title: 'Training Modules',
-            description: 'Free skill-building videos for worker development',
-            color: 'neon'
-        },
-        {
-            icon: '💳',
+            icon: '💰',
             title: 'Transparent Pricing',
-            description: 'Clear pricing breakdown - per visit or per hour',
-            color: 'blue'
+            description: 'No hidden fees - see exact prices before you book.'
+        },
+        {
+            icon: '🔒',
+            title: 'Safe & Secure',
+            description: 'All professionals are verified and insured for your peace of mind.'
+        },
+        {
+            icon: '🛡️',
+            title: 'Guaranteed Quality',
+            description: 'If you are not satisfied, we will send someone else for free.'
         }
     ];
 
     return (
-        <section id="features" className="section section-glow">
+        <section id="features" className="section">
             <div className="container">
-                <div className="section-header text-center scroll-animate">
-                    <h2 className="text-gradient mb-md">Powerful Features</h2>
-                    <p className="section-subtitle">
-                        Everything you need for seamless service booking and management
+                <div className="section-header text-center mb-xl">
+                    <div className="badge badge-outline mb-sm">Why Choose Us</div>
+                    <h2>Powerful Features</h2>
+                    <p style={{ maxWidth: '600px', margin: '0 auto' }}>
+                        Everything you need for seamless service booking and management.
                     </p>
                 </div>
 
                 <div className="features-grid">
                     {features.map((feature, index) => (
-                        <div
+                        <ModernCard
                             key={index}
-                            className={`feature-card scroll-animate delay-${((index % 4) + 1) * 100} ${feature.color}`}
-                        >
-                            <div className="feature-card-icon">{feature.icon}</div>
-                            <h3>{feature.title}</h3>
-                            <p>{feature.description}</p>
-                        </div>
+                            title={feature.title}
+                            description={feature.description}
+                            icon={feature.icon}
+                            className="scroll-animate"
+                            hoverable={true}
+                            style={{
+                                animationDelay: `${index * 100}ms`
+                            }}
+                        />
                     ))}
                 </div>
             </div>

@@ -1,113 +1,159 @@
+.how-it-works-section {
+    background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.section-header h2 {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--color-black);
+    margin-bottom: var(--spacing-md);
+}
+
+.section-subtitle {
+    font-size: 18px;
+    color: var(--color-gray-600);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
 .steps-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: var(--spacing-md);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
     margin-bottom: var(--spacing-2xl);
     position: relative;
 }
 
 .step-card {
-    background: var(--color-white);
-    border: 1px solid var(--color-gray-200);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
+    background: white;
+    border: 1.5px solid var(--color-gray-200);
+    border-radius: 12px;
+    padding: 32px 24px;
     text-align: center;
     position: relative;
-    transition: all var(--transition-normal);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .step-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     border-color: var(--color-black);
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 
 .step-number {
     position: absolute;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
-    font-size: var(--font-size-xs);
-    font-weight: 700;
-    color: var(--color-white);
-    background: var(--color-black);
-    width: 32px;
-    height: 32px;
+    top: 16px;
+    right: 16px;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--color-gray-600);
+    background: var(--color-gray-100);
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    letter-spacing: 0.5px;
 }
 
 .step-icon {
-    font-size: 48px;
-    margin-bottom: var(--spacing-md);
+    font-size: 56px;
+    margin-bottom: 16px;
+    line-height: 1;
 }
 
 .step-card h3 {
-    font-size: var(--font-size-md);
-    margin-bottom: var(--spacing-sm);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
     color: var(--color-black);
 }
 
 .step-card p {
-    font-size: var(--font-size-sm);
+    font-size: 14px;
     color: var(--color-gray-600);
+    line-height: 1.6;
+    margin: 0;
 }
 
-.step-arrow {
+.step-connector {
     position: absolute;
-    right: -20px;
+    right: -24px;
     top: 50%;
+    width: 18px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-black) 0%, transparent 100%);
     transform: translateY(-50%);
-    font-size: var(--font-size-2xl);
-    color: var(--color-gray-400);
-    z-index: 1;
 }
 
-.cta-box {
-    background: var(--color-gray-50);
-    border: 2px solid var(--color-black);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-xl);
+.how-it-works-cta {
+    background: var(--color-black);
+    color: white;
+    border-radius: 12px;
+    padding: 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--spacing-lg);
-    box-shadow: var(--shadow-md);
 }
 
-.cta-content h3 {
-    font-size: var(--font-size-xl);
-    margin-bottom: var(--spacing-xs);
+.how-it-works-cta h3 {
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
 }
 
-.cta-content p {
-    font-size: var(--font-size-md);
-    color: var(--color-gray-600);
+.how-it-works-cta p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+}
+
+.how-it-works-cta .btn {
+    flex-shrink: 0;
 }
 
 @media (max-width: 1200px) {
     .steps-container {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
 
-    .step-card:nth-child(3) .step-arrow,
-    .step-card:nth-child(4) .step-arrow {
+    .step-connector {
         display: none;
     }
 }
 
 @media (max-width: 768px) {
+    .section-header h2 {
+        font-size: 36px;
+    }
+
     .steps-container {
         grid-template-columns: 1fr;
     }
 
-    .step-arrow {
-        display: none;
-    }
-
-    .cta-box {
+    .how-it-works-cta {
         flex-direction: column;
         text-align: center;
+        padding: 32px;
+    }
+
+    .how-it-works-cta h3 {
+        font-size: 24px;
+    }
+
+    .how-it-works-cta .btn {
+        width: 100%;
     }
 }

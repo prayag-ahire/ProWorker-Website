@@ -4,71 +4,68 @@ function HowItWorks() {
     const steps = [
         {
             number: '01',
-            title: 'Search a Worker',
-            description: 'Browse verified professionals by service type, location, and availability',
+            title: 'Search for a Professional',
+            description: 'Browse verified professionals by service type, location, and availability. See real ratings and reviews.',
             icon: '🔍'
         },
         {
             number: '02',
-            title: 'Check Availability & Pricing',
-            description: 'View real-time availability, hourly rates, and service details',
-            icon: '💵'
+            title: 'View Details & Pricing',
+            description: 'Check availability, hourly rates, experience, certifications, and verified client reviews.',
+            icon: '💼'
         },
         {
             number: '03',
-            title: 'Book Instantly',
-            description: 'Select your preferred time slot and confirm your booking in seconds',
-            icon: '⚡'
+            title: 'Book & Confirm',
+            description: 'Select your preferred time slot and confirm your booking instantly. No hidden charges.',
+            icon: '✓'
         },
         {
             number: '04',
-            title: 'Worker Arrives & Completes Work',
-            description: 'Your verified professional arrives on time and completes the job',
-            icon: '✅'
-        },
-        {
-            number: '05',
-            title: 'Leave a Review',
-            description: 'Rate your experience and share photos or videos to help others',
+            title: 'Service Completed',
+            description: 'Professional arrives on time and completes your work with quality assurance.',
             icon: '⭐'
         }
     ];
 
     return (
-        <section id="how-it-works" className="section section-glow">
+        <section id="how-it-works" className="section how-it-works-section">
             <div className="container">
-                <div className="section-header text-center scroll-animate">
-                    <h2 className="text-gradient mb-md">How It Works</h2>
+                <div className="section-header scroll-animate">
+                    <h2>How It Works</h2>
                     <p className="section-subtitle">
-                        Get professional help in 5 simple steps
+                        Get professional help in just 4 simple steps
                     </p>
                 </div>
 
-                <div className="steps-container">
+                <div className="steps-container scroll-animate">
                     {steps.map((step, index) => (
                         <div
                             key={index}
-                            className={`step-card scroll-animate delay-${(index + 1) * 100}`}
+                            className="step-card"
                         >
-                            <div className="step-number">{step.number}</div>
                             <div className="step-icon">{step.icon}</div>
+                            <div className="step-number">{step.number}</div>
                             <h3>{step.title}</h3>
                             <p>{step.description}</p>
                             {index < steps.length - 1 && (
-                                <div className="step-arrow">→</div>
+                                <div className="step-connector"></div>
                             )}
                         </div>
                     ))}
                 </div>
 
-                <div className="cta-box scroll-animate delay-500">
-                    <div className="cta-content">
-                        <h3>Ready to get started?</h3>
-                        <p>Join thousands of satisfied clients today</p>
+                <div className="how-it-works-cta scroll-animate">
+                    <div>
+                        <h3>Ready to get professional help?</h3>
+                        <p>Browse verified workers and book instantly</p>
                     </div>
-                    <a href="#download" className="btn btn-primary btn-large">
-                        Download Now
-                    </a>
+                    <button 
+                        className="btn btn-primary btn-large"
+                        onClick={() => window.location.hash = '#search'}
+                    >
+                        Find a Worker Now
+                    </button>
                 </div>
             </div>
         </section>

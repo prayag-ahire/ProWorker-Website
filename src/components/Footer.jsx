@@ -66,21 +66,6 @@ function Footer() {
                 </div>
 
                 <div className="footer-bottom">
-                    <div className="footer-stats">
-                        <div className="stat">
-                            <span className="stat-number">50K+</span>
-                            <span className="stat-label">Active Users</span>
-                        </div>
-                        <div className="stat">
-                            <span className="stat-number">5K+</span>
-                            <span className="stat-label">Verified Workers</span>
-                        </div>
-                        <div className="stat">
-                            <span className="stat-number">4.8★</span>
-                            <span className="stat-label">Average Rating</span>
-                        </div>
-                    </div>
-                    
                     <div className="footer-copyright">
                         <p>&copy; {currentYear} ProWorker. All rights reserved.</p>
                         <p>Made with 💚 for professional service workers everywhere</p>

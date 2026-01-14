@@ -8,11 +8,12 @@ const ModernCard = ({
     variant = 'default',
     hoverable = true,
     bordered = true,
+    className = '',
     ...props
 }) => {
     return (
         <div
-            className={`modern-card ${variant} ${hoverable ? 'hoverable' : ''} ${bordered ? 'bordered' : ''}`}
+            className={`modern-card ${variant} ${hoverable ? 'hoverable' : ''} ${bordered ? 'bordered' : ''} ${className}`}
             {...props}
         >
             {icon && <div className="modern-card-icon">{icon}</div>}

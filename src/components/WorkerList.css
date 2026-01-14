@@ -1,0 +1,265 @@
+.worker-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.worker-card {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.worker-card:hover {
+  border-color: var(--color-black);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+.worker-header {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.worker-avatar {
+  flex-shrink: 0;
+}
+
+.worker-avatar img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--color-gray-200);
+}
+
+.avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-gray-100);
+  color: var(--color-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  border: 1px solid var(--color-gray-200);
+}
+
+.worker-info {
+  flex: 1;
+}
+
+.worker-name {
+  font-size: 20px;
+  color: var(--color-black);
+  margin: 0 0 4px 0;
+  font-weight: 700;
+}
+
+.worker-profession {
+  font-size: 14px;
+  color: var(--color-gray-600);
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.worker-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: var(--color-gray-600);
+  flex-wrap: wrap;
+}
+
+.distance,
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-gray-50);
+  padding: 4px 12px;
+  border-radius: 100px;
+  border: 1px solid var(--color-gray-200);
+}
+
+.worker-price {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-black);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.rating-badge {
+  display: inline-block;
+  background: var(--color-black);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.worker-bio {
+  font-size: 14px;
+  color: var(--color-gray-600);
+  margin: 0 0 24px 0;
+  line-height: 1.6;
+}
+
+.worker-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.skill-tag {
+  display: inline-block;
+  background: var(--color-gray-50);
+  color: var(--color-gray-700);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--color-gray-200);
+}
+
+.worker-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.btn-primary {
+  background: var(--color-black);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: var(--color-gray-800);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--color-black);
+  border: 1px solid var(--color-gray-200);
+}
+
+.btn-secondary:hover {
+  background: var(--color-gray-50);
+  border-color: var(--color-black);
+}
+
+.worker-details {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-gray-200);
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.detail-item {
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: var(--color-gray-800);
+}
+
+.detail-item strong {
+  color: var(--color-black);
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.detail-item ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0 0;
+}
+
+.detail-item li {
+  padding: 4px 0;
+  color: var(--color-gray-600);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-item li:before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--color-black);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .worker-header {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .worker-price {
+    width: 100%;
+    text-align: left;
+    border-top: 1px solid var(--color-gray-100);
+    padding-top: 16px;
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .price {
+    margin-bottom: 0;
+  }
+
+  .worker-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn {
+    flex: none;
+  }
+}
