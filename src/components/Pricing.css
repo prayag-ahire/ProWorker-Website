@@ -129,8 +129,8 @@
     .pricing-card.featured {
         transform: none;
         grid-column: 1 / -1;
-        max-width: 400px;
-        margin: 0 auto;
+        max-width: 500px;
+        margin: 20px auto;
     }
 
     .pricing-card.featured:hover {
@@ -141,9 +141,21 @@
 @media (max-width: 768px) {
     .pricing-grid {
         grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .pricing-card {
+        padding: 32px 24px;
     }
 
     .pricing-card.featured {
         max-width: 100%;
+        margin: 24px 0;
+    }
+
+    .pricing-badge {
+        top: -14px;
+        font-size: 10px;
+        padding: 4px 12px;
     }
 }

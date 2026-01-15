@@ -18,8 +18,7 @@ function Hero() {
                         </div>
 
                         <h1 className="hero-title animate-fade-in-up delay-100">
-                            Find Trusted Professionals<br />
-                            Matched in Minutes.
+                            Find Trusted Professionals <br /> Matched in Minutes.
                         </h1>
 
                         <p className="hero-subtitle animate-fade-in-up delay-200">

@@ -281,32 +281,121 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .worker-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .worker-card {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+  }
+
   .worker-header {
-    flex-wrap: wrap;
-    gap: 16px;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-gray-100);
+  }
+
+  .avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+  }
+
+  .worker-info {
+    align-items: center;
+    width: 100%;
+  }
+
+  .worker-name {
+    font-size: 16px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .worker-profession {
+    font-size: 10px;
+    margin: 0 0 8px 0;
+    letter-spacing: 0.5px;
+  }
+
+  .worker-meta {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .distance,
+  .rating {
+    padding: 4px 8px;
+    font-size: 10px;
   }
 
   .worker-price {
     width: 100%;
-    text-align: left;
-    border-top: 1px solid var(--color-gray-100);
-    padding-top: 16px;
-    margin-top: 8px;
-    display: flex;
-    justify-content: space-between;
+    text-align: center;
+    border-top: none;
+    padding-top: 0;
+    margin-top: 0;
+    flex-direction: column;
+    gap: 4px;
     align-items: center;
   }
 
   .price {
-    margin-bottom: 0;
+    font-size: 18px;
+  }
+
+  .rating-stars {
+    display: none;
+    /* Hide stars for space on mobile grid */
+  }
+
+  .worker-bio {
+    display: none;
+    /* Hide bio in grid view for space */
+  }
+
+  .worker-skills {
+    display: none;
+    /* Hide skills in grid view for space */
   }
 
   .worker-actions {
     flex-direction: column;
-    gap: 12px;
+    gap: 6px;
+    margin-top: 12px;
   }
 
   .btn {
-    flex: none;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 11px;
+    border-radius: 6px;
+  }
+
+  .btn-secondary {
+    display: flex;
+    /* Restored */
+    padding: 8px 10px;
+    border-width: 1.5px;
+  }
+}
+
+@media (max-width: 380px) {
+  .worker-list {
+    grid-template-columns: 1fr;
   }
 }
