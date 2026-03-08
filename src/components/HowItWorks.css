@@ -99,7 +99,7 @@
     background: var(--color-black);
     color: white;
     border-radius: 12px;
-    padding: 48px;
+    padding: 32px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -121,6 +121,19 @@
 
 .how-it-works-cta .btn {
     flex-shrink: 0;
+    background: white;
+    color: var(--color-black);
+    padding: 10px 24px;
+    /* More compact padding */
+    font-size: 13px;
+    /* Slightly smaller text */
+    height: fit-content;
+    width: fit-content;
+}
+
+.how-it-works-cta .btn:hover {
+    background: var(--color-gray-100);
+    transform: translateY(-2px);
 }
 
 @media (max-width: 1200px) {
@@ -140,7 +153,28 @@
     }
 
     .steps-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .step-card {
+        padding: 20px 16px;
+    }
+
+    .step-icon {
+        font-size: 40px;
+    }
+
+    .step-card h3 {
+        font-size: 15px;
+    }
+
+    .step-number {
+        width: 28px;
+        height: 28px;
+        font-size: 10px;
+        top: 8px;
+        right: 8px;
     }
 
     .how-it-works-cta {

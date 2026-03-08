@@ -141,6 +141,31 @@ h2 {
   margin-bottom: var(--spacing-md);
 }
 
+/* Logo Brand Styles */
+.logo-text-inner {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-heading);
+  font-size: 28px;
+  /* Standard size for brand */
+  font-weight: 850;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.logo-pro {
+  color: #2563eb;
+  /* Royal Blue */
+}
+
+.logo-worker {
+  color: var(--color-black);
+}
+
+.logo-worker-footer {
+  color: var(--color-white);
+}
+
 h3 {
   font-size: var(--font-size-2xl);
   margin-bottom: var(--spacing-sm);

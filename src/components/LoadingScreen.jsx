@@ -27,8 +27,10 @@ function LoadingScreen() {
         <div className="loading-screen">
             <div className="loading-content">
                 <div className="logo-animation">
-                    <div className="logo-text">ProWorker</div>
-                    <div className="logo-badge">BETA</div>
+                    <div className="logo-text-inner">
+                        <span className="logo-pro">Pro</span>
+                        <span className="logo-worker">Worker</span>
+                    </div>
                 </div>
 
                 <div className="loading-bar-container">

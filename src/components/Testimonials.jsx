@@ -1,7 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import './Testimonials.css';
+import { useViewMode } from '../context/ViewModeContext';
 
 function Testimonials() {
+    const isWorker = useViewMode() === 'worker';
     const [activeClientIndex, setActiveClientIndex] = useState(0);
     const [activeWorkerIndex, setActiveWorkerIndex] = useState(0);
     const clientCarouselRef = useRef(null);
@@ -146,39 +148,41 @@ function Testimonials() {
                 </div>
 
                 <div className="testimonials-container">
-                    <div className="testimonials-column scroll-animate delay-100">
-                        <h3 className="testimonials-title">
-                            <span className="title-icon">👥</span>
-                            Client Reviews
-                        </h3>
-                        <div className="testimonials-carousel" ref={clientCarouselRef}>
-                            {clientTestimonials.map((testimonial, index) => (
-                                <TestimonialCard
-                                    key={index}
-                                    testimonial={testimonial}
-                                    type="client"
-                                    isActive={index === activeClientIndex}
-                                />
-                            ))}
+                    {!isWorker ? (
+                        <div className="testimonials-column scroll-animate delay-100">
+                            <h3 className="testimonials-title">
+                                <span className="title-icon">👥</span>
+                                Client Reviews
+                            </h3>
+                            <div className="testimonials-carousel" ref={clientCarouselRef}>
+                                {clientTestimonials.map((testimonial, index) => (
+                                    <TestimonialCard
+                                        key={index}
+                                        testimonial={testimonial}
+                                        type="client"
+                                        isActive={index === activeClientIndex}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-
-                    <div className="testimonials-column scroll-animate delay-200">
-                        <h3 className="testimonials-title">
-                            <span className="title-icon">🔧</span>
-                            Worker Reviews
-                        </h3>
-                        <div className="testimonials-carousel" ref={workerCarouselRef}>
-                            {workerTestimonials.map((testimonial, index) => (
-                                <TestimonialCard
-                                    key={index}
-                                    testimonial={testimonial}
-                                    type="worker"
-                                    isActive={index === activeWorkerIndex}
-                                />
-                            ))}
+                    ) : (
+                        <div className="testimonials-column scroll-animate delay-100">
+                            <h3 className="testimonials-title">
+                                <span className="title-icon">🔧</span>
+                                Worker Reviews
+                            </h3>
+                            <div className="testimonials-carousel" ref={workerCarouselRef}>
+                                {workerTestimonials.map((testimonial, index) => (
+                                    <TestimonialCard
+                                        key={index}
+                                        testimonial={testimonial}
+                                        type="worker"
+                                        isActive={index === activeWorkerIndex}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         </section>

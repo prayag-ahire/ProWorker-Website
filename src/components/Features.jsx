@@ -1,46 +1,18 @@
 import './Features.css';
 import ModernCard from './ModernCard';
+import { useViewMode } from '../context/ViewModeContext';
+import { clientFeatures, workerFeatures } from '../data/features';
 
 function Features() {
-    const features = [
-        {
-            icon: '🔍',
-            title: 'Smart Discovery',
-            description: 'Find verified professionals matched to your exact needs in seconds.'
-        },
-        {
-            icon: '⭐',
-            title: 'Verified Reviews',
-            description: 'Real ratings & feedback from customers just like you.'
-        },
-        {
-            icon: '📅',
-            title: 'Flexible Booking',
-            description: 'Choose when and how with instant availability and real-time scheduling.'
-        },
-        {
-            icon: '💰',
-            title: 'Transparent Pricing',
-            description: 'No hidden fees - see exact prices before you book.'
-        },
-        {
-            icon: '🔒',
-            title: 'Safe & Secure',
-            description: 'All professionals are verified and insured for your peace of mind.'
-        },
-        {
-            icon: '🛡️',
-            title: 'Guaranteed Quality',
-            description: 'If you are not satisfied, we will send someone else for free.'
-        }
-    ];
+    const isWorker = useViewMode() === 'worker';
+    const features = isWorker ? workerFeatures : clientFeatures;
 
     return (
         <section id="features" className="section">
             <div className="container">
                 <div className="section-header text-center mb-xl">
-                    <div className="badge badge-outline mb-sm">Why Choose Us</div>
-                    <h2>Powerful Features</h2>
+                    <div className="badge badge-outline mb-sm">{isWorker ? 'For Professionals' : 'Why Choose Us'}</div>
+                    <h2>{isWorker ? 'Built for Professionals' : 'Powerful Features'}</h2>
                     <p style={{ maxWidth: '600px', margin: '0 auto' }}>
                         Everything you need for seamless service booking and management.
                     </p>

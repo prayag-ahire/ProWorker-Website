@@ -24,13 +24,10 @@
     margin-bottom: 20px;
 }
 
-/* Explicitly target footer logo text to override global logo styles */
-.footer .brand-logo .logo-text {
+/* Shared styles from index.css handle the logo structure */
+.brand-logo .logo-text-inner {
     font-size: 28px;
-    font-weight: 900;
-    color: white !important;
-    /* Force white text on dark footer */
-    opacity: 1 !important;
+    margin-bottom: 0;
 }
 
 .logo-badge {

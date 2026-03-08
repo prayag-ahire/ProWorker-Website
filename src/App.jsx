@@ -10,9 +10,11 @@ import CTA from './components/CTA';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import WorkerSearch from './components/WorkerSearch';
+import { ViewModeContext } from './context/ViewModeContext';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [viewMode, setViewMode] = useState('client');
 
   useEffect(() => {
     // Check if search page is requested via URL hash
@@ -70,26 +72,28 @@ function App() {
   }, [currentPage]);
 
   return (
-    <div className="App">
-      <Navbar onNavigate={setCurrentPage} />
-      {currentPage === 'search' ? (
-        <>
-          <WorkerSearch />
-          <Footer />
-        </>
-      ) : (
-        <>
-          <Hero onSearchClick={() => setCurrentPage('search')} />
-          <HowItWorks />
-          <Features />
-          <Testimonials />
-          <Pricing />
-          <FAQ />
-          <CTA />
-          <Footer />
-        </>
-      )}
-    </div>
+    <ViewModeContext.Provider value={viewMode}>
+      <div className="App">
+        <Navbar onNavigate={setCurrentPage} viewMode={viewMode} onViewModeChange={setViewMode} />
+        {currentPage === 'search' ? (
+          <>
+            <WorkerSearch />
+            <Footer />
+          </>
+        ) : (
+          <>
+            <Hero onSearchClick={() => setCurrentPage('search')} />
+            <HowItWorks />
+            <Features />
+            <Testimonials />
+            <Pricing />
+            <FAQ />
+            <CTA />
+            <Footer />
+          </>
+        )}
+      </div>
+    </ViewModeContext.Provider>
   );
 }
 

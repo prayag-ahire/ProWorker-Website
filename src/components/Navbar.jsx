@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './Navbar.css';
 
-function Navbar({ onNavigate }) {
+function Navbar({ onNavigate, viewMode, onViewModeChange }) {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isSearchPage, setIsSearchPage] = useState(false);
@@ -37,18 +37,38 @@ function Navbar({ onNavigate }) {
         setMobileMenuOpen(false);
     };
 
+    const toggleMarkup = (
+        <div className="view-toggle">
+            <button
+                className={`toggle-option ${viewMode === 'client' ? 'active' : ''}`}
+                onClick={() => onViewModeChange('client')}
+            >Client</button>
+            <button
+                className={`toggle-option ${viewMode === 'worker' ? 'active' : ''}`}
+                onClick={() => onViewModeChange('worker')}
+            >Worker</button>
+        </div>
+    );
+
     return (
         <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
             <div className="container">
                 <div className="navbar-content">
-                    <button 
+                    <button
                         className="navbar-logo"
                         onClick={handleHome}
                         style={{ background: 'none', border: 'none', cursor: 'pointer' }}
                     >
-                        <span className="logo-text">ProWorker</span>
-                        <span className="logo-badge">BETA</span>
+                        <div className="logo-text-inner">
+                            <span className="logo-pro">Pro</span>
+                            <span className="logo-worker">Worker</span>
+                        </div>
                     </button>
+
+                    {/* Mobile-only toggle sitting outside the menu for quick access */}
+                    <div className="navbar-mobile-toggle">
+                        {toggleMarkup}
+                    </div>
 
                     <ul className={`navbar-menu ${mobileMenuOpen ? 'open' : ''}`}>
                         <li><a href="#why">Why ProWorker</a></li>
@@ -59,23 +79,13 @@ function Navbar({ onNavigate }) {
                     </ul>
 
                     <div className="navbar-actions">
+                        {toggleMarkup}
                         {isSearchPage ? (
-                            <button 
-                                onClick={handleHome}
-                                className="btn btn-secondary"
-                            >
-                                ← Back to Home
-                            </button>
+                            <button onClick={handleHome} className="btn btn-secondary">← Back to Home</button>
+                        ) : viewMode === 'client' ? (
+                            <button onClick={handleSearch} className="btn btn-primary">🔍 Find Workers</button>
                         ) : (
-                            <>
-                                <button 
-                                    onClick={handleSearch}
-                                    className="btn btn-primary"
-                                >
-                                    🔍 Find Workers
-                                </button>
-                                <a href="#worker" className="btn btn-secondary">For Workers</a>
-                            </>
+                            <button className="btn btn-primary" disabled>Join as Worker</button>
                         )}
                     </div>
 

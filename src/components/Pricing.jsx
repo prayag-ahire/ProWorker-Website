@@ -1,6 +1,9 @@
 import './Pricing.css';
+import { useViewMode } from '../context/ViewModeContext';
 
 function Pricing() {
+    const isWorker = useViewMode() === 'worker';
+
     return (
         <section className="section section-glow">
             <div className="container">
@@ -12,65 +15,69 @@ function Pricing() {
                 </div>
 
                 <div className="pricing-grid">
-                    <div className="pricing-card scroll-animate delay-100">
-                        <div className="pricing-icon">👥</div>
-                        <h3>For Clients</h3>
-                        <div className="pricing-feature-list">
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>100% Free to browse & search</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>No subscription fees</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Pay only for booked services</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Transparent worker pricing</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Secure payment protection</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="pricing-card featured scroll-animate delay-200">
-                        <div className="pricing-badge">Most Popular</div>
-                        <div className="pricing-icon">🔧</div>
-                        <h3>For Workers</h3>
-                        <div className="pricing-feature-list">
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Free to join & create profile</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Unlimited booking requests</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Set your own pricing</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Free training resources</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Premium tools coming soon</span>
+                    {!isWorker && (
+                        <div className="pricing-card featured scroll-animate delay-100">
+                            <div className="pricing-icon">👥</div>
+                            <h3>For Clients</h3>
+                            <div className="pricing-feature-list">
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>100% Free to browse & search</span>
+                                </div>
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>No subscription fees</span>
+                                </div>
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>Pay only for booked services</span>
+                                </div>
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>Transparent worker pricing</span>
+                                </div>
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>Secure payment protection</span>
+                                </div>
                             </div>
                         </div>
-                        <a href="#worker" className="btn btn-primary btn-large">
-                            Join as Worker
-                        </a>
-                    </div>
+                    )}
 
-                    <div className="pricing-card scroll-animate delay-300">
+                    {isWorker && (
+                        <div className="pricing-card featured scroll-animate delay-100">
+                            <div className="pricing-badge">Most Popular</div>
+                            <div className="pricing-icon">🔧</div>
+                            <h3>For Workers</h3>
+                            <div className="pricing-feature-list">
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>Free to join & create profile</span>
+                                </div>
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>Unlimited booking requests</span>
+                                </div>
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>Set your own pricing</span>
+                                </div>
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>Free training resources</span>
+                                </div>
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>Premium tools coming soon</span>
+                                </div>
+                            </div>
+                            <button className="btn btn-primary btn-large" disabled>
+                                Join as Worker
+                            </button>
+                        </div>
+                    )}
+
+                    <div className="pricing-card scroll-animate delay-200">
                         <div className="pricing-icon">💎</div>
                         <h3>Coming Soon</h3>
                         <div className="pricing-feature-list">
