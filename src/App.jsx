@@ -10,6 +10,7 @@ import CTA from './components/CTA';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import WorkerSearch from './components/WorkerSearch';
+import PrivacyPolicy from './components/PrivacyPolicy';
 import { ViewModeContext } from './context/ViewModeContext';
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
     const handleHashChange = () => {
       if (window.location.hash === '#search') {
         setCurrentPage('search');
+      } else if (window.location.hash === '#privacy') {
+        setCurrentPage('privacy');
       } else {
         setCurrentPage('home');
       }
@@ -78,6 +81,11 @@ function App() {
         {currentPage === 'search' ? (
           <>
             <WorkerSearch />
+            <Footer />
+          </>
+        ) : currentPage === 'privacy' ? (
+          <>
+            <PrivacyPolicy />
             <Footer />
           </>
         ) : (

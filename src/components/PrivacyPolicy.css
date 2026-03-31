@@ -1,0 +1,501 @@
+/* ==========================================
+   Privacy Policy Page
+   ========================================== */
+
+.privacy-page {
+    background: var(--color-white);
+    min-height: 100vh;
+}
+
+/* Hero */
+.privacy-hero {
+    background: var(--color-black);
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.privacy-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.privacy-hero-content {
+    max-width: 720px;
+    position: relative;
+    z-index: 1;
+}
+
+.privacy-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: var(--radius-full);
+    margin-bottom: 24px;
+}
+
+.privacy-title {
+    font-family: var(--font-heading);
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 800;
+    color: var(--color-white);
+    line-height: 1.1;
+    margin: 0 0 20px;
+    letter-spacing: -1px;
+}
+
+.privacy-subtitle {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 20px;
+    max-width: 580px;
+}
+
+.privacy-meta {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.35);
+    margin: 0;
+    font-style: italic;
+}
+
+/* Body layout */
+.privacy-body {
+    padding: 80px 0 120px;
+}
+
+.privacy-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+/* Table of Contents */
+.privacy-toc {
+    position: sticky;
+    top: 100px;
+}
+
+.privacy-toc h3 {
+    font-family: var(--font-heading);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--color-gray-400);
+    margin: 0 0 16px;
+}
+
+.privacy-toc ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    counter-reset: toc;
+}
+
+.privacy-toc ol li {
+    margin-bottom: 4px;
+}
+
+.privacy-toc ol li a {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--color-gray-500);
+    text-decoration: none;
+    display: block;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    line-height: 1.4;
+}
+
+.privacy-toc ol li a:hover {
+    color: var(--color-black);
+    background: var(--color-gray-100);
+}
+
+/* Main content */
+.privacy-content {
+    min-width: 0;
+}
+
+.privacy-section {
+    margin-bottom: 64px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid var(--color-gray-200);
+}
+
+.privacy-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.privacy-section h2 {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--color-black);
+    margin: 0 0 20px;
+    letter-spacing: -0.5px;
+}
+
+.privacy-section h3 {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-gray-800);
+    margin: 32px 0 12px;
+}
+
+.privacy-section p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--color-gray-600);
+    margin: 0 0 16px;
+}
+
+.privacy-section ul,
+.privacy-section ol {
+    padding-left: 20px;
+    margin: 0 0 20px;
+}
+
+.privacy-section li {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--color-gray-600);
+    margin-bottom: 8px;
+}
+
+.privacy-section a {
+    color: var(--color-black);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+}
+
+.privacy-section a:hover {
+    color: var(--color-gray-600);
+}
+
+.privacy-section em {
+    color: var(--color-gray-700);
+    font-style: italic;
+}
+
+/* Highlight box */
+.privacy-highlight {
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-left: 3px solid var(--color-black);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 16px 20px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--color-gray-600);
+    margin: 24px 0;
+}
+
+.privacy-highlight strong {
+    color: var(--color-black);
+}
+
+.privacy-highlight a {
+    color: var(--color-black);
+    font-weight: 600;
+}
+
+/* Use cases grid */
+.privacy-use-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.privacy-use-card {
+    background: var(--color-gray-50);
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.privacy-use-card:hover {
+    border-color: var(--color-gray-300);
+    background: var(--color-gray-100);
+}
+
+.use-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.privacy-use-card h4 {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-black);
+    margin: 0 0 6px;
+}
+
+.privacy-use-card p {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-gray-500);
+    margin: 0;
+}
+
+/* Table */
+.privacy-table-wrapper {
+    overflow-x: auto;
+    margin: 24px 0;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-gray-200);
+}
+
+.privacy-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-body);
+    font-size: 14px;
+}
+
+.privacy-table thead {
+    background: var(--color-black);
+}
+
+.privacy-table th {
+    padding: 14px 18px;
+    text-align: left;
+    color: var(--color-white);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+.privacy-table td {
+    padding: 14px 18px;
+    color: var(--color-gray-600);
+    border-bottom: 1px solid var(--color-gray-100);
+    line-height: 1.5;
+    vertical-align: top;
+}
+
+.privacy-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.privacy-table tbody tr:nth-child(even) {
+    background: var(--color-gray-50);
+}
+
+.privacy-table tbody tr:hover td {
+    background: var(--color-gray-100);
+}
+
+/* Rights grid */
+.rights-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 24px 0;
+    border: 1px solid var(--color-gray-200);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.rights-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--color-gray-100);
+    transition: background var(--transition-fast);
+}
+
+.rights-item:last-child {
+    border-bottom: none;
+}
+
+.rights-item:hover {
+    background: var(--color-gray-50);
+}
+
+.rights-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.rights-item h4 {
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-black);
+    margin: 0 0 4px;
+}
+
+.rights-item p {
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-gray-500);
+    margin: 0;
+}
+
+/* Contact card */
+.privacy-contact-card {
+    background: var(--color-black);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    margin: 28px 0;
+    color: white;
+}
+
+.contact-brand {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 28px;
+}
+
+.contact-brand .logo-pro {
+    color: var(--color-white);
+}
+
+.contact-brand .logo-worker-footer {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contact-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+}
+
+.contact-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    min-width: 120px;
+}
+
+.contact-value {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a.contact-value:hover {
+    color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Container util (mirrors existing pattern) */
+.privacy-page .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* ==========================================
+   Responsive
+   ========================================== */
+
+@media (max-width: 1024px) {
+    .privacy-layout {
+        grid-template-columns: 200px 1fr;
+        gap: 48px;
+    }
+}
+
+@media (max-width: 768px) {
+    .privacy-hero {
+        padding: 100px 0 60px;
+    }
+
+    .privacy-body {
+        padding: 48px 0 80px;
+    }
+
+    .privacy-layout {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .privacy-toc {
+        display: none;
+    }
+
+    .privacy-section {
+        margin-bottom: 48px;
+        padding-bottom: 48px;
+    }
+
+    .privacy-use-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .privacy-contact-card {
+        padding: 28px 24px;
+    }
+
+    .contact-row {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .contact-label {
+        min-width: unset;
+    }
+
+    .privacy-page .container {
+        padding: 0 20px;
+    }
+
+    .privacy-table th,
+    .privacy-table td {
+        padding: 12px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .privacy-use-grid {
+        grid-template-columns: 1fr;
+    }
+}
