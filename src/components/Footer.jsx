@@ -61,6 +61,7 @@ function Footer() {
                             <ul>
                                 <li><a href="#privacy">Privacy Policy</a></li>
                                 <li><a href="#deleteaccount">Delete Account</a></li>
+                                <li><a href="#childsafety">Child Safety Standards</a></li>
                                 <li><a href="#terms">Terms of Service</a></li>
                                 <li><a href="#cookies">Cookie Policy</a></li>
                             </ul>

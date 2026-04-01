@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import WorkerSearch from './components/WorkerSearch';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import DeleteAccount from './components/DeleteAccount';
+import ChildSafetyStandards from './components/ChildSafetyStandards';
 import { ViewModeContext } from './context/ViewModeContext';
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
         setCurrentPage('privacy');
       } else if (window.location.hash === '#deleteaccount') {
         setCurrentPage('deleteaccount');
+      } else if (window.location.hash === '#childsafety') {
+        setCurrentPage('childsafety');
       } else {
         setCurrentPage('home');
       }
@@ -94,6 +97,11 @@ function App() {
         ) : currentPage === 'deleteaccount' ? (
           <>
             <DeleteAccount />
+            <Footer />
+          </>
+        ) : currentPage === 'childsafety' ? (
+          <>
+            <ChildSafetyStandards />
             <Footer />
           </>
         ) : (
