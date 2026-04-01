@@ -11,6 +11,7 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import WorkerSearch from './components/WorkerSearch';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import DeleteAccount from './components/DeleteAccount';
 import { ViewModeContext } from './context/ViewModeContext';
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
         setCurrentPage('search');
       } else if (window.location.hash === '#privacy') {
         setCurrentPage('privacy');
+      } else if (window.location.hash === '#deleteaccount') {
+        setCurrentPage('deleteaccount');
       } else {
         setCurrentPage('home');
       }
@@ -86,6 +89,11 @@ function App() {
         ) : currentPage === 'privacy' ? (
           <>
             <PrivacyPolicy />
+            <Footer />
+          </>
+        ) : currentPage === 'deleteaccount' ? (
+          <>
+            <DeleteAccount />
             <Footer />
           </>
         ) : (
