@@ -1,48 +1,63 @@
 import { useState } from 'react';
+import { authService } from '../services/authService';
 import './DeleteAccount.css';
 
 function DeleteAccount() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(authService.isAuthenticated());
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loginError, setLoginError] = useState('');
     const [deletionRequested, setDeletionRequested] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [deleteError, setDeleteError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         setLoginError('');
+        setIsLoading(true);
 
         if (!email || !password) {
             setLoginError('Please fill in all fields');
+            setIsLoading(false);
             return;
         }
 
-        // Simulate login - In a real app, this would call an API
-        if (email && password.length >= 6) {
+        try {
+            await authService.signIn(email, password);
             setIsLoggedIn(true);
             setEmail('');
             setPassword('');
-        } else {
-            setLoginError('Invalid email or password');
+        } catch (err) {
+            setLoginError(err.message || 'Invalid email or password');
+        } finally {
+            setIsLoading(false);
         }
     };
 
-    const handleDeleteRequest = (e) => {
+    const handleDeleteRequest = async (e) => {
         e.preventDefault();
         setDeleteError('');
+        setIsLoading(true);
 
         if (!confirmDelete) {
             setDeleteError('Please confirm that you understand your account will be deleted');
+            setIsLoading(false);
             return;
         }
 
-        // Simulate delete request - In a real app, this would call an API
-        setDeletionRequested(true);
+        try {
+            await authService.deleteAccount();
+            setDeletionRequested(true);
+        } catch (err) {
+            setDeleteError(err.message || 'Failed to delete account');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleLogout = () => {
+        authService.logout();
         setIsLoggedIn(false);
         setDeletionRequested(false);
         setConfirmDelete(false);
@@ -108,8 +123,8 @@ function DeleteAccount() {
                                                 </div>
                                             )}
 
-                                            <button type="submit" className="btn btn-primary">
-                                                Sign In
+                                            <button type="submit" className="btn btn-primary" disabled={isLoading}>
+                                                {isLoading ? 'Signing In...' : 'Sign In'}
                                             </button>
                                         </form>
 
@@ -164,10 +179,10 @@ function DeleteAccount() {
                                             )}
 
                                             <div className="form-actions">
-                                                <button type="submit" className="btn btn-danger">
-                                                    Request Account Deletion
+                                                <button type="submit" className="btn btn-danger" disabled={isLoading}>
+                                                    {isLoading ? 'Processing...' : 'Request Account Deletion'}
                                                 </button>
-                                                <button type="button" onClick={handleLogout} className="btn btn-secondary">
+                                                <button type="button" onClick={handleLogout} className="btn btn-secondary" disabled={isLoading}>
                                                     Cancel
                                                 </button>
                                             </div>

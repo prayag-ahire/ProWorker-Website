@@ -13,7 +13,9 @@ import WorkerSearch from './components/WorkerSearch';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import DeleteAccount from './components/DeleteAccount';
 import ChildSafetyStandards from './components/ChildSafetyStandards';
+import SignIn from './components/SignIn';
 import { ViewModeContext } from './context/ViewModeContext';
+import { AuthProvider } from './context/AuthContext';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -26,6 +28,8 @@ function App() {
         setCurrentPage('search');
       } else if (window.location.hash === '#privacy') {
         setCurrentPage('privacy');
+      } else if (window.location.hash === '#signin') {
+        setCurrentPage('signin');
       } else if (window.location.hash === '#deleteaccount') {
         setCurrentPage('deleteaccount');
       } else if (window.location.hash === '#childsafety') {
@@ -81,43 +85,50 @@ function App() {
   }, [currentPage]);
 
   return (
-    <ViewModeContext.Provider value={viewMode}>
-      <div className="App">
-        <Navbar onNavigate={setCurrentPage} viewMode={viewMode} onViewModeChange={setViewMode} />
-        {currentPage === 'search' ? (
-          <>
-            <WorkerSearch />
-            <Footer />
-          </>
-        ) : currentPage === 'privacy' ? (
-          <>
-            <PrivacyPolicy />
-            <Footer />
-          </>
-        ) : currentPage === 'deleteaccount' ? (
-          <>
-            <DeleteAccount />
-            <Footer />
-          </>
-        ) : currentPage === 'childsafety' ? (
-          <>
-            <ChildSafetyStandards />
-            <Footer />
-          </>
-        ) : (
-          <>
-            <Hero onSearchClick={() => setCurrentPage('search')} />
-            <HowItWorks />
-            <Features />
-            <Testimonials />
-            <Pricing />
-            <FAQ />
-            <CTA />
-            <Footer />
-          </>
-        )}
-      </div>
-    </ViewModeContext.Provider>
+    <AuthProvider>
+      <ViewModeContext.Provider value={viewMode}>
+        <div className="App">
+          <Navbar onNavigate={setCurrentPage} viewMode={viewMode} onViewModeChange={setViewMode} />
+          {currentPage === 'search' ? (
+            <>
+              <WorkerSearch />
+              <Footer />
+            </>
+          ) : currentPage === 'signin' ? (
+            <>
+              <SignIn onNavigate={setCurrentPage} />
+              <Footer />
+            </>
+          ) : currentPage === 'privacy' ? (
+            <>
+              <PrivacyPolicy />
+              <Footer />
+            </>
+          ) : currentPage === 'deleteaccount' ? (
+            <>
+              <DeleteAccount />
+              <Footer />
+            </>
+          ) : currentPage === 'childsafety' ? (
+            <>
+              <ChildSafetyStandards />
+              <Footer />
+            </>
+          ) : (
+            <>
+              <Hero onSearchClick={() => setCurrentPage('search')} />
+              <HowItWorks />
+              <Features />
+              <Testimonials />
+              <Pricing />
+              <FAQ />
+              <CTA />
+              <Footer />
+            </>
+          )}
+        </div>
+      </ViewModeContext.Provider>
+    </AuthProvider>
   );
 }
 
