@@ -1,5 +1,5 @@
 // API service for worker-related requests
-const API_BASE_URL = 'https://proworker.onrender.com/api/v1/website';
+const API_BASE_URL = 'http://localhost:5000/api/v1/website';
 
 export const workerService = {
   // Get current user location

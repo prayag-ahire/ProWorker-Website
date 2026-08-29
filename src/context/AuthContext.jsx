@@ -1,35 +1,34 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext, useState } from 'react';
 import { authService } from '../services/authService';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(() => {
+    const currentUser = authService.getCurrentUser();
+    return currentUser.isAuthenticated ? currentUser : null;
+  });
+  const [isLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  // Initialize auth state from localStorage
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      setUser({
-        userId: localStorage.getItem('userId'),
-        clientId: localStorage.getItem('clientId'),
-        profileCompleted: localStorage.getItem('profileCompleted') === 'true',
-      });
-    }
-    setIsLoading(false);
-  }, []);
 
   const signIn = async (email, password) => {
     try {
       setError(null);
       const response = await authService.signIn(email, password);
-      setUser({
-        userId: response.userId,
-        clientId: response.clientId,
-        profileCompleted: response.profileCompleted,
-      });
+      setUser(authService.getCurrentUser());
+      return response;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    }
+  };
+
+  const signInWithGoogle = async (credentialResponse) => {
+    try {
+      setError(null);
+      const response = await authService.signInWithGoogle(credentialResponse);
+      setUser(authService.getCurrentUser());
       return response;
     } catch (err) {
       setError(err.message);
@@ -41,11 +40,7 @@ export const AuthProvider = ({ children }) => {
     try {
       setError(null);
       const response = await authService.signUp(email, password, name);
-      setUser({
-        userId: response.userId,
-        clientId: response.clientId,
-        profileCompleted: response.profileCompleted,
-      });
+      setUser(authService.getCurrentUser());
       return response;
     } catch (err) {
       setError(err.message);
@@ -78,6 +73,7 @@ export const AuthProvider = ({ children }) => {
         isLoading,
         error,
         signIn,
+        signInWithGoogle,
         signUp,
         deleteAccount,
         logout,

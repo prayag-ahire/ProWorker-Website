@@ -46,9 +46,7 @@ function WorkerSearch() {
         );
         const data = await response.json();
         setLocationName(data.address?.city || data.address?.town || 'Current Location');
-      } catch (err) {
-        setLocationName('Current Location');
-      }
+      } catch {`r`n        setLocationName('Current Location');`r`n      }
     } catch (error) {
       setLocationError(error.message || 'Unable to get your location. Please enable location permissions.');
     } finally {
@@ -111,9 +109,7 @@ function WorkerSearch() {
       setPagination(results.pagination);
       setCurrentPage(pageNumber);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (error) {
-      setLocationError('Failed to load more workers. Please try again.');
-    } finally {
+    } catch {`r`n      setLocationError('Failed to load more workers. Please try again.');`r`n    } finally {
       setSearchLoading(false);
     }
   };
@@ -264,3 +260,4 @@ function WorkerSearch() {
 }
 
 export default WorkerSearch;
+

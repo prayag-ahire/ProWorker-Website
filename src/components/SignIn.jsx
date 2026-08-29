@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import GoogleAuth from './googleAuth';
 import './SignIn.css';
 
 function SignIn({ onNavigate }) {
-  const { signIn, signUp, error, isLoading } = useAuth();
+  const { signIn, signUp, signInWithGoogle, error, isLoading } = useAuth();
   const [isSignUp, setIsSignUp] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -12,6 +13,7 @@ function SignIn({ onNavigate }) {
     name: '',
   });
   const [formError, setFormError] = useState('');
+  const [googleError, setGoogleError] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -78,12 +80,27 @@ function SignIn({ onNavigate }) {
 
       // Navigate to home after successful auth
       onNavigate('home');
-    } catch (err) {
+    } catch {
       // Error is handled by context
     }
   };
 
-  const displayError = formError || error;
+  const handleGoogleSuccess = async (credentialResponse) => {
+    try {
+      setFormError('');
+      setGoogleError('');
+      await signInWithGoogle(credentialResponse);
+      onNavigate('home');
+    } catch (err) {
+      setGoogleError(err.message || 'Google sign-in failed');
+    }
+  };
+
+  const handleGoogleError = () => {
+    setGoogleError('Google sign-in failed. Please try again.');
+  };
+
+  const displayError = formError || error || googleError;
 
   return (
     <div className="signin-page">
@@ -180,6 +197,15 @@ function SignIn({ onNavigate }) {
                   </button>
                 </form>
 
+                <div className="signin-divider" aria-hidden="true">
+                  <span>or continue with</span>
+                </div>
+
+                <GoogleAuth
+                  onSuccess={handleGoogleSuccess}
+                  onError={handleGoogleError}
+                />
+
                 <div className="signin-toggle">
                   <p>
                     {isSignUp ? 'Already have an account?' : "Don't have an account?"}
@@ -194,6 +220,7 @@ function SignIn({ onNavigate }) {
                           name: '',
                         });
                         setFormError('');
+                        setGoogleError('');
                       }}
                       className="toggle-button"
                     >

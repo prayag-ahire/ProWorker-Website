@@ -1,6 +1,9 @@
 .signin-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.2), transparent 35%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.14), transparent 30%),
+    linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .signin-hero {
@@ -130,6 +133,49 @@
 .signin-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+.signin-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 24px 0 18px;
+  color: #666;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.signin-divider::before,
+.signin-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d7d7e2, transparent);
+}
+
+.signin-divider span {
+  white-space: nowrap;
+}
+
+.google-auth-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.google-auth-wrapper > div {
+  display: inline-flex;
+}
+
+.google-auth-hint {
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px dashed #c7c7d4;
+  background: #fafafa;
+  color: #555;
+  font-size: 0.95rem;
+  text-align: center;
 }
 
 .signin-toggle {
