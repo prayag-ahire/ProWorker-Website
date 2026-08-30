@@ -1,4 +1,4 @@
-const BASE_API_URL = "https://api.proworker.co/api" || 'http://localhost:5000/api';
+const BASE_API_URL = "https://api.proworker.co/api";
 const API_BASE_URL = `${BASE_API_URL.replace(/\/$/, '')}/v1/website`;
 const GOOGLE_SIGNIN_URL = import.meta.env.VITE_GOOGLE_SIGNIN_URL || `${BASE_API_URL.replace(/\/$/, '')}/v1/website/google-signin`;
 
