@@ -1,68 +1,46 @@
 import { useState } from 'react';
-import { authService } from '../services/authService';
+import { useAuth } from '../context/AuthContext';
+import { useViewMode } from '../context/ViewModeContext';
+import OtpLoginForm from './OtpLoginForm';
 import './DeleteAccount.css';
 
 function DeleteAccount() {
-    const [isLoggedIn, setIsLoggedIn] = useState(authService.isAuthenticated());
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [loginError, setLoginError] = useState('');
+    const { user, isAuthenticated, deleteAccount, logout, error } = useAuth();
+    const viewMode = useViewMode();
     const [deletionRequested, setDeletionRequested] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState(false);
     const [deleteError, setDeleteError] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        setLoginError('');
-        setIsLoading(true);
-
-        if (!email || !password) {
-            setLoginError('Please fill in all fields');
-            setIsLoading(false);
-            return;
-        }
-
-        try {
-            await authService.signIn(email, password);
-            setIsLoggedIn(true);
-            setEmail('');
-            setPassword('');
-        } catch (err) {
-            setLoginError(err.message || 'Invalid email or password');
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    const signedInLabel = user?.mobile || user?.email || user?.name || 'User';
+    const signedInRole = user?.role === 'worker' ? 'worker' : 'client';
 
     const handleDeleteRequest = async (e) => {
         e.preventDefault();
         setDeleteError('');
-        setIsLoading(true);
+        setIsDeleting(true);
 
         if (!confirmDelete) {
             setDeleteError('Please confirm that you understand your account will be deleted');
-            setIsLoading(false);
+            setIsDeleting(false);
             return;
         }
 
         try {
-            await authService.deleteAccount();
+            await deleteAccount();
             setDeletionRequested(true);
         } catch (err) {
             setDeleteError(err.message || 'Failed to delete account');
         } finally {
-            setIsLoading(false);
+            setIsDeleting(false);
         }
     };
 
     const handleLogout = () => {
-        authService.logout();
-        setIsLoggedIn(false);
+        logout();
         setDeletionRequested(false);
         setConfirmDelete(false);
-        setEmail('');
-        setPassword('');
+        setDeleteError('');
     };
 
     return (
@@ -73,7 +51,7 @@ function DeleteAccount() {
                         <span className="delete-account-badge">Account Management</span>
                         <h1 className="delete-account-title">Delete Account</h1>
                         <p className="delete-account-subtitle">
-                            We understand your decision. Here you can request permanent deletion of your ProWorker account.
+                            Clients and workers can sign in with OTP and request permanent deletion of their ProWorker account.
                         </p>
                     </div>
                 </div>
@@ -83,54 +61,18 @@ function DeleteAccount() {
                 <div className="container">
                     <div className="delete-account-layout">
                         <div className="delete-account-content">
-                            {!isLoggedIn ? (
+                            {!isAuthenticated && !deletionRequested ? (
                                 <section className="delete-account-section">
                                     <div className="section-card">
                                         <h2>Sign In to Your Account</h2>
                                         <p className="section-description">
-                                            Please log in with your ProWorker account credentials to proceed with account deletion.
+                                            Choose Client or Worker, then verify your mobile number with OTP to continue.
                                         </p>
 
-                                        <form onSubmit={handleLogin} className="login-form">
-                                            <div className="form-group">
-                                                <label htmlFor="email">Email Address</label>
-                                                <input
-                                                    type="email"
-                                                    id="email"
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
-                                                    placeholder="Enter your email"
-                                                    className="form-input"
-                                                />
-                                            </div>
-
-                                            <div className="form-group">
-                                                <label htmlFor="password">Password</label>
-                                                <input
-                                                    type="password"
-                                                    id="password"
-                                                    value={password}
-                                                    onChange={(e) => setPassword(e.target.value)}
-                                                    placeholder="Enter your password"
-                                                    className="form-input"
-                                                />
-                                            </div>
-
-                                            {loginError && (
-                                                <div className="error-message">
-                                                    <span className="error-icon">⚠️</span>
-                                                    {loginError}
-                                                </div>
-                                            )}
-
-                                            <button type="submit" className="btn btn-primary" disabled={isLoading}>
-                                                {isLoading ? 'Signing In...' : 'Sign In'}
-                                            </button>
-                                        </form>
-
-                                        <p className="form-hint">
-                                            Don't have an account? <a href="/">Create one here</a>
-                                        </p>
+                                        <OtpLoginForm
+                                            defaultRole={viewMode}
+                                            buttonClassName="btn btn-primary"
+                                        />
                                     </div>
                                 </section>
                             ) : !deletionRequested ? (
@@ -138,7 +80,10 @@ function DeleteAccount() {
                                     <div className="section-card">
                                         <div className="success-banner">
                                             <span className="success-icon">✓</span>
-                                            <p>You are signed in as <strong>{email || 'User'}</strong></p>
+                                            <p>
+                                                You are signed in as <strong>{signedInLabel}</strong>
+                                                {' '}({signedInRole})
+                                            </p>
                                         </div>
 
                                         <h2>Request Account Deletion</h2>
@@ -171,18 +116,18 @@ function DeleteAccount() {
                                                 </label>
                                             </div>
 
-                                            {deleteError && (
+                                            {(deleteError || error) && (
                                                 <div className="error-message">
                                                     <span className="error-icon">⚠️</span>
-                                                    {deleteError}
+                                                    {deleteError || error}
                                                 </div>
                                             )}
 
                                             <div className="form-actions">
-                                                <button type="submit" className="btn btn-danger" disabled={isLoading}>
-                                                    {isLoading ? 'Processing...' : 'Request Account Deletion'}
+                                                <button type="submit" className="btn btn-danger" disabled={isDeleting}>
+                                                    {isDeleting ? 'Processing...' : 'Request Account Deletion'}
                                                 </button>
-                                                <button type="button" onClick={handleLogout} className="btn btn-secondary" disabled={isLoading}>
+                                                <button type="button" onClick={handleLogout} className="btn btn-secondary" disabled={isDeleting}>
                                                     Cancel
                                                 </button>
                                             </div>
@@ -273,9 +218,9 @@ function DeleteAccount() {
                                         </p>
                                     </div>
                                     <div className="faq-item">
-                                        <h4>Can I use the same email again?</h4>
+                                        <h4>Can I use the same mobile number again?</h4>
                                         <p>
-                                            After 30 days, you can register a new account with the same email address.
+                                            After 30 days, you can register a new account with the same mobile number.
                                         </p>
                                     </div>
                                     <div className="faq-item">

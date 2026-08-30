@@ -1,0 +1,94 @@
+.otp-login-form {
+  width: 100%;
+}
+
+.otp-role-toggle {
+  display: flex;
+  width: 100%;
+  padding: 4px;
+  margin-bottom: 24px;
+  background: var(--color-gray-100, #f4f4f5);
+  border: 1px solid var(--color-gray-200, #e4e4e7);
+  border-radius: 9999px;
+}
+
+.otp-role-option {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: #71717a;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.otp-role-option.active {
+  background: #000000;
+  color: #ffffff;
+}
+
+.otp-role-option:not(.active):hover {
+  color: #000000;
+}
+
+.otp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.otp-form .form-group {
+  margin-bottom: 0;
+}
+
+.otp-sent-hint {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-gray-600, #52525b);
+}
+
+.otp-code-input {
+  letter-spacing: 0.24em;
+  font-weight: 700;
+}
+
+.otp-form-error {
+  margin: 0;
+  padding: 12px 16px;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  color: #b91c1c;
+  font-size: 14px;
+}
+
+.otp-secondary-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.otp-text-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.otp-text-button:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.otp-text-button:disabled {
+  color: #a1a1aa;
+  cursor: not-allowed;
+}

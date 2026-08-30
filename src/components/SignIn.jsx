@@ -1,93 +1,17 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useViewMode } from '../context/ViewModeContext';
 import GoogleAuth from './googleAuth';
+import OtpLoginForm from './OtpLoginForm';
 import './SignIn.css';
 
 function SignIn({ onNavigate }) {
-  const { signIn, signUp, signInWithGoogle, error, isLoading } = useAuth();
-  const [isSignUp, setIsSignUp] = useState(false);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    confirmPassword: '',
-    name: '',
-  });
-  const [formError, setFormError] = useState('');
+  const { signInWithGoogle } = useAuth();
+  const viewMode = useViewMode();
   const [googleError, setGoogleError] = useState('');
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const validateForm = () => {
-    setFormError('');
-
-    if (!formData.email || !formData.password) {
-      setFormError('Email and password are required');
-      return false;
-    }
-
-    if (!formData.email.includes('@')) {
-      setFormError('Please enter a valid email');
-      return false;
-    }
-
-    if (formData.password.length < 6) {
-      setFormError('Password must be at least 6 characters');
-      return false;
-    }
-
-    if (isSignUp) {
-      if (!formData.name) {
-        setFormError('Name is required');
-        return false;
-      }
-
-      if (formData.password !== formData.confirmPassword) {
-        setFormError('Passwords do not match');
-        return false;
-      }
-    }
-
-    return true;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    try {
-      if (isSignUp) {
-        await signUp(formData.email, formData.password, formData.name);
-      } else {
-        await signIn(formData.email, formData.password);
-      }
-
-      // Reset form and navigate
-      setFormData({
-        email: '',
-        password: '',
-        confirmPassword: '',
-        name: '',
-      });
-
-      // Navigate to home after successful auth
-      onNavigate('home');
-    } catch {
-      // Error is handled by context
-    }
-  };
 
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
-      setFormError('');
       setGoogleError('');
       await signInWithGoogle(credentialResponse);
       onNavigate('home');
@@ -100,7 +24,7 @@ function SignIn({ onNavigate }) {
     setGoogleError('Google sign-in failed. Please try again.');
   };
 
-  const displayError = formError || error || googleError;
+  const isWorker = viewMode === 'worker';
 
   return (
     <div className="signin-page">
@@ -108,13 +32,11 @@ function SignIn({ onNavigate }) {
         <div className="container">
           <div className="signin-hero-content">
             <span className="signin-badge">Join ProWorker</span>
-            <h1 className="signin-title">
-              {isSignUp ? 'Create Your Account' : 'Sign In'}
-            </h1>
+            <h1 className="signin-title">Sign In</h1>
             <p className="signin-subtitle">
-              {isSignUp
-                ? 'Get started with ProWorker and find trusted professionals'
-                : 'Access your ProWorker account'}
+              {isWorker
+                ? 'Sign in with your mobile number to manage bookings and earnings'
+                : 'Sign in with your mobile number to find trusted professionals'}
             </p>
           </div>
         </div>
@@ -125,121 +47,50 @@ function SignIn({ onNavigate }) {
           <div className="signin-layout">
             <div className="signin-form-container">
               <div className="signin-card">
-                <form onSubmit={handleSubmit} className="signin-form">
-                  {isSignUp && (
-                    <div className="form-group">
-                      <label htmlFor="name">Full Name</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        placeholder="Enter your full name"
-                        className="form-input"
-                      />
-                    </div>
-                  )}
-
-                  <div className="form-group">
-                    <label htmlFor="email">Email Address</label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="Enter your email"
-                      className="form-input"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      placeholder="Enter your password"
-                      className="form-input"
-                    />
-                  </div>
-
-                  {isSignUp && (
-                    <div className="form-group">
-                      <label htmlFor="confirmPassword">Confirm Password</label>
-                      <input
-                        type="password"
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleInputChange}
-                        placeholder="Confirm your password"
-                        className="form-input"
-                      />
-                    </div>
-                  )}
-
-                  {displayError && (
-                    <div className="form-error">
-                      {displayError}
-                    </div>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="signin-button"
-                  >
-                    {isLoading ? 'Loading...' : isSignUp ? 'Sign Up' : 'Sign In'}
-                  </button>
-                </form>
+                <OtpLoginForm
+                  defaultRole={isWorker ? 'worker' : 'client'}
+                  buttonClassName="signin-button"
+                  onSuccess={() => onNavigate('home')}
+                />
 
                 <div className="signin-divider" aria-hidden="true">
                   <span>or continue with</span>
                 </div>
 
+                {googleError && (
+                  <div className="form-error">
+                    {googleError}
+                  </div>
+                )}
+
                 <GoogleAuth
                   onSuccess={handleGoogleSuccess}
                   onError={handleGoogleError}
                 />
-
-                <div className="signin-toggle">
-                  <p>
-                    {isSignUp ? 'Already have an account?' : "Don't have an account?"}
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsSignUp(!isSignUp);
-                        setFormData({
-                          email: '',
-                          password: '',
-                          confirmPassword: '',
-                          name: '',
-                        });
-                        setFormError('');
-                        setGoogleError('');
-                      }}
-                      className="toggle-button"
-                    >
-                      {isSignUp ? 'Sign In' : 'Sign Up'}
-                    </button>
-                  </p>
-                </div>
               </div>
             </div>
 
             <div className="signin-info">
               <div className="info-card">
-                <h3>Why Join ProWorker?</h3>
+                <h3>{isWorker ? 'For Professionals' : 'Why Join ProWorker?'}</h3>
                 <ul className="info-list">
-                  <li>✓ Access to trusted professionals</li>
-                  <li>✓ Secure payment processing</li>
-                  <li>✓ Real-time worker tracking</li>
-                  <li>✓ Professional support 24/7</li>
-                  <li>✓ Verified service providers</li>
+                  {isWorker ? (
+                    <>
+                      <li>✓ Keep 100% of what you earn</li>
+                      <li>✓ Set your own prices and schedule</li>
+                      <li>✓ Build a reputation that belongs to you</li>
+                      <li>✓ Get bookings from verified clients</li>
+                      <li>✓ Own your professional brand</li>
+                    </>
+                  ) : (
+                    <>
+                      <li>✓ Access to trusted professionals</li>
+                      <li>✓ Secure payment processing</li>
+                      <li>✓ Real-time worker tracking</li>
+                      <li>✓ Professional support 24/7</li>
+                      <li>✓ Verified service providers</li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>
