@@ -54,10 +54,13 @@ export const workerService = {
       }
 
       const data = await response.json();
-      
+
       // Transform API response to match component expectations
       if (data.success && data.data) {
         return {
+          success: data.success,
+          searchMode: data.search_mode,
+          message: data.message,
           workers: (data.data.workers || []).map(worker => ({
             id: worker.id,
             name: worker.username,
@@ -71,7 +74,17 @@ export const workerService = {
             distanceCharges: worker.distance_charges,
             distance: worker.distance_km,
             rating: worker.rating,
-            reviewCount: worker.review_count
+            reviewCount: worker.review_count,
+            isOnline: worker.isOnline,
+            status: worker.status,
+            defaultAddress: worker.default_address
+              ? {
+                  label: worker.default_address.label,
+                  address: worker.default_address.address,
+                  latitude: worker.default_address.latitude,
+                  longitude: worker.default_address.longitude
+                }
+              : null
           })),
           pagination: data.data.pagination
         };

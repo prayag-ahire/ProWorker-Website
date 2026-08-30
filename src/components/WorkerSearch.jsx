@@ -15,6 +15,8 @@ function WorkerSearch() {
   const [locationName, setLocationName] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pagination, setPagination] = useState(null);
+  const [searchMode, setSearchMode] = useState('');
+  const [searchMessage, setSearchMessage] = useState('');
 
   // Load professions on component mount
   useEffect(() => {
@@ -84,10 +86,14 @@ function WorkerSearch() {
       );
       setWorkers(results.workers || []);
       setPagination(results.pagination);
+      setSearchMode(results.searchMode || '');
+      setSearchMessage(results.message || '');
     } catch (error) {
       setLocationError('Failed to search workers. Please try again.');
       setWorkers([]);
       setPagination(null);
+      setSearchMode('');
+      setSearchMessage('');
     } finally {
       setSearchLoading(false);
     }
@@ -109,6 +115,8 @@ function WorkerSearch() {
       );
       setWorkers(results.workers || []);
       setPagination(results.pagination);
+      setSearchMode(results.searchMode || '');
+      setSearchMessage(results.message || '');
       setCurrentPage(pageNumber);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {
@@ -218,7 +226,12 @@ function WorkerSearch() {
                 <div className="results-header">
                   <h3>{pagination?.total_workers || workers.length} {(pagination?.total_workers || workers.length) === 1 ? 'Professional' : 'Professionals'} Found</h3>
                   <p className="results-subtitle">
-                    Nearby • <span className="highlight-text">Verified</span>
+                    {searchMessage || (
+                      <>
+                        {searchMode === 'nearby' ? 'Nearby' : searchMode || 'Nearby'} •{' '}
+                        <span className="highlight-text">Verified</span>
+                      </>
+                    )}
                   </p>
                 </div>
                 <WorkerList workers={workers} />
