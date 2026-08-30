@@ -76,6 +76,7 @@ function Navbar({ onNavigate, viewMode, onViewModeChange }) {
                         <li><a href="#features">Features</a></li>
                         <li><a href="#testimonials">Reviews</a></li>
                         <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#about">About</a></li>
                     </ul>
 
                     <div className="navbar-actions">

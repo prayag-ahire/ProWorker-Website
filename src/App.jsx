@@ -8,6 +8,7 @@ import Testimonials from './components/Testimonials';
 import Pricing from './components/Pricing';
 import CTA from './components/CTA';
 import FAQ from './components/FAQ';
+import AboutUs from './components/AboutUs';
 import Footer from './components/Footer';
 import WorkerSearch from './components/WorkerSearch';
 import PrivacyPolicy from './components/PrivacyPolicy';
@@ -84,6 +85,21 @@ function App() {
     }
   }, [currentPage]);
 
+  useEffect(() => {
+    if (currentPage !== 'home') return;
+
+    const hash = window.location.hash.replace('#', '');
+    if (!hash || ['search', 'privacy', 'signin', 'deleteaccount', 'childsafety'].includes(hash)) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth' });
+    }, 80);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [currentPage]);
+
   return (
     <AuthProvider>
       <ViewModeContext.Provider value={viewMode}>
@@ -122,6 +138,7 @@ function App() {
               <Testimonials />
               <Pricing />
               <FAQ />
+              <AboutUs />
               <CTA />
               <Footer />
             </>
