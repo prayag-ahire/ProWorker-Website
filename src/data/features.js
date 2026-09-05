@@ -1,65 +1,65 @@
 export const clientFeatures = [
     {
-        icon: '✓',
-        title: 'Verified & Background-Checked',
-        description: 'Every worker goes through rigorous verification and background checks for your safety'
+        icon: 'pin',
+        title: 'Nearby Worker Discovery',
+        description: 'Search by profession or category and find skilled workers near you, sorted by distance'
     },
     {
-        icon: '📸',
-        title: 'Real Photos, Videos & Reviews',
-        description: 'See authentic reviews with photos and videos from real clients'
+        icon: 'user',
+        title: 'Professional Profiles',
+        description: 'See photos, skills, specialties, service areas, working hours, and monthly availability'
     },
     {
-        icon: '⚡',
-        title: 'Book Instantly',
-        description: 'Check live availability and book your worker in under 2 minutes'
+        icon: 'star',
+        title: 'Ratings & Reviews',
+        description: 'Read genuine reviews and ratings to compare workers and choose reliable professionals'
     },
     {
-        icon: '📅',
-        title: 'Easy Rescheduling',
-        description: 'Plans changed? Reschedule or cancel bookings with just a tap'
+        icon: 'camera',
+        title: 'Photo & Video Portfolio',
+        description: 'Browse work photos and videos to trust a worker\'s craftsmanship before you contact them'
     },
     {
-        icon: '💰',
-        title: 'No Hidden Charges',
-        description: 'Transparent pricing with clear breakdown - see exactly what you pay'
+        icon: 'tag',
+        title: 'Transparent Pricing',
+        description: 'View visit charges and service pricing on each profile—no hidden platform fees'
     },
     {
-        icon: '🛡️',
-        title: 'Secure & Reliable',
-        description: 'Your data is protected with bank-level security encryption'
+        icon: 'phone',
+        title: 'Direct Connection',
+        description: 'Contact workers directly. No booking system, no booking fee, and no commission'
     }
 ];
 
 export const workerFeatures = [
     {
-        icon: '💼',
-        title: 'Increase Daily Earnings',
-        description: 'Get regular bookings and maximize your income potential'
+        icon: 'spark',
+        title: 'Free Professional Profile',
+        description: 'Create your digital identity with a photo, profession, about section, experience, skills, and service areas'
     },
     {
-        icon: '🌟',
-        title: 'Build Your Brand',
-        description: 'Create a professional profile with your portfolio and certificates'
+        icon: 'tag',
+        title: 'Set Your Own Pricing',
+        description: 'Define visit charges, service pricing, and notes so nearby customers know your rates before they contact you'
     },
     {
-        icon: '📆',
-        title: 'Manage Your Schedule',
-        description: 'Set your availability, holidays, and working hours easily'
+        icon: 'clock',
+        title: 'Working Days & Hours',
+        description: 'Set weekly working days and daily start and end times so customers can see when you are normally available'
     },
     {
-        icon: '📲',
-        title: 'Receive Bookings Anytime',
-        description: 'Get instant notifications when clients book your services'
+        icon: 'calendar',
+        title: 'Monthly Leave Schedule',
+        description: 'Mark holidays and unavailable dates so customers do not reach you while you are on leave'
     },
     {
-        icon: '⭐',
-        title: 'Earn from Reviews',
-        description: 'Build reputation with 5-star reviews and grow your client base'
+        icon: 'camera',
+        title: 'Photo & Video Portfolio',
+        description: 'Upload completed work to showcase craftsmanship, before-and-after results, and the jobs you do best'
     },
     {
-        icon: '🎓',
-        title: 'Free Training Videos',
-        description: 'Access skill-building content to improve your expertise'
+        icon: 'pin',
+        title: 'Local Visibility',
+        description: 'Get discovered by nearby customers searching in your area—and grow through ratings, reviews, and reputation'
     }
 ];

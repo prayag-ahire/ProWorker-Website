@@ -8,8 +8,8 @@
 }
 
 .section-header h2 {
-    font-size: 48px;
-    font-weight: 900;
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
     color: var(--color-black);
     margin-bottom: var(--spacing-md);
 }
@@ -66,9 +66,15 @@
 }
 
 .step-icon {
-    font-size: 56px;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--color-brand-soft);
+    color: var(--color-brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 16px;
-    line-height: 1;
 }
 
 .step-card h3 {
@@ -96,10 +102,11 @@
 }
 
 .how-it-works-cta {
-    background: var(--color-black);
-    color: white;
-    border-radius: 12px;
-    padding: 32px 48px;
+    background: var(--color-gray-50);
+    color: var(--color-black);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 16px;
+    padding: 28px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -107,33 +114,32 @@
 }
 
 .how-it-works-cta h3 {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
-    color: white;
+    color: var(--color-black);
     margin-bottom: 8px;
 }
 
 .how-it-works-cta p {
-    font-size: 16px;
-    color: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+    color: var(--color-gray-600);
     margin: 0;
+}
+
+.how-it-works-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    flex-shrink: 0;
 }
 
 .how-it-works-cta .btn {
     flex-shrink: 0;
-    background: white;
-    color: var(--color-black);
-    padding: 10px 24px;
-    /* More compact padding */
-    font-size: 13px;
-    /* Slightly smaller text */
-    height: fit-content;
     width: fit-content;
 }
 
 .how-it-works-cta .btn:hover {
-    background: var(--color-gray-100);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 @media (max-width: 1200px) {
@@ -149,24 +155,36 @@
 
 @media (max-width: 768px) {
     .section-header h2 {
-        font-size: 36px;
+        font-size: var(--font-size-3xl);
+    }
+
+    .section-subtitle {
+        font-size: 15px;
     }
 
     .steps-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr 1fr;
         gap: 12px;
+        margin-bottom: 32px;
     }
 
     .step-card {
-        padding: 20px 16px;
+        padding: 20px 14px;
+        width: 100%;
+        min-width: 0;
     }
 
     .step-icon {
-        font-size: 40px;
+        width: 40px;
+        height: 40px;
     }
 
     .step-card h3 {
         font-size: 15px;
+    }
+
+    .step-card p {
+        font-size: 13px;
     }
 
     .step-number {
@@ -180,14 +198,25 @@
     .how-it-works-cta {
         flex-direction: column;
         text-align: center;
-        padding: 32px;
+        padding: 24px 16px;
     }
 
     .how-it-works-cta h3 {
-        font-size: 24px;
+        font-size: 20px;
     }
 
     .how-it-works-cta .btn {
         width: 100%;
+    }
+
+    .how-it-works-cta-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .steps-container {
+        grid-template-columns: 1fr;
     }
 }

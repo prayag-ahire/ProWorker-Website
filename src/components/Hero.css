@@ -1,441 +1,247 @@
 .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding-top: 160px;
-    /* Increased from 80px */
-    background: var(--color-white);
-    overflow: hidden;
-}
-
-/* Subtle Background Blobs */
-.hero-background {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.hero-glow {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.4;
-}
-
-.hero-glow-1 {
-    top: -10%;
-    right: -10%;
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.03) 0%, transparent 70%);
-}
-
-.hero-glow-2 {
-    bottom: -10%;
-    left: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(0, 0, 0, 0.02) 0%, transparent 70%);
+    padding: 132px 0 56px;
+    background:
+        radial-gradient(ellipse 80% 50% at 90% 0%, rgba(37, 99, 235, 0.08), transparent 55%),
+        var(--color-white);
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-2xl);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 56px;
     align-items: center;
 }
 
-.hero-badge {
+.hero-kicker {
     display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: var(--color-gray-50);
-    border: 1px solid var(--color-gray-200);
-    border-radius: 100px;
+    margin-bottom: 16px;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    background: var(--color-brand-soft);
+    color: var(--color-brand-dark);
     font-size: 13px;
-    font-weight: 600;
-    color: var(--color-gray-800);
-    margin-bottom: var(--spacing-md);
-    /* margin-top removed */
+    font-weight: 650;
+    letter-spacing: 0.02em;
 }
 
-.hero-title {
+.hero-copy h1 {
     font-size: var(--font-size-hero);
-    line-height: 1.05;
-    margin-bottom: var(--spacing-md);
-    letter-spacing: -0.04em;
+    line-height: 1.08;
+    margin-bottom: 16px;
+    max-width: 16ch;
 }
 
 .hero-subtitle {
-    font-size: 20px;
-    color: var(--color-gray-600);
+    font-size: 17px;
+    line-height: 1.65;
     max-width: 540px;
-    margin-bottom: var(--spacing-lg);
-    line-height: 1.6;
+    margin-bottom: 28px;
 }
 
-.hero-cta {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-xl);
-}
-
-.hero-stats {
-    display: flex;
-    gap: 0;
-    padding-top: var(--spacing-xl);
-    border-top: 1px solid var(--color-gray-100);
-}
-
-.stat-item {
-    padding: 0 40px;
-    border-right: 1px solid var(--color-gray-100);
-}
-
-.stat-item:first-child {
-    padding-left: 0;
-}
-
-.stat-item:last-child {
-    border-right: none;
-}
-
-.stat-item h4 {
-    font-size: 36px;
-    font-weight: 800;
-    margin-bottom: 4px;
-    color: var(--color-black);
-}
-
-.stat-item p {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 600;
-    color: var(--color-gray-500);
-}
-
-/* Right Side CSS App Illustration */
-.hero-visual {
-    position: relative;
-    height: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 1500px;
-}
-
-.hero-app-mockup {
-    width: 320px;
-    background: var(--color-white);
-    border-radius: 40px;
-    border: 8px solid var(--color-black);
-    box-shadow:
-        0 40px 80px -20px rgba(0, 0, 0, 0.15),
-        0 0 0 2px rgba(0, 0, 0, 0.05);
-    /* Outer stroke */
-    overflow: hidden;
-    transform: rotateY(-15deg) rotateX(5deg);
-    transition: transform 0.5s ease;
-    height: auto;
-    aspect-ratio: 9/18;
-    position: relative;
-}
-
-.hero-app-mockup:hover {
-    transform: rotateY(-5deg) rotateX(2deg) translateY(-10px);
-}
-
-/* Mockup Notch */
-.hero-app-mockup::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 24px;
-    background: var(--color-black);
-    border-bottom-left-radius: 16px;
-    border-bottom-right-radius: 16px;
-    z-index: 10;
-}
-
-.mockup-content {
-    padding: 40px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    height: 100%;
-}
-
-.mockup-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--color-gray-100);
-}
-
-.mockup-avatar {
-    width: 48px;
-    height: 48px;
-    background: var(--color-gray-100);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    border: 1px solid var(--color-gray-200);
-}
-
-.mockup-info {
-    flex: 1;
-}
-
-.mockup-name {
-    font-weight: 800;
-    font-size: 16px;
-    color: var(--color-black);
-}
-
-.mockup-role {
-    font-size: 12px;
-    color: var(--color-gray-600);
-    font-weight: 600;
-}
-
-.mockup-badge {
-    background: var(--color-black);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 100px;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.mockup-body {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.mockup-stat-row {
-    display: flex;
-    justify-content: space-between;
-    background: var(--color-gray-50);
-    padding: 16px;
-    border-radius: 16px;
-}
-
-.m-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.m-stat span {
-    font-size: 10px;
-    text-transform: uppercase;
-    color: var(--color-gray-500);
-    font-weight: 600;
-}
-
-.m-stat strong {
-    font-size: 14px;
-    color: var(--color-black);
-}
-
-.mockup-tags {
+.hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 12px;
+    margin-bottom: 24px;
 }
 
-.mockup-tags span {
-    padding: 6px 12px;
-    background: white;
-    border: 1px solid var(--color-gray-200);
-    border-radius: 100px;
-    font-size: 12px;
-    color: var(--color-gray-700);
-}
-
-/* Nearby workers card (client mockup) */
-.mockup-nearby {
-    background: var(--color-gray-50);
-    border: 1px solid var(--color-gray-200);
-    border-radius: 16px;
-    padding: 12px 14px;
+.hero-search {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.nearby-label {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--color-gray-500);
-    margin-bottom: 2px;
-}
-
-.nearby-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--color-black);
+    align-items: stretch;
+    gap: 10px;
+    padding: 8px;
+    margin-bottom: 16px;
     background: var(--color-white);
     border: 1px solid var(--color-gray-200);
-    border-radius: 10px;
-    padding: 7px 10px;
-}
-
-.nearby-dist {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--color-gray-500);
-}
-
-/* Upcoming job card (worker mockup) */
-.mockup-upcoming {
-    background: var(--color-gray-50);
-    border: 1px solid var(--color-gray-200);
     border-radius: 16px;
-    padding: 14px;
+    box-shadow: var(--shadow-md);
+}
+
+.hero-store-link {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 24px;
+    font-size: 14px;
+    font-weight: 650;
+    color: var(--color-brand);
+    text-decoration: none;
+}
+
+.hero-store-link:hover {
+    color: var(--color-brand-dark);
+    text-decoration: underline;
+}
+
+.hero-search-field {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 2px;
+    padding: 8px 14px;
 }
 
-.upcoming-label {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
+.hero-search-field span {
+    font-size: 11px;
+    font-weight: 600;
     letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--color-gray-500);
 }
 
-.upcoming-detail {
+.hero-search-field select {
+    border: 0;
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-black);
+    outline: none;
+    cursor: pointer;
+}
+
+.hero-search .btn {
+    flex-shrink: 0;
+    padding: 14px 22px;
+    white-space: nowrap;
+}
+
+.hero-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.hero-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: var(--radius-full);
+    background: var(--color-gray-50);
+    color: var(--color-gray-700);
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 600;
+}
+
+.hero-chip .pw-icon {
+    color: var(--color-brand);
+}
+
+.hero-media {
+    position: relative;
+}
+
+.hero-media img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: var(--shadow-xl);
+}
+
+.hero-media-card {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 260px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 14px;
+    box-shadow: var(--shadow-md);
+}
+
+.hero-media-card strong {
+    font-size: 14px;
     color: var(--color-black);
 }
 
-.upcoming-time {
-    font-size: 11px;
-    color: var(--color-gray-500);
-    font-weight: 500;
+.hero-media-card span {
+    font-size: 13px;
+    color: var(--color-gray-600);
 }
-
-.mockup-btn {
-    background: var(--color-black);
-    color: white;
-    text-align: center;
-    padding: 14px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    margin-top: auto;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
 
 @media (max-width: 1024px) {
+    .hero {
+        padding: calc(108px + env(safe-area-inset-top)) 0 40px;
+    }
+
     .hero-content {
         grid-template-columns: 1fr;
-        text-align: center;
+        gap: 28px;
     }
 
-    .hero-cta,
-    .hero-stats {
-        justify-content: center;
+    .hero-copy h1 {
+        max-width: none;
     }
 
-    .hero-badge {
-        margin: 0 auto var(--spacing-md);
-    }
-
-    .hero-subtitle {
-        margin: 0 auto var(--spacing-lg);
-    }
-
-    .hero-visual {
-        display: none;
+    .hero-media img {
+        height: 340px;
     }
 }
 
 @media (max-width: 768px) {
     .hero {
-        padding-top: 100px;
-        min-height: auto;
-        padding-bottom: 40px;
-    }
-
-    .hero-title {
-        font-size: 36px;
-        line-height: 1.2;
-        letter-spacing: -0.02em;
-        margin-bottom: 16px;
-    }
-
-    .hero-title br {
-        display: none;
+        padding: calc(96px + env(safe-area-inset-top)) 0 32px;
     }
 
     .hero-subtitle {
-        font-size: 16px;
-        line-height: 1.5;
-        margin-bottom: 24px;
-        padding: 0 10px;
+        font-size: 15px;
+        margin-bottom: 20px;
     }
 
-    .hero-cta {
-        flex-direction: row;
-        justify-content: center;
-        gap: 12px;
+    .hero-search {
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    .hero-search-field {
+        min-width: 0;
         width: 100%;
-        margin-bottom: 32px;
     }
 
-    .hero-cta .btn {
-        width: auto;
-        flex: 1;
-        padding: 12px 16px;
-        font-size: 13px;
+    .hero-search-field select {
+        width: 100%;
     }
 
-    .hero-stats {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 16px 24px;
-        justify-content: center;
-        padding-top: 20px;
+    .hero-search .btn,
+    .hero-actions .btn {
+        width: 100%;
     }
 
-    .stat-item {
-        text-align: center;
-        min-width: 80px;
+    .hero-media img {
+        height: 240px;
+        border-radius: 16px;
     }
 
-    .stat-item h4 {
-        font-size: 22px;
-        margin-bottom: 2px;
+    .hero-media-card {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        max-width: none;
+        padding: 10px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-kicker {
+        font-size: 12px;
     }
 
-    .stat-item p {
-        font-size: 11px;
+    .hero-chips {
+        gap: 8px;
+    }
+
+    .hero-chip {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    .hero-media img {
+        height: 200px;
+        border-radius: 14px;
     }
 }

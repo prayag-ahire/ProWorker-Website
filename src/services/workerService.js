@@ -23,7 +23,7 @@ export const workerService = {
         {
           enableHighAccuracy: true,
           timeout: 10000,
-          maximumAge: 0
+          maximumAge: 300000
         }
       );
     });

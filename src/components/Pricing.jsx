@@ -5,40 +5,41 @@ function Pricing() {
     const isWorker = useViewMode() === 'worker';
 
     return (
-        <section className="section section-glow">
+        <section id="pricing" className="section section-gray">
             <div className="container">
                 <div className="section-header text-center scroll-animate">
-                    <h2 className="text-gradient mb-md">Simple, Transparent Pricing</h2>
+                    <h2 className="mb-md">Simple, transparent pricing</h2>
                     <p className="section-subtitle">
-                        No hidden fees. Just honest pricing that works for everyone.
+                        {isWorker
+                            ? 'Free to join. Set your own prices. No commission. Direct inquiries from nearby customers.'
+                            : 'Free for customers. No booking fee. No commission. Direct connection with workers.'}
                     </p>
                 </div>
 
                 <div className="pricing-grid">
                     {!isWorker && (
                         <div className="pricing-card featured scroll-animate delay-100">
-                            <div className="pricing-icon">👥</div>
-                            <h3>For Clients</h3>
+                            <h3>For customers</h3>
                             <div className="pricing-feature-list">
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>100% Free to browse & search</span>
+                                    <span>Completely free to search and browse</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>No subscription fees</span>
+                                    <span>No booking fee</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Pay only for booked services</span>
+                                    <span>No commission</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Transparent worker pricing</span>
+                                    <span>See visit charges and service pricing on profiles</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Secure payment protection</span>
+                                    <span>Contact workers directly—pay them yourself</span>
                                 </div>
                             </div>
                         </div>
@@ -47,60 +48,85 @@ function Pricing() {
                     {isWorker && (
                         <div className="pricing-card featured scroll-animate delay-100">
                             <div className="pricing-badge">Most Popular</div>
-                            <div className="pricing-icon">🔧</div>
-                            <h3>For Workers</h3>
+                            <h3>For workers</h3>
                             <div className="pricing-feature-list">
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Free to join & create profile</span>
+                                    <span>Completely free professional profile</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Unlimited booking requests</span>
+                                    <span>Set visit charges and service pricing</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Set your own pricing</span>
+                                    <span>Manage working hours and leave days</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Free training resources</span>
+                                    <span>Photo and video portfolio</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Premium tools coming soon</span>
+                                    <span>No commission—customers contact you directly</span>
                                 </div>
                             </div>
                             <button className="btn btn-primary btn-large" disabled>
-                                Join as Worker
+                                Create Your Profile
                             </button>
                         </div>
                     )}
 
                     <div className="pricing-card scroll-animate delay-200">
-                        <div className="pricing-icon">💎</div>
-                        <h3>Coming Soon</h3>
+                        <h3>Coming soon</h3>
                         <div className="pricing-feature-list">
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Worker analytics dashboard</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Priority listing visibility</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Advanced scheduling tools</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Client insights & trends</span>
-                            </div>
-                            <div className="pricing-feature">
-                                <span className="check">✓</span>
-                                <span>Promotional features</span>
-                            </div>
+                            {isWorker ? (
+                                <>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>Online bookings</span>
+                                    </div>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>In-app chat and internet calling</span>
+                                    </div>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>Digital payments</span>
+                                    </div>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>Business analytics and customer management</span>
+                                    </div>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>AI-powered growth insights</span>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>Online booking</span>
+                                    </div>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>In-app chat</span>
+                                    </div>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>Internet calling without sharing numbers</span>
+                                    </div>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>Secure digital payments</span>
+                                    </div>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>AI-powered recommendations</span>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

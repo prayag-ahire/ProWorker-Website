@@ -35,8 +35,8 @@ function SignIn({ onNavigate }) {
             <h1 className="signin-title">Sign In</h1>
             <p className="signin-subtitle">
               {isWorker
-                ? 'Sign in with your mobile number to manage bookings and earnings'
-                : 'Sign in with your mobile number to find trusted professionals'}
+                ? 'Sign in with your mobile number to manage your professional profile'
+                : 'Sign in with your mobile number to find nearby skilled workers'}
             </p>
           </div>
         </div>
@@ -76,19 +76,19 @@ function SignIn({ onNavigate }) {
                 <ul className="info-list">
                   {isWorker ? (
                     <>
-                      <li>✓ Keep 100% of what you earn</li>
-                      <li>✓ Set your own prices and schedule</li>
-                      <li>✓ Build a reputation that belongs to you</li>
-                      <li>✓ Get bookings from verified clients</li>
-                      <li>✓ Own your professional brand</li>
+                      <li>✓ Free professional profile and portfolio</li>
+                      <li>✓ Set your own prices, hours, and leave days</li>
+                      <li>✓ Get discovered by nearby customers</li>
+                      <li>✓ Build trust with ratings and reviews</li>
+                      <li>✓ Direct inquiries—no commission</li>
                     </>
                   ) : (
                     <>
-                      <li>✓ Access to trusted professionals</li>
-                      <li>✓ Secure payment processing</li>
-                      <li>✓ Real-time worker tracking</li>
-                      <li>✓ Professional support 24/7</li>
-                      <li>✓ Verified service providers</li>
+                      <li>✓ Find nearby skilled workers by distance</li>
+                      <li>✓ Compare ratings, reviews, and portfolios</li>
+                      <li>✓ See pricing, skills, and availability</li>
+                      <li>✓ Contact workers directly—no booking fee</li>
+                      <li>✓ Completely free for customers</li>
                     </>
                   )}
                 </ul>

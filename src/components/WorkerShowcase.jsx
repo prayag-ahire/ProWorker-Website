@@ -7,7 +7,7 @@ function WorkerShowcase() {
                 <div className="section-header text-center scroll-animate">
                     <h2 className="text-gradient mb-md">How It Works</h2>
                     <p className="section-subtitle">
-                        Experience the easiest way to find and hire professionals
+                        Discover nearby skilled workers and contact them directly
                     </p>
                 </div>
 
@@ -28,7 +28,7 @@ function WorkerShowcase() {
                                     </div>
                                     <div className="screen-text">
                                         <h3>Explore</h3>
-                                        <p>Browse various categories and find the perfect match for your needs.</p>
+                                        <p>Search categories like plumber, electrician, carpenter, painter, cleaner, and more.</p>
                                     </div>
                                     <div className="screen-button"></div>
                                 </div>
@@ -51,8 +51,8 @@ function WorkerShowcase() {
                                         <div className="person-figure sitting"></div>
                                     </div>
                                     <div className="screen-text">
-                                        <h3>Discovery</h3>
-                                        <p>Discover top-rated professionals verified by our team.</p>
+                                        <h3>Discover</h3>
+                                        <p>See nearby workers with ratings, reviews, and distance from you.</p>
                                     </div>
                                     <div className="screen-button"></div>
                                 </div>
@@ -75,8 +75,8 @@ function WorkerShowcase() {
                                         <div className="person-figure walking"></div>
                                     </div>
                                     <div className="screen-text">
-                                        <h3>Create</h3>
-                                        <p>Book quickly, track real-time progress, and enjoy great service.</p>
+                                        <h3>Connect</h3>
+                                        <p>View full profiles, pricing, and portfolios—then contact workers directly.</p>
                                     </div>
                                     <div className="screen-button filled"></div>
                                 </div>

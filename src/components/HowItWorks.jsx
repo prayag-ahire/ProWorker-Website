@@ -1,41 +1,24 @@
 import './HowItWorks.css';
 import { useViewMode } from '../context/ViewModeContext';
+import { Icon } from './Icons';
+import { goToSearch } from '../utils/goToSearch';
+import { CLIENT_PLAY_STORE_URL } from '../data/appLinks';
 
 function HowItWorks() {
     const isWorker = useViewMode() === 'worker';
 
     const clientSteps = [
-        {
-            number: '01',
-            title: 'Search for a Professional',
-            description: 'Browse verified professionals by service type, location, and availability. See real ratings and reviews.',
-            icon: '🔍'
-        },
-        {
-            number: '02',
-            title: 'View Details & Pricing',
-            description: 'Check availability, hourly rates, experience, certifications, and verified client reviews.',
-            icon: '💼'
-        },
-        {
-            number: '03',
-            title: 'Book & Confirm',
-            description: 'Select your preferred time slot and confirm your booking instantly. No hidden charges.',
-            icon: '✓'
-        },
-        {
-            number: '04',
-            title: 'Service Completed',
-            description: 'Professional arrives on time and completes your work with quality assurance.',
-            icon: '⭐'
-        }
+        { number: '01', title: 'Search nearby workers', description: 'Search by profession or category and browse nearby workers based on distance from you.', icon: 'search' },
+        { number: '02', title: 'Compare worker cards', description: 'Each card shows a profile photo, name, profession, rating, review count, and distance.', icon: 'list' },
+        { number: '03', title: 'View the full profile', description: 'See about, skills, specialties, visit charges, service areas, working hours, leave schedule, and photo or video portfolio.', icon: 'user' },
+        { number: '04', title: 'Contact directly', description: 'Reach out using the worker\'s contact information. There is no booking system, no booking fee, and no commission.', icon: 'phone' }
     ];
 
     const workerSteps = [
-        { number: '01', icon: '📋', title: 'Create Your Profile', description: 'Sign up, add your skills, certifications, and set your service area and hourly rate.' },
-        { number: '02', icon: '📲', title: 'Receive Booking Requests', description: 'Get instant notifications when clients near you request your service.' },
-        { number: '03', icon: '✓', title: 'Accept & Confirm', description: 'Review the job details, accept bookings that fit your schedule, and confirm your arrival time.' },
-        { number: '04', icon: '💰', title: 'Complete & Get Paid', description: 'Finish the job, collect your payment, and earn reviews that grow your reputation.' }
+        { number: '01', icon: 'user', title: 'Create your profile', description: 'Add your photo, profession, about section, experience, skills, specialties, and the areas you serve—for free.' },
+        { number: '02', icon: 'tag', title: 'Set pricing and availability', description: 'Define visit charges and service pricing, working days and hours, and mark leave days on your monthly calendar.' },
+        { number: '03', icon: 'camera', title: 'Showcase your work', description: 'Upload photo and video portfolios so nearby customers can see your craftsmanship before they contact you.' },
+        { number: '04', icon: 'pin', title: 'Get discovered locally', description: 'Customers nearby find your profile, read reviews, and send direct inquiries. There is no booking system or commission.' }
     ];
 
     const steps = isWorker ? workerSteps : clientSteps;
@@ -44,43 +27,47 @@ function HowItWorks() {
         <section id="how-it-works" className="section how-it-works-section">
             <div className="container">
                 <div className="section-header scroll-animate">
-                    <h2>How It Works</h2>
+                    <h2>How it works</h2>
                     <p className="section-subtitle">
-                        {isWorker ? 'Start getting bookings in just 4 steps' : 'Get professional help in just 4 simple steps'}
+                        {isWorker ? 'Build your brand and get discovered nearby in four steps' : 'Find nearby workers and contact them in four simple steps'}
                     </p>
                 </div>
 
                 <div className="steps-container scroll-animate">
                     {steps.map((step, index) => (
-                        <div
-                            key={index}
-                            className="step-card"
-                        >
-                            <div className="step-icon">{step.icon}</div>
+                        <div key={step.number} className="step-card">
+                            <div className="step-icon">
+                                <Icon name={step.icon} size={22} />
+                            </div>
                             <div className="step-number">{step.number}</div>
                             <h3>{step.title}</h3>
                             <p>{step.description}</p>
-                            {index < steps.length - 1 && (
-                                <div className="step-connector"></div>
-                            )}
+                            {index < steps.length - 1 && <div className="step-connector" />}
                         </div>
                     ))}
                 </div>
 
                 <div className="how-it-works-cta scroll-animate">
                     <div>
-                        <h3>{isWorker ? 'Ready to start earning?' : 'Ready to get professional help?'}</h3>
-                        <p>{isWorker ? 'Join thousands of professionals already on ProWorker' : 'Browse verified workers and book instantly'}</p>
+                        <h3>{isWorker ? 'Ready to build your professional brand?' : 'Ready to find nearby workers?'}</h3>
+                        <p>{isWorker ? 'Create a free profile, showcase your work, and attract direct inquiries from nearby customers' : 'Browse profiles, ratings, and portfolios—then contact workers directly'}</p>
                     </div>
                     {isWorker ? (
-                        <button className="btn btn-primary btn-large" disabled>Join as a Worker</button>
+                        <button className="btn btn-primary" disabled>Create your profile</button>
                     ) : (
-                        <button
-                            className="btn btn-primary btn-large"
-                            onClick={() => window.location.hash = '#search'}
-                        >
-                            Find a Worker Now
-                        </button>
+                        <div className="how-it-works-cta-actions">
+                            <button className="btn btn-secondary" onClick={() => goToSearch()}>
+                                Find a worker
+                            </button>
+                            <a
+                                className="btn btn-primary"
+                                href={CLIENT_PLAY_STORE_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Get the app
+                            </a>
+                        </div>
                     )}
                 </div>
             </div>

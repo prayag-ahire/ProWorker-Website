@@ -25,27 +25,26 @@
 }
 
 .pricing-card.featured {
-    background: var(--color-black);
-    color: white;
-    border: 1px solid var(--color-black);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    transform: scale(1.05);
+    background: var(--color-white);
+    color: var(--color-black);
+    border: 1px solid var(--color-brand);
+    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.12);
+    transform: none;
     z-index: 2;
 }
 
 .pricing-card.featured:hover {
-    transform: scale(1.05) translateY(-8px);
+    transform: translateY(-4px);
 }
 
 .pricing-card.featured h3,
-.pricing-card.featured .pricing-icon,
 .pricing-card.featured .pricing-feature span {
-    color: white;
+    color: var(--color-black);
 }
 
 .pricing-card.featured .check {
-    background: white;
-    color: var(--color-black);
+    background: var(--color-brand);
+    color: white;
 }
 
 .pricing-card.featured .btn {
@@ -107,7 +106,7 @@
 .check {
     width: 20px;
     height: 20px;
-    background: var(--color-black);
+    background: var(--color-brand);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -130,7 +129,7 @@
     }
 
     .pricing-card {
-        padding: 28px 20px;
+        padding: 24px 16px;
     }
 
     .pricing-card.featured {
@@ -139,12 +138,17 @@
     }
 
     .pricing-card.featured:hover {
-        transform: translateY(-4px);
+        transform: none;
     }
 
     .pricing-badge {
         top: -14px;
         font-size: 10px;
         padding: 4px 12px;
+    }
+
+    .pricing-card h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
     }
 }

@@ -6,7 +6,7 @@
 /* Hero Section */
 .safety-hero {
     background: linear-gradient(135deg, #0f1535 0%, #1e2749 100%);
-    padding: 60px 0;
+    padding: calc(120px + env(safe-area-inset-top)) 0 60px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -557,7 +557,7 @@
 
 @media (max-width: 480px) {
     .safety-hero {
-        padding: 40px 0;
+        padding: calc(96px + env(safe-area-inset-top)) 0 36px;
     }
 
     .safety-title {

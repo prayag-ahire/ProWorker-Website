@@ -446,7 +446,7 @@ a.contact-value:hover {
 
 @media (max-width: 768px) {
     .privacy-hero {
-        padding: 100px 0 60px;
+        padding: calc(100px + env(safe-area-inset-top)) 0 48px;
     }
 
     .privacy-body {
@@ -485,7 +485,7 @@ a.contact-value:hover {
     }
 
     .privacy-page .container {
-        padding: 0 20px;
+        padding: 0 16px;
     }
 
     .privacy-table th,

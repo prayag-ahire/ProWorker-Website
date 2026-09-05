@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import ServiceCategories from './components/ServiceCategories';
 import HowItWorks from './components/HowItWorks';
 import Features from './components/Features';
 import Testimonials from './components/Testimonials';
@@ -17,6 +18,7 @@ import ChildSafetyStandards from './components/ChildSafetyStandards';
 import SignIn from './components/SignIn';
 import { ViewModeContext } from './context/ViewModeContext';
 import { AuthProvider } from './context/AuthContext';
+import { LocationProvider } from './context/LocationContext';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -25,7 +27,7 @@ function App() {
   useEffect(() => {
     // Check if search page is requested via URL hash
     const handleHashChange = () => {
-      if (window.location.hash === '#search') {
+      if (window.location.hash.startsWith('#search')) {
         setCurrentPage('search');
       } else if (window.location.hash === '#privacy') {
         setCurrentPage('privacy');
@@ -89,7 +91,7 @@ function App() {
     if (currentPage !== 'home') return;
 
     const hash = window.location.hash.replace('#', '');
-    if (!hash || ['search', 'privacy', 'signin', 'deleteaccount', 'childsafety'].includes(hash)) {
+    if (!hash || hash.startsWith('search') || ['privacy', 'signin', 'deleteaccount', 'childsafety'].includes(hash)) {
       return;
     }
 
@@ -102,49 +104,52 @@ function App() {
 
   return (
     <AuthProvider>
-      <ViewModeContext.Provider value={viewMode}>
-        <div className="App">
-          <Navbar onNavigate={setCurrentPage} viewMode={viewMode} onViewModeChange={setViewMode} />
-          {currentPage === 'search' ? (
-            <>
-              <WorkerSearch />
-              <Footer />
-            </>
-          ) : currentPage === 'signin' ? (
-            <>
-              <SignIn onNavigate={setCurrentPage} />
-              <Footer />
-            </>
-          ) : currentPage === 'privacy' ? (
-            <>
-              <PrivacyPolicy />
-              <Footer />
-            </>
-          ) : currentPage === 'deleteaccount' ? (
-            <>
-              <DeleteAccount />
-              <Footer />
-            </>
-          ) : currentPage === 'childsafety' ? (
-            <>
-              <ChildSafetyStandards />
-              <Footer />
-            </>
-          ) : (
-            <>
-              <Hero onSearchClick={() => setCurrentPage('search')} />
-              <HowItWorks />
-              <Features />
-              <Testimonials />
-              <Pricing />
-              <FAQ />
-              <AboutUs />
-              <CTA />
-              <Footer />
-            </>
-          )}
-        </div>
-      </ViewModeContext.Provider>
+      <LocationProvider>
+        <ViewModeContext.Provider value={viewMode}>
+          <div className="App">
+            <Navbar onNavigate={setCurrentPage} viewMode={viewMode} onViewModeChange={setViewMode} />
+            {currentPage === 'search' ? (
+              <>
+                <WorkerSearch />
+                <Footer />
+              </>
+            ) : currentPage === 'signin' ? (
+              <>
+                <SignIn onNavigate={setCurrentPage} />
+                <Footer />
+              </>
+            ) : currentPage === 'privacy' ? (
+              <>
+                <PrivacyPolicy />
+                <Footer />
+              </>
+            ) : currentPage === 'deleteaccount' ? (
+              <>
+                <DeleteAccount />
+                <Footer />
+              </>
+            ) : currentPage === 'childsafety' ? (
+              <>
+                <ChildSafetyStandards />
+                <Footer />
+              </>
+            ) : (
+              <>
+                <Hero />
+                <ServiceCategories />
+                <HowItWorks />
+                <Features />
+                <Testimonials />
+                <Pricing />
+                <FAQ />
+                <AboutUs />
+                <CTA />
+                <Footer />
+              </>
+            )}
+          </div>
+        </ViewModeContext.Provider>
+      </LocationProvider>
     </AuthProvider>
   );
 }

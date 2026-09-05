@@ -204,15 +204,19 @@
         gap: 12px;
     }
 
+    .about-founder {
+        padding: 16px;
+    }
+
     .about-founder-content h3 {
-        font-size: 28px;
+        font-size: 24px;
     }
 
     .about-quote {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .about-principle {
-        padding: 20px 16px;
+        padding: 16px;
     }
 }

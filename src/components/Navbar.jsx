@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CLIENT_PLAY_STORE_URL } from '../data/appLinks';
 import './Navbar.css';
 
 function Navbar({ onNavigate, viewMode, onViewModeChange }) {
@@ -12,7 +13,7 @@ function Navbar({ onNavigate, viewMode, onViewModeChange }) {
         };
 
         const handleHashChange = () => {
-            setIsSearchPage(window.location.hash === '#search');
+            setIsSearchPage(window.location.hash.startsWith('#search'));
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -71,22 +72,42 @@ function Navbar({ onNavigate, viewMode, onViewModeChange }) {
                     </div>
 
                     <ul className={`navbar-menu ${mobileMenuOpen ? 'open' : ''}`}>
-                        <li><a href="#why">Why ProWorker</a></li>
-                        <li><a href="#how-it-works">How It Works</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#testimonials">Reviews</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#about">About</a></li>
+                        <li><a href="#categories" onClick={() => setMobileMenuOpen(false)}>Services</a></li>
+                        <li><a href="#how-it-works" onClick={() => setMobileMenuOpen(false)}>How it works</a></li>
+                        <li><a href="#testimonials" onClick={() => setMobileMenuOpen(false)}>Reviews</a></li>
+                        <li><a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a></li>
+                        {viewMode === 'client' && (
+                            <li>
+                                <a
+                                    href={CLIENT_PLAY_STORE_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => setMobileMenuOpen(false)}
+                                >
+                                    Get the app
+                                </a>
+                            </li>
+                        )}
                     </ul>
 
                     <div className="navbar-actions">
                         {toggleMarkup}
                         {isSearchPage ? (
-                            <button onClick={handleHome} className="btn btn-secondary">← Back to Home</button>
+                            <button onClick={handleHome} className="btn btn-secondary">Back to home</button>
                         ) : viewMode === 'client' ? (
-                            <button onClick={handleSearch} className="btn btn-primary">🔍 Find Workers</button>
+                            <>
+                                <button onClick={handleSearch} className="btn btn-secondary">Find workers</button>
+                                <a
+                                    className="btn btn-primary"
+                                    href={CLIENT_PLAY_STORE_URL}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Get the app
+                                </a>
+                            </>
                         ) : (
-                            <button className="btn btn-primary" disabled>Join as Worker</button>
+                            <button className="btn btn-primary" disabled>Create Profile</button>
                         )}
                     </div>
 

@@ -14,29 +14,29 @@ function Testimonials() {
             name: 'Priya Sharma',
             role: 'Homeowner',
             rating: 5,
-            text: 'Booked a plumber in 2 minutes! The pricing was transparent and the worker arrived exactly on time. Best service app ever!',
-            avatar: '👩‍💼'
+            text: 'I found a plumber nearby, checked his ratings and work photos, then contacted him directly. Clear visit charges and no platform fees.',
+            avatar: 'PS'
         },
         {
             name: 'Arjun Patel',
             role: 'Apartment Owner',
             rating: 5,
-            text: 'Loved the clean UI and pricing transparency. Being able to see reviews with actual photos gave me confidence to book.',
-            avatar: '👨‍💻'
+            text: 'Seeing real portfolio photos and reviews gave me confidence before I reached out. Distance-based search made it easy to pick someone close.',
+            avatar: 'AP'
         },
         {
             name: 'Kavya Reddy',
             role: 'Small Business Owner',
             rating: 5,
-            text: 'The rescheduling feature saved me when plans changed. Customer support was amazing too!',
-            avatar: '👩‍💼'
+            text: 'I compared working hours and monthly availability on profiles before contacting anyone. Completely free to use as a customer.',
+            avatar: 'KR'
         },
         {
             name: 'Rohit Gupta',
             role: 'Property Manager',
             rating: 5,
-            text: 'Managing multiple properties is easy now. I can book different workers for different locations seamlessly.',
-            avatar: '👨‍💼'
+            text: 'I can browse electricians, carpenters, and painters near each property, read reviews, and contact the right worker myself.',
+            avatar: 'RG'
         }
     ];
 
@@ -45,29 +45,29 @@ function Testimonials() {
             name: 'Rajesh Kumar',
             role: 'Electrician',
             rating: 5,
-            text: 'I get 2-3 bookings daily thanks to ProWorker. My income has doubled in just 3 months!',
-            avatar: '👨‍🔧'
+            text: 'Customers nearby find my profile, see my work photos, and call me directly. I set my visit charges and keep every rupee I earn.',
+            avatar: 'RK'
         },
         {
             name: 'Sunita Singh',
             role: 'House Cleaner',
             rating: 5,
-            text: 'This app really improved my income. I love managing my schedule and getting paid fairly.',
-            avatar: '👩‍🦰'
+            text: 'I marked my working days and leave calendar so people know when I am available. Reviews from real customers have grown my local reputation.',
+            avatar: 'SS'
         },
         {
             name: 'Vikram Joshi',
             role: 'Plumber',
             rating: 5,
-            text: 'The training videos helped me improve my skills. Now I get more 5-star reviews!',
-            avatar: '👨‍🔧'
+            text: 'Uploading before-and-after photos of my jobs made customers trust me before they called. Quality work now brings better-paying inquiries.',
+            avatar: 'VJ'
         },
         {
             name: 'Meera Agarwal',
-            role: 'Tutor',
+            role: 'Beautician',
             rating: 5,
-            text: 'ProWorker connects me with families looking for quality tutoring. My calendar is always full!',
-            avatar: '👩‍🏫'
+            text: 'ProWorker gave me an online presence in my area. I showcase specialties, pricing, and portfolio instead of competing only on cheap rates.',
+            avatar: 'MA'
         }
     ];
 
@@ -130,7 +130,7 @@ function Testimonials() {
                     </div>
                 </div>
                 <div className="rating">
-                    {'⭐'.repeat(testimonial.rating)}
+                    {'★'.repeat(testimonial.rating)}
                 </div>
             </div>
             <p className="testimonial-text">{testimonial.text}</p>
@@ -141,19 +141,16 @@ function Testimonials() {
         <section id="testimonials" className="section section-light">
             <div className="container">
                 <div className="section-header text-center scroll-animate">
-                    <h2 className="text-gradient mb-md">What People Say</h2>
+                    <h2 className="mb-md">What people say</h2>
                     <p className="section-subtitle">
-                        Real stories from clients and workers who love ProWorker
+                        Real stories from customers and workers who use ProWorker
                     </p>
                 </div>
 
                 <div className="testimonials-container">
                     {!isWorker ? (
                         <div className="testimonials-column scroll-animate delay-100">
-                            <h3 className="testimonials-title">
-                                <span className="title-icon">👥</span>
-                                Client Reviews
-                            </h3>
+                            <h3 className="testimonials-title">Customer reviews</h3>
                             <div className="testimonials-carousel" ref={clientCarouselRef}>
                                 {clientTestimonials.map((testimonial, index) => (
                                     <TestimonialCard
@@ -167,10 +164,7 @@ function Testimonials() {
                         </div>
                     ) : (
                         <div className="testimonials-column scroll-animate delay-100">
-                            <h3 className="testimonials-title">
-                                <span className="title-icon">🔧</span>
-                                Worker Reviews
-                            </h3>
+                            <h3 className="testimonials-title">Worker reviews</h3>
                             <div className="testimonials-carousel" ref={workerCarouselRef}>
                                 {workerTestimonials.map((testimonial, index) => (
                                     <TestimonialCard

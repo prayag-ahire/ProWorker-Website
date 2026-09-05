@@ -1,23 +1,20 @@
 import './CTA.css';
 import { useViewMode } from '../context/ViewModeContext';
+import { CLIENT_PLAY_STORE_URL } from '../data/appLinks';
 
 function CTA() {
     const isWorker = useViewMode() === 'worker';
 
-    const handleSearchClick = () => {
-        window.location.hash = '#search';
-    };
-
     const clientStats = [
-        { number: '50K+', label: 'Customers Served' },
-        { number: '5K+', label: 'Verified Professionals' },
-        { number: '4.8★', label: 'Average Rating' }
+        { number: 'Free', label: 'For Customers' },
+        { number: '0', label: 'Booking Fees' },
+        { number: '0', label: 'Commission' }
     ];
 
     const workerStats = [
-        { number: '12k+', label: 'Active Workers' },
-        { number: '₹40k+', label: 'Avg Monthly Earnings' },
-        { number: '4.9★', label: 'Worker Rating' }
+        { number: 'Free', label: 'Professional Profile' },
+        { number: '0', label: 'Commission' },
+        { number: 'Direct', label: 'Customer Inquiries' }
     ];
 
     const stats = isWorker ? workerStats : clientStats;
@@ -27,27 +24,24 @@ function CTA() {
             <div className="container">
                 <div className="cta-wrapper">
                     <div className="cta-content">
-                        <h2>{isWorker ? 'Ready to Start Earning with ProWorker?' : 'Ready to Find Your Perfect Professional?'}</h2>
+                        <h2>{isWorker ? 'Ready to Build Your Professional Brand?' : 'Ready to Find Nearby Skilled Workers?'}</h2>
                         <p>{isWorker
-                            ? 'Join thousands of professionals building their business on ProWorker. Set up your profile in under 3 minutes.'
-                            : "Join thousands of satisfied customers who've found trusted professionals on ProWorker. Get started in just 60 seconds."
+                            ? 'Create a free profile, showcase your work, set your prices and availability, and get discovered by nearby customers. No booking system. No commission.'
+                            : 'Search local professionals, compare profiles, ratings, pricing, and portfolios—then contact them directly. Completely free.'
                         }</p>
                         {isWorker ? (
-                            <button
-                                className="cta-btn"
-                                style={{ backgroundColor: '#FFFFFF', color: '#000000' }}
-                                disabled
-                            >
-                                Join as a Worker Now
+                            <button className="cta-btn" disabled>
+                                Join free as a worker
                             </button>
                         ) : (
-                            <button
-                                onClick={handleSearchClick}
+                            <a
                                 className="cta-btn"
-                                style={{ backgroundColor: '#FFFFFF', color: '#000000' }}
+                                href={CLIENT_PLAY_STORE_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
-                                Find a Worker Now
-                            </button>
+                                Get it on Google Play
+                            </a>
                         )}
                     </div>
 

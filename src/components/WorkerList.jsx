@@ -82,7 +82,7 @@ function WorkerList({ workers }) {
             >
               {expandedWorkerId === worker.id ? 'Hide Details' : 'View Details'}
             </button>
-            <button className="btn btn-primary">Book Now</button>
+            <button className="btn btn-primary">Contact</button>
           </div>
 
           {expandedWorkerId === worker.id && (
