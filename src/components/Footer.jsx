@@ -46,6 +46,7 @@ function Footer() {
                                 <li><a href="#how-it-works">How it works</a></li>
                                 <li><a href="#features">Build your profile</a></li>
                                 <li><a href="#pricing">Free to join</a></li>
+                                <li><a href="#partner">Growth Partners (Earn ₹50)</a></li>
                             </ul>
                         </div>
 
@@ -54,6 +55,7 @@ function Footer() {
                             <ul>
                                 <li><a href="#about">About us</a></li>
                                 <li><a href="#faq">FAQ</a></li>
+                                <li><a href="#partner">Sales Partner Program</a></li>
                             </ul>
                         </div>
 

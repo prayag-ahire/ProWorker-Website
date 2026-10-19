@@ -32,6 +32,12 @@ function Navbar({ onNavigate, viewMode, onViewModeChange }) {
         setMobileMenuOpen(false);
     };
 
+    const handlePartner = () => {
+        window.location.hash = '#partner';
+        onNavigate('partner');
+        setMobileMenuOpen(false);
+    };
+
     const handleHome = () => {
         window.location.hash = '';
         onNavigate('home');
@@ -76,8 +82,18 @@ function Navbar({ onNavigate, viewMode, onViewModeChange }) {
                         <li><a href="#how-it-works" onClick={() => setMobileMenuOpen(false)}>How it works</a></li>
                         <li><a href="#testimonials" onClick={() => setMobileMenuOpen(false)}>Reviews</a></li>
                         <li><a href="#about" onClick={() => setMobileMenuOpen(false)}>About</a></li>
+                        <li>
+                            <a 
+                                href="#partner" 
+                                onClick={(e) => { e.preventDefault(); handlePartner(); }}
+                                className="nav-partner-link"
+                            >
+                                <span>Growth Partner</span>
+                                <span className="nav-earn-badge">Earn ₹50</span>
+                            </a>
+                        </li>
                         {viewMode === 'client' && (
-                            <li>
+                            <li className="mobile-only-link">
                                 <a
                                     href={CLIENT_PLAY_STORE_URL}
                                     target="_blank"

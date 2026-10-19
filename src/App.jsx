@@ -16,6 +16,7 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import DeleteAccount from './components/DeleteAccount';
 import ChildSafetyStandards from './components/ChildSafetyStandards';
 import SignIn from './components/SignIn';
+import SalesPartner from './components/SalesPartner';
 import { ViewModeContext } from './context/ViewModeContext';
 import { AuthProvider } from './context/AuthContext';
 import { LocationProvider } from './context/LocationContext';
@@ -37,6 +38,8 @@ function App() {
         setCurrentPage('deleteaccount');
       } else if (window.location.hash === '#childsafety') {
         setCurrentPage('childsafety');
+      } else if (window.location.hash === '#partner' || window.location.hash === '#sales-partner' || window.location.hash === '#growth-partner') {
+        setCurrentPage('partner');
       } else {
         setCurrentPage('home');
       }
@@ -91,7 +94,7 @@ function App() {
     if (currentPage !== 'home') return;
 
     const hash = window.location.hash.replace('#', '');
-    if (!hash || hash.startsWith('search') || ['privacy', 'signin', 'deleteaccount', 'childsafety'].includes(hash)) {
+    if (!hash || hash.startsWith('search') || ['privacy', 'signin', 'deleteaccount', 'childsafety', 'partner', 'sales-partner', 'growth-partner'].includes(hash)) {
       return;
     }
 
@@ -116,6 +119,11 @@ function App() {
             ) : currentPage === 'signin' ? (
               <>
                 <SignIn onNavigate={setCurrentPage} />
+                <Footer />
+              </>
+            ) : currentPage === 'partner' ? (
+              <>
+                <SalesPartner onNavigate={setCurrentPage} />
                 <Footer />
               </>
             ) : currentPage === 'privacy' ? (
