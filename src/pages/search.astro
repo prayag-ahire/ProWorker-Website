@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SearchPage from '../components/react/SearchPage.jsx';
+
+const title = 'Find Nearby Workers — ProWorker';
+const description =
+  'Search verified skilled workers near you on ProWorker. Filter by profession, compare ratings and portfolios, and contact workers directly with no commission.';
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/search">
+  <SearchPage client:load />
+</BaseLayout>

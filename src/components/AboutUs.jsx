@@ -1,5 +1,5 @@
 import './AboutUs.css';
-import prayagImg from '../assets/AboutUS/prayag.jpg';
+import prayagImg from '../assets/AboutUS/prayag.jpg?url';
 
 const founder = {
     name: 'Prayag Ahire',

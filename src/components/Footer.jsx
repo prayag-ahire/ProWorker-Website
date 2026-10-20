@@ -1,5 +1,5 @@
 import './Footer.css';
-import { CLIENT_PLAY_STORE_URL } from '../data/appLinks';
+import { CLIENT_PLAY_STORE_URL, WORKER_PLAY_STORE_URL } from '../data/appLinks';
 
 function Footer() {
     const currentYear = new Date().getFullYear();
@@ -24,10 +24,10 @@ function Footer() {
                         <div className="link-group">
                             <h4>For customers</h4>
                             <ul>
-                                <li><a href="#categories">Services</a></li>
-                                <li><a href="#how-it-works">How it works</a></li>
-                                <li><a href="#testimonials">Reviews</a></li>
-                                <li><a href="#search">Find workers</a></li>
+                                <li><a href="/#categories">Services</a></li>
+                                <li><a href="/#how-it-works">How it works</a></li>
+                                <li><a href="/#testimonials">Reviews</a></li>
+                                <li><a href="/search">Find workers</a></li>
                                 <li>
                                     <a
                                         href={CLIENT_PLAY_STORE_URL}
@@ -43,28 +43,37 @@ function Footer() {
                         <div className="link-group">
                             <h4>For workers</h4>
                             <ul>
-                                <li><a href="#how-it-works">How it works</a></li>
-                                <li><a href="#features">Build your profile</a></li>
-                                <li><a href="#pricing">Free to join</a></li>
-                                <li><a href="#partner">Growth Partners (Earn ₹50)</a></li>
+                                <li><a href="/#how-it-works">How it works</a></li>
+                                <li><a href="/#features">Build your profile</a></li>
+                                <li><a href="/#pricing">Free to join</a></li>
+                                <li>
+                                    <a
+                                        href={WORKER_PLAY_STORE_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Download Worker app
+                                    </a>
+                                </li>
+                                <li><a href="/partner">Growth Partners (Earn ₹50)</a></li>
                             </ul>
                         </div>
 
                         <div className="link-group">
                             <h4>Company</h4>
                             <ul>
-                                <li><a href="#about">About us</a></li>
-                                <li><a href="#faq">FAQ</a></li>
-                                <li><a href="#partner">Sales Partner Program</a></li>
+                                <li><a href="/#about">About us</a></li>
+                                <li><a href="/#faq">FAQ</a></li>
+                                <li><a href="/partner">Sales Partner Program</a></li>
                             </ul>
                         </div>
 
                         <div className="link-group">
                             <h4>Legal</h4>
                             <ul>
-                                <li><a href="#privacy">Privacy policy</a></li>
-                                <li><a href="#deleteaccount">Delete account</a></li>
-                                <li><a href="#childsafety">Child safety standards</a></li>
+                                <li><a href="/privacy">Privacy policy</a></li>
+                                <li><a href="/delete-account">Delete account</a></li>
+                                <li><a href="/child-safety">Child safety standards</a></li>
                             </ul>
                         </div>
                     </div>

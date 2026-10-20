@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StaticContentPage from '../components/react/StaticContentPage.jsx';
+
+const title = 'Child Safety Standards — ProWorker';
+const description =
+  'Learn about ProWorker child safety standards, reporting processes, and how we protect minors on our hyperlocal marketplace platform.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: 'https://proworker.co/child-safety',
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/child-safety"
+  jsonLd={jsonLd}
+>
+  <StaticContentPage client:load page="child-safety" />
+</BaseLayout>

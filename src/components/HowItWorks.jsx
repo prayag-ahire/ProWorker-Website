@@ -2,7 +2,7 @@ import './HowItWorks.css';
 import { useViewMode } from '../context/ViewModeContext';
 import { Icon } from './Icons';
 import { goToSearch } from '../utils/goToSearch';
-import { CLIENT_PLAY_STORE_URL } from '../data/appLinks';
+import { CLIENT_PLAY_STORE_URL, WORKER_PLAY_STORE_URL } from '../data/appLinks';
 
 function HowItWorks() {
     const isWorker = useViewMode() === 'worker';
@@ -53,10 +53,17 @@ function HowItWorks() {
                         <p>{isWorker ? 'Create a free profile, showcase your work, and attract direct inquiries from nearby customers' : 'Browse profiles, ratings, and portfolios—then contact workers directly'}</p>
                     </div>
                     {isWorker ? (
-                        <button className="btn btn-primary" disabled>Create your profile</button>
+                        <a
+                            className="btn btn-primary"
+                            href={WORKER_PLAY_STORE_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Download Worker app
+                        </a>
                     ) : (
                         <div className="how-it-works-cta-actions">
-                            <button className="btn btn-secondary" onClick={() => goToSearch()}>
+                            <button type="button" className="btn btn-secondary" onClick={() => goToSearch()}>
                                 Find a worker
                             </button>
                             <a

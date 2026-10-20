@@ -1,10 +1,9 @@
 export function goToSearch(profession) {
   const query = profession ? `?profession=${encodeURIComponent(profession)}` : '';
-  window.location.hash = `#search${query}`;
+  window.location.assign(`/search${query}`);
 }
 
-export function getSearchProfessionFromHash() {
-  const hash = window.location.hash || '';
-  const query = hash.includes('?') ? hash.slice(hash.indexOf('?') + 1) : '';
-  return new URLSearchParams(query).get('profession') || '';
+export function getSearchProfessionFromUrl() {
+  if (typeof window === 'undefined') return '';
+  return new URLSearchParams(window.location.search).get('profession') || '';
 }

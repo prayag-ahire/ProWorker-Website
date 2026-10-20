@@ -1,12 +1,12 @@
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 function GoogleAuth({ onSuccess, onError }) {
-  const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+  const clientId = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID;
 
   if (!clientId) {
     return (
       <div className="google-auth-hint" role="status">
-        Set <code>VITE_GOOGLE_CLIENT_ID</code> to enable Google sign-in.
+        Set <code>PUBLIC_GOOGLE_CLIENT_ID</code> to enable Google sign-in.
       </div>
     );
   }

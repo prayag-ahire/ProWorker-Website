@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DeleteAccountPage from '../components/react/DeleteAccountPage.jsx';
+
+const title = 'Delete Account — ProWorker';
+const description =
+  'Request deletion of your ProWorker customer or worker account. Follow the secure OTP verification steps to permanently remove your data.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath="/delete-account"
+  noindex={true}
+>
+  <DeleteAccountPage client:load />
+</BaseLayout>

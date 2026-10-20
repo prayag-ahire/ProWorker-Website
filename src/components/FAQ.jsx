@@ -52,7 +52,7 @@ function FAQ() {
     const workerFaqs = [
         {
             question: 'How do I join ProWorker as a worker?',
-            answer: 'Download the ProWorker Worker app and create a free professional profile with your photo, name, profession, about section, experience, skills, specialties, and service areas. A complete profile increases credibility and helps nearby customers find you.'
+            answer: 'Download the free Proworker Worker app from Google Play, then create your professional profile with photo, profession, skills, pricing, availability, and portfolio. A complete profile helps nearby customers find and contact you.'
         },
         {
             question: 'Is the Worker app free? Does ProWorker take a commission?',

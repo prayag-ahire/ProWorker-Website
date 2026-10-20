@@ -163,7 +163,7 @@ function PrivacyPolicy() {
                                 <div className="privacy-highlight">
                                     <strong>Marketing:</strong> We may send promotional offers or feature announcements
                                     via email or push notifications. You can opt out at any time through app settings
-                                    or by contacting us at <a href="mailto:contact@proworker.in">contact@proworker.in</a>.
+                                    or by contacting us at <a href="mailto:info@proworker.co">info@proworker.co</a>.
                                 </div>
                             </section>
 
@@ -362,7 +362,7 @@ function PrivacyPolicy() {
 
                                 <p>
                                     To exercise any of these rights, please contact us at{' '}
-                                    <a href="mailto:contact@proworker.in">contact@proworker.in</a>.
+                                    <a href="mailto:info@proworker.co">info@proworker.co</a>.
                                     We will respond within 30 days. We may need to verify your identity
                                     before processing your request.
                                 </p>
@@ -395,7 +395,7 @@ function PrivacyPolicy() {
                                     While we strive to protect your personal information, no method of
                                     transmission over the internet or electronic storage is 100% secure.
                                     If you become aware of any security breach, please notify us immediately
-                                    at <a href="mailto:contact@proworker.in">contact@proworker.in</a>.
+                                    at <a href="mailto:info@proworker.co">info@proworker.co</a>.
                                 </p>
                             </section>
 
@@ -410,7 +410,7 @@ function PrivacyPolicy() {
                                 <p>
                                     If you are a parent or guardian and believe your child has provided us
                                     with personal data, please contact us at{' '}
-                                    <a href="mailto:contact@proworker.in">contact@proworker.in</a>.
+                                    <a href="mailto:info@proworker.co">info@proworker.co</a>.
                                 </p>
                             </section>
 
@@ -447,7 +447,7 @@ function PrivacyPolicy() {
                                     <div className="contact-details">
                                         <div className="contact-row">
                                             <span className="contact-label">Email</span>
-                                            <a href="mailto:contact@proworker.in" className="contact-value">contact@proworker.in</a>
+                                            <a href="mailto:info@proworker.co" className="contact-value">info@proworker.co</a>
                                         </div>
                                         <div className="contact-row">
                                             <span className="contact-label">Subject</span>

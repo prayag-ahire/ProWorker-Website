@@ -4,9 +4,9 @@ import { useViewMode } from '../context/ViewModeContext';
 import { serviceCategories } from '../data/categories';
 import { Icon } from './Icons';
 import { goToSearch } from '../utils/goToSearch';
-import { CLIENT_PLAY_STORE_URL } from '../data/appLinks';
-import heroCustomer from '../assets/marketplace/hero-customer.jpg';
-import heroWorker from '../assets/marketplace/hero-worker.jpg';
+import { CLIENT_PLAY_STORE_URL, WORKER_PLAY_STORE_URL } from '../data/appLinks';
+import heroCustomer from '../assets/marketplace/hero-customer.jpg?url';
+import heroWorker from '../assets/marketplace/hero-worker.jpg?url';
 
 function Hero() {
     const isWorker = useViewMode() === 'worker';
@@ -36,19 +36,27 @@ function Hero() {
                                 : 'Search plumbers, electricians, carpenters, painters, cleaners, AC technicians, and more. Compare profiles, ratings, pricing, and availability—then connect yourself.'}
                         </p>
 
-                        {isWorker ? (
-                            <div className="hero-actions">
-                                <button className="btn btn-primary" disabled>
-                                    Create your profile
-                                </button>
-                                <button
-                                    className="btn btn-secondary"
-                                    onClick={() => { window.location.hash = '#how-it-works'; }}
-                                >
-                                    How it works
-                                </button>
-                            </div>
-                        ) : (
+                        <div className="hero-actions">
+                            <a
+                                className="btn btn-primary btn-hero-download"
+                                href={isWorker ? WORKER_PLAY_STORE_URL : CLIENT_PLAY_STORE_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {isWorker ? 'Download Worker app' : 'Download Customer app'}
+                            </a>
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                onClick={() => {
+                                    window.location.assign(isWorker ? '/#how-it-works' : '/#categories');
+                                }}
+                            >
+                                {isWorker ? 'How it works' : 'Browse services'}
+                            </button>
+                        </div>
+
+                        {!isWorker && (
                             <form className="hero-search" onSubmit={handleSearch}>
                                 <label className="hero-search-field">
                                     <span>Service</span>
@@ -71,17 +79,6 @@ function Hero() {
                                     Find nearby workers
                                 </button>
                             </form>
-                        )}
-
-                        {!isWorker && (
-                            <a
-                                className="hero-store-link"
-                                href={CLIENT_PLAY_STORE_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Get it on Google Play
-                            </a>
                         )}
 
                         <div className="hero-chips">

@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SignInPage from '../components/react/SignInPage.jsx';
+
+const title = 'Sign In — ProWorker';
+const description =
+  'Sign in to ProWorker with your mobile number or Google account to find nearby skilled workers or manage your professional profile.';
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/sign-in" noindex={true}>
+  <SignInPage client:load />
+</BaseLayout>

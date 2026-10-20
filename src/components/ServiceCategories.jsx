@@ -8,7 +8,7 @@ function ServiceCategories() {
 
     const handleCategoryClick = (category) => {
         if (isWorker) {
-            window.location.hash = '#features';
+            window.location.assign('/#features');
             return;
         }
         goToSearch(category.browseAll ? '' : category.name);

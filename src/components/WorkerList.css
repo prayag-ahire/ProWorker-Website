@@ -234,6 +234,13 @@
   gap: 16px;
 }
 
+.worker-download-btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn {
   padding: 14px 28px;
   border-radius: 100px;

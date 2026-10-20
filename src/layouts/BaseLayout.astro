@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+import '../styles/app.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  ogType?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  ogType = 'website',
+  jsonLd,
+  noindex = false,
+} = Astro.props;
+
+const siteUrl = Astro.site?.href.replace(/\/$/, '') || 'https://proworker.co';
+const canonical = new URL(canonicalPath, siteUrl).href;
+const ogImage = new URL('/favicon.svg', siteUrl).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow" />
+    )}
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="ProWorker" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_IN" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    )}
+  </head>
+  <body>
+    <slot />
+    <script is:inline>
+      (function () {
+        var hash = window.location.hash || '';
+        if (!hash || hash.length < 2) return;
+        var path = hash.slice(1);
+        var query = '';
+        var qIndex = path.indexOf('?');
+        if (qIndex !== -1) {
+          query = path.slice(qIndex);
+          path = path.slice(0, qIndex);
+        }
+        var map = {
+          search: '/search',
+          privacy: '/privacy',
+          signin: '/sign-in',
+          deleteaccount: '/delete-account',
+          childsafety: '/child-safety',
+          partner: '/partner',
+          'sales-partner': '/partner',
+          'growth-partner': '/partner',
+        };
+        var target = map[path];
+        if (target) {
+          window.location.replace(target + query);
+        }
+      })();
+    </script>
+  </body>
+</html>

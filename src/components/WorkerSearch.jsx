@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { workerService } from '../services/workerService';
 import WorkerList from './WorkerList';
-import { getSearchProfessionFromHash, goToSearch } from '../utils/goToSearch';
+import { getSearchProfessionFromUrl, goToSearch } from '../utils/goToSearch';
 import { useLocation } from '../context/LocationContext';
 import './WorkerSearch.css';
 
@@ -14,7 +14,7 @@ function WorkerSearch() {
     refreshLocation,
   } = useLocation();
 
-  const [profession, setProfession] = useState(() => getSearchProfessionFromHash());
+  const [profession, setProfession] = useState(() => getSearchProfessionFromUrl());
   const [professions, setProfessions] = useState([]);
   const [workers, setWorkers] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
@@ -28,14 +28,13 @@ function WorkerSearch() {
   const searchGenRef = useRef(0);
 
   useEffect(() => {
-    const syncProfessionFromHash = () => {
-      const fromHash = getSearchProfessionFromHash();
-      setProfession(fromHash);
+    const syncProfessionFromUrl = () => {
+      setProfession(getSearchProfessionFromUrl());
     };
 
-    syncProfessionFromHash();
-    window.addEventListener('hashchange', syncProfessionFromHash);
-    return () => window.removeEventListener('hashchange', syncProfessionFromHash);
+    syncProfessionFromUrl();
+    window.addEventListener('popstate', syncProfessionFromUrl);
+    return () => window.removeEventListener('popstate', syncProfessionFromUrl);
   }, []);
 
   useEffect(() => {

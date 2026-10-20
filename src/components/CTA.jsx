@@ -1,6 +1,6 @@
 import './CTA.css';
 import { useViewMode } from '../context/ViewModeContext';
-import { CLIENT_PLAY_STORE_URL } from '../data/appLinks';
+import { CLIENT_PLAY_STORE_URL, WORKER_PLAY_STORE_URL } from '../data/appLinks';
 
 function CTA() {
     const isWorker = useViewMode() === 'worker';
@@ -29,20 +29,14 @@ function CTA() {
                             ? 'Create a free profile, showcase your work, set your prices and availability, and get discovered by nearby customers. No booking system. No commission.'
                             : 'Search local professionals, compare profiles, ratings, pricing, and portfolios—then contact them directly. Completely free.'
                         }</p>
-                        {isWorker ? (
-                            <button className="cta-btn" disabled>
-                                Join free as a worker
-                            </button>
-                        ) : (
-                            <a
-                                className="cta-btn"
-                                href={CLIENT_PLAY_STORE_URL}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                Get it on Google Play
-                            </a>
-                        )}
+                        <a
+                            className="cta-btn"
+                            href={isWorker ? WORKER_PLAY_STORE_URL : CLIENT_PLAY_STORE_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {isWorker ? 'Download Worker app' : 'Get it on Google Play'}
+                        </a>
                     </div>
 
                     <div className="cta-stats">

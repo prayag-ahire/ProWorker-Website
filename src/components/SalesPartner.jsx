@@ -91,7 +91,7 @@ const QUALIFICATION_CHECKLIST = [
   }
 ];
 
-function SalesPartner({ onNavigate }) {
+function SalesPartner() {
   // Form State
   const [formData, setFormData] = useState({
     fullName: '',
@@ -584,7 +584,7 @@ function SalesPartner({ onNavigate }) {
                   <button
                     type="button"
                     className="btn btn-secondary"
-                    onClick={() => onNavigate('home')}
+                    onClick={() => window.location.assign('/')}
                   >
                     Back to Home
                   </button>

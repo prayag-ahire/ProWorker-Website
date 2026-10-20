@@ -5,16 +5,20 @@ import GoogleAuth from './googleAuth';
 import OtpLoginForm from './OtpLoginForm';
 import './SignIn.css';
 
-function SignIn({ onNavigate }) {
+function SignIn() {
   const { signInWithGoogle } = useAuth();
   const viewMode = useViewMode();
   const [googleError, setGoogleError] = useState('');
+
+  const goHome = () => {
+    window.location.assign('/');
+  };
 
   const handleGoogleSuccess = async (credentialResponse) => {
     try {
       setGoogleError('');
       await signInWithGoogle(credentialResponse);
-      onNavigate('home');
+      goHome();
     } catch (err) {
       setGoogleError(err.message || 'Google sign-in failed');
     }
@@ -50,7 +54,7 @@ function SignIn({ onNavigate }) {
                 <OtpLoginForm
                   defaultRole={isWorker ? 'worker' : 'client'}
                   buttonClassName="signin-button"
-                  onSuccess={() => onNavigate('home')}
+                  onSuccess={goHome}
                 />
 
                 <div className="signin-divider" aria-hidden="true">

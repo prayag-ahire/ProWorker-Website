@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StaticContentPage from '../components/react/StaticContentPage.jsx';
+
+const title = 'Privacy Policy — ProWorker';
+const description =
+  'Read how ProWorker collects, uses, and protects your personal data. Our privacy policy covers customers, workers, and partners on the ProWorker platform.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: 'https://proworker.co/privacy',
+};
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/privacy" jsonLd={jsonLd}>
+  <StaticContentPage client:load page="privacy" />
+</BaseLayout>

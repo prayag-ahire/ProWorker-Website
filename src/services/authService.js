@@ -1,6 +1,6 @@
 const BASE_API_URL = 'https://api.proworker.co/api';
 const API_BASE_URL = `${BASE_API_URL.replace(/\/$/, '')}/v1/website`;
-const GOOGLE_SIGNIN_URL = import.meta.env.VITE_GOOGLE_SIGNIN_URL || `${BASE_API_URL.replace(/\/$/, '')}/v1/website/google-signin`;
+const GOOGLE_SIGNIN_URL = import.meta.env.PUBLIC_GOOGLE_SIGNIN_URL || `${BASE_API_URL.replace(/\/$/, '')}/v1/website/google-signin`;
 
 import decodeJwt from '../utils/decodeJwt';
 
@@ -16,6 +16,16 @@ const SESSION_KEYS = [
   'userMobile',
   'authProvider',
 ];
+
+const canUseStorage = () => typeof window !== 'undefined' && typeof localStorage !== 'undefined';
+
+const storageGet = (key) => (canUseStorage() ? localStorage.getItem(key) : null);
+const storageSet = (key, value) => {
+  if (canUseStorage()) localStorage.setItem(key, value);
+};
+const storageRemove = (key) => {
+  if (canUseStorage()) localStorage.removeItem(key);
+};
 
 const parseJson = async (response) => {
   try {
@@ -55,50 +65,50 @@ const persistSession = (data = {}, fallback = {}) => {
   const authProvider = data.authProvider ?? fallback.authProvider;
 
   if (token) {
-    localStorage.setItem('authToken', token);
+    storageSet('authToken', token);
   }
 
   if (userId !== undefined && userId !== null) {
-    localStorage.setItem('userId', String(userId));
+    storageSet('userId', String(userId));
   }
 
-  localStorage.setItem('userRole', role);
+  storageSet('userRole', role);
 
   if (role === 'worker') {
-    localStorage.removeItem('clientId');
+    storageRemove('clientId');
     if (workerId !== undefined && workerId !== null) {
-      localStorage.setItem('workerId', String(workerId));
+      storageSet('workerId', String(workerId));
     }
   } else {
-    localStorage.removeItem('workerId');
+    storageRemove('workerId');
     if (clientId !== undefined && clientId !== null) {
-      localStorage.setItem('clientId', String(clientId));
+      storageSet('clientId', String(clientId));
     }
   }
 
   if (profileCompleted !== undefined && profileCompleted !== null) {
-    localStorage.setItem('profileCompleted', String(Boolean(profileCompleted)));
+    storageSet('profileCompleted', String(Boolean(profileCompleted)));
   }
 
   if (userName) {
-    localStorage.setItem('userName', userName);
+    storageSet('userName', userName);
   }
 
   if (userEmail) {
-    localStorage.setItem('userEmail', userEmail);
+    storageSet('userEmail', userEmail);
   }
 
   if (userMobile) {
-    localStorage.setItem('userMobile', userMobile);
+    storageSet('userMobile', userMobile);
   }
 
   if (authProvider) {
-    localStorage.setItem('authProvider', authProvider);
+    storageSet('authProvider', authProvider);
   }
 };
 
 const clearSession = () => {
-  SESSION_KEYS.forEach((key) => localStorage.removeItem(key));
+  SESSION_KEYS.forEach((key) => storageRemove(key));
 };
 
 const buildGoogleSession = (credential) => {
@@ -311,8 +321,8 @@ export const authService = {
 
   deleteAccount: async () => {
     try {
-      const token = localStorage.getItem('authToken');
-      const role = normalizeRole(localStorage.getItem('userRole'));
+      const token = storageGet('authToken');
+      const role = normalizeRole(storageGet('userRole'));
 
       if (!token) {
         throw new Error('No authentication token found');
@@ -356,21 +366,21 @@ export const authService = {
   },
 
   isAuthenticated: () => {
-    return !!localStorage.getItem('authToken');
+    return !!storageGet('authToken');
   },
 
   getCurrentUser: () => {
     return {
-      userId: localStorage.getItem('userId'),
-      clientId: localStorage.getItem('clientId'),
-      workerId: localStorage.getItem('workerId'),
-      role: localStorage.getItem('userRole') || 'client',
-      name: localStorage.getItem('userName'),
-      email: localStorage.getItem('userEmail'),
-      mobile: localStorage.getItem('userMobile'),
-      authProvider: localStorage.getItem('authProvider'),
-      profileCompleted: localStorage.getItem('profileCompleted') === 'true',
-      isAuthenticated: !!localStorage.getItem('authToken'),
+      userId: storageGet('userId'),
+      clientId: storageGet('clientId'),
+      workerId: storageGet('workerId'),
+      role: storageGet('userRole') || 'client',
+      name: storageGet('userName'),
+      email: storageGet('userEmail'),
+      mobile: storageGet('userMobile'),
+      authProvider: storageGet('authProvider'),
+      profileCompleted: storageGet('profileCompleted') === 'true',
+      isAuthenticated: !!storageGet('authToken'),
     };
   },
 
@@ -379,6 +389,6 @@ export const authService = {
   },
 
   getToken: () => {
-    return localStorage.getItem('authToken');
+    return storageGet('authToken');
   },
 };

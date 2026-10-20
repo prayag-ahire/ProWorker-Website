@@ -420,7 +420,14 @@
     transition: color var(--transition-fast);
 }
 
-a.contact-value:hover {
+/* Beat .privacy-section a { color: black } on the dark contact card */
+.privacy-contact-card a.contact-value,
+.privacy-section .privacy-contact-card a {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.privacy-contact-card a.contact-value:hover,
+.privacy-section .privacy-contact-card a:hover {
     color: var(--color-white);
     text-decoration: underline;
     text-underline-offset: 3px;

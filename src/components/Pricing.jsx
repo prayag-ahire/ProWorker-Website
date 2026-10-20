@@ -1,5 +1,6 @@
 import './Pricing.css';
 import { useViewMode } from '../context/ViewModeContext';
+import { WORKER_PLAY_STORE_URL } from '../data/appLinks';
 
 function Pricing() {
     const isWorker = useViewMode() === 'worker';
@@ -71,9 +72,14 @@ function Pricing() {
                                     <span>No commission—customers contact you directly</span>
                                 </div>
                             </div>
-                            <button className="btn btn-primary btn-large" disabled>
-                                Create Your Profile
-                            </button>
+                            <a
+                                className="btn btn-primary btn-large"
+                                href={WORKER_PLAY_STORE_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Download Worker app
+                            </a>
                         </div>
                     )}
 

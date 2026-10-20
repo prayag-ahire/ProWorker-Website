@@ -1,13 +1,7 @@
-import { useState } from 'react';
 import './WorkerList.css';
+import { CLIENT_PLAY_STORE_URL } from '../data/appLinks';
 
 function WorkerList({ workers }) {
-  const [expandedWorkerId, setExpandedWorkerId] = useState(null);
-
-  const toggleWorkerDetails = (workerId) => {
-    setExpandedWorkerId(expandedWorkerId === workerId ? null : workerId);
-  };
-
   return (
     <div className="worker-list">
       {workers.map((worker) => (
@@ -25,7 +19,7 @@ function WorkerList({ workers }) {
                   {(worker.name || '?')
                     .split(' ')
                     .slice(0, 2)
-                    .map(word => word.charAt(0).toUpperCase())
+                    .map((word) => word.charAt(0).toUpperCase())
                     .join('')}
                 </div>
               )}
@@ -76,47 +70,15 @@ function WorkerList({ workers }) {
           )}
 
           <div className="worker-actions">
-            <button
-              className="btn btn-secondary"
-              onClick={() => toggleWorkerDetails(worker.id)}
+            <a
+              className="btn btn-primary worker-download-btn"
+              href={CLIENT_PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              {expandedWorkerId === worker.id ? 'Hide Details' : 'View Details'}
-            </button>
-            <button className="btn btn-primary">Contact</button>
+              Download app to contact
+            </a>
           </div>
-
-          {expandedWorkerId === worker.id && (
-            <div className="worker-details">
-              {worker.age && (
-                <div className="detail-item">
-                  <strong>Age:</strong> {worker.age} years
-                </div>
-              )}
-              {worker.gender && (
-                <div className="detail-item">
-                  <strong>Gender:</strong> {worker.gender}
-                </div>
-              )}
-              {worker.hourlyRate != null && (
-                <div className="detail-item">
-                  <strong>Charges:</strong> ₹{worker.hourlyRate} per visit
-                </div>
-              )}
-              {worker.distanceCharges != null && (
-                <div className="detail-item">
-                  <strong>Distance Charges:</strong> ₹{worker.distanceCharges} per km
-                </div>
-              )}
-              {worker.defaultAddress?.address && (
-                <div className="detail-item">
-                  <strong>Address:</strong>{' '}
-                  {worker.defaultAddress.label
-                    ? `${worker.defaultAddress.label} — ${worker.defaultAddress.address}`
-                    : worker.defaultAddress.address}
-                </div>
-              )}
-            </div>
-          )}
         </div>
       ))}
     </div>
