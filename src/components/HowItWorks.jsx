@@ -33,9 +33,9 @@ function HowItWorks() {
                     </p>
                 </div>
 
-                <div className="steps-container scroll-animate">
+                <div className="steps-container scroll-animate" key={isWorker ? 'worker-steps' : 'client-steps'}>
                     {steps.map((step, index) => (
-                        <div key={step.number} className="step-card">
+                        <div key={`${isWorker ? 'w' : 'c'}-${step.number}`} className="step-card">
                             <div className="step-icon">
                                 <Icon name={step.icon} size={22} />
                             </div>

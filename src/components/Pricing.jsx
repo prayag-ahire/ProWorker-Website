@@ -17,7 +17,7 @@ function Pricing() {
                     </p>
                 </div>
 
-                <div className="pricing-grid">
+                <div className="pricing-grid" key={isWorker ? 'worker-pricing' : 'client-pricing'}>
                     {!isWorker && (
                         <div className="pricing-card featured scroll-animate delay-100">
                             <h3>For customers</h3>

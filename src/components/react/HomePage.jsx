@@ -12,43 +12,64 @@ import AboutUs from '../AboutUs';
 import CTA from '../CTA';
 import Footer from '../Footer';
 
+function revealInView(el) {
+  const rect = el.getBoundingClientRect();
+  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+  if (rect.top < viewportHeight && rect.bottom > 0) {
+    el.classList.add('visible');
+  }
+}
+
 export default function HomePage() {
   const [viewMode, setViewMode] = useState('client');
 
   useEffect(() => {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -100px 0px',
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    const attach = () => {
+      document.querySelectorAll('.scroll-animate').forEach((el) => {
+        observer.observe(el);
+        revealInView(el);
+      });
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    const animatedElements = document.querySelectorAll('.scroll-animate');
-    animatedElements.forEach((el) => observer.observe(el));
+    let timeoutId = 0;
+    // Wait for React to paint after Client/Worker content swaps
+    const frameId = window.requestAnimationFrame(() => {
+      attach();
+      // Second pass catches late layout after mode switch
+      timeoutId = window.setTimeout(attach, 50);
+    });
 
     const handleScroll = () => {
       const scrolled = window.scrollY;
-      const parallaxElements = document.querySelectorAll('.section-glow::before, .hero-glow');
-
-      parallaxElements.forEach((el, index) => {
+      document.querySelectorAll('.section-glow::before, .hero-glow').forEach((el, index) => {
         const speed = (index + 1) * 0.1;
         el.style.transform = `translateY(${scrolled * speed}px)`;
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
+      window.cancelAnimationFrame(frameId);
+      window.clearTimeout(timeoutId);
       observer.disconnect();
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [viewMode]);
 
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');

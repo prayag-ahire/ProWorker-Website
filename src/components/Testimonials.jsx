@@ -147,7 +147,7 @@ function Testimonials() {
                     </p>
                 </div>
 
-                <div className="testimonials-container">
+                <div className="testimonials-container" key={isWorker ? 'worker-reviews' : 'client-reviews'}>
                     {!isWorker ? (
                         <div className="testimonials-column scroll-animate delay-100">
                             <h3 className="testimonials-title">Customer reviews</h3>

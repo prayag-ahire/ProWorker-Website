@@ -20,9 +20,12 @@ function Features() {
                     </p>
                 </div>
 
-                <div className="features-grid">
+                <div className="features-grid" key={isWorker ? 'worker-features' : 'client-features'}>
                     {features.map((feature) => (
-                        <article key={feature.title} className="feature-item-card scroll-animate">
+                        <article
+                            key={`${isWorker ? 'w' : 'c'}-${feature.title}`}
+                            className="feature-item-card scroll-animate"
+                        >
                             <div className="feature-item-icon">
                                 <Icon name={feature.icon} size={22} />
                             </div>
