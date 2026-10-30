@@ -111,42 +111,59 @@
   margin: 0 auto 40px;
 }
 
-.partner-quick-pills {
+.partner-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  max-width: 560px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.highlight-item {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-}
-
-.pill-item {
-  display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 10px 20px;
-  border-radius: var(--radius-full);
-  font-size: 14px;
-  font-weight: 500;
-  color: #CBD5E1;
-  transition: all var(--transition-normal);
+  justify-content: center;
+  gap: 4px;
+  padding: 16px 12px;
+  text-align: center;
+  position: relative;
 }
 
-.pill-item:hover {
-  transform: translateY(-3px);
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+.highlight-item + .highlight-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18%;
+  bottom: 18%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.highlight-value {
+  font-size: clamp(18px, 3.2vw, 22px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: #FFFFFF;
+  line-height: 1.1;
 }
 
-.pill-item strong {
-  color: #60A5FA;
+.highlight-item:first-child .highlight-value {
+  background: linear-gradient(135deg, #60A5FA 0%, #34D399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.pill-icon {
-  font-size: 16px;
+.highlight-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #94A3B8;
+  line-height: 1.3;
 }
 
 /* =========================================================
@@ -1183,10 +1200,47 @@ select.form-control {
   font-size: 13.5px;
   line-height: 1.55;
   color: var(--color-gray-600);
+  min-width: 0;
+  flex: 1;
+}
+
+.checkbox-label-text label {
+  display: block;
+  cursor: pointer;
 }
 
 .checkbox-label-text strong {
   color: var(--color-gray-800);
+}
+
+.agreement-summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.agreement-detail {
+  display: inline;
+}
+
+.agreement-view-more {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--color-brand);
+  font-size: 12.5px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.agreement-view-more:hover {
+  color: var(--color-brand-dark);
 }
 
 /* Submit Button */
@@ -1689,13 +1743,22 @@ select.form-control {
     padding: 7px 16px;
   }
 
-  .partner-quick-pills {
-    gap: 8px;
+  .partner-highlights {
+    max-width: 100%;
+    border-radius: 14px;
   }
 
-  .pill-item {
-    padding: 8px 14px;
-    font-size: 13px;
+  .highlight-item {
+    padding: 12px 8px;
+    gap: 3px;
+  }
+
+  .highlight-value {
+    font-size: 16px;
+  }
+
+  .highlight-label {
+    font-size: 11px;
   }
 
   /* Calculator */
@@ -1903,9 +1966,16 @@ select.form-control {
     padding: 90px 0 44px;
   }
 
-  .pill-item {
-    padding: 7px 12px;
-    font-size: 12px;
+  .highlight-item {
+    padding: 10px 6px;
+  }
+
+  .highlight-value {
+    font-size: 15px;
+  }
+
+  .highlight-label {
+    font-size: 10px;
   }
 
   .calc-card {
@@ -2160,13 +2230,33 @@ select.form-control {
   }
 
   .partner-info-links-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
 
   .partner-info-link-card {
     min-height: auto;
-    padding: 16px 16px 16px 18px;
+    padding: 14px 12px;
+    gap: 4px;
+    border-radius: 12px;
+  }
+
+  .info-link-title {
+    font-size: 13px;
+    line-height: 1.3;
+    padding-right: 14px;
+  }
+
+  .info-link-desc {
+    font-size: 11px;
+    line-height: 1.4;
+    padding-right: 0;
+  }
+
+  .info-link-arrow {
+    top: 12px;
+    right: 10px;
+    font-size: 14px;
   }
 
   .partner-guide-page .partner-guide-hero {
@@ -2211,7 +2301,20 @@ select.form-control {
     padding: 84px 0 32px;
   }
 
+  .partner-info-links-grid {
+    gap: 8px;
+  }
+
+  .partner-info-link-card {
+    padding: 12px 10px;
+  }
+
   .info-link-title {
-    font-size: 15px;
+    font-size: 12px;
+    padding-right: 12px;
+  }
+
+  .info-link-desc {
+    font-size: 10px;
   }
 }

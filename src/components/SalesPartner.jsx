@@ -80,6 +80,36 @@ const INFO_LINKS = [
   }
 ];
 
+const AGREEMENT_ITEMS = [
+  {
+    name: 'agreeNoFee',
+    title: 'Strict Zero-Fee Guarantee',
+    summary: 'Profiles are 100% free — never charge workers any fee.',
+    detail:
+      'I understand that creating a ProWorker profile is 100% FREE for workers. I will NEVER ask, collect, or accept any money or fee from workers on behalf of ProWorker.'
+  },
+  {
+    name: 'agreeSevenDayRetention',
+    title: 'Verification & 7-Day Retention',
+    summary: '₹50 is paid only after verification and 7 active days.',
+    detail:
+      'I understand that ₹50 is paid only after profile verification passes the 9-point criteria and the worker remains active for 7 full days.'
+  },
+  {
+    name: 'agreeAntiFraud',
+    title: 'Anti-Fraud Policy',
+    summary: 'Fake accounts, duplicates, or stock images lead to a ban.',
+    detail:
+      'I understand that creating fake accounts, duplicate profiles, self-referrals, or using stock images is fraud. ProWorker will forfeit all commissions and permanently ban violators.'
+  },
+  {
+    name: 'agreeGeneralTerms',
+    title: 'Partner Agreement',
+    summary: 'I accept the ProWorker Growth Partner Agreement and Code of Conduct.',
+    detail: 'I accept the ProWorker Growth Partner Agreement and Code of Conduct.'
+  }
+];
+
 function SalesPartner() {
   const [formData, setFormData] = useState({ ...EMPTY_FORM });
 
@@ -95,6 +125,7 @@ function SalesPartner() {
   const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
   const [submittedPartner, setSubmittedPartner] = useState(null);
   const [copiedCode, setCopiedCode] = useState(false);
+  const [expandedAgreements, setExpandedAgreements] = useState({});
 
   const [weeklyWorkers, setWeeklyWorkers] = useState(15);
   const calculatedWeekly = weeklyWorkers * 50;
@@ -306,6 +337,13 @@ function SalesPartner() {
     setTimeout(() => setCopiedCode(false), 2500);
   };
 
+  const toggleAgreementExpand = (name) => {
+    setExpandedAgreements((prev) => ({
+      ...prev,
+      [name]: !prev[name]
+    }));
+  };
+
   return (
     <div className="partner-page">
       <section className="partner-hero partner-hero-compact">
@@ -321,18 +359,18 @@ function SalesPartner() {
             Help local tradespeople create a free digital profile. Direct weekly UPI payouts to your mobile.
           </p>
 
-          <div className="partner-quick-pills">
-            <div className="pill-item">
-              <span className="pill-icon">💰</span>
-              <span><strong>₹50</strong> / Qualified Worker</span>
+          <div className="partner-highlights" aria-label="Program highlights">
+            <div className="highlight-item">
+              <span className="highlight-value">₹50</span>
+              <span className="highlight-label">Per qualified worker</span>
             </div>
-            <div className="pill-item">
-              <span className="pill-icon">⚡</span>
-              <span>Weekly UPI Payouts</span>
+            <div className="highlight-item">
+              <span className="highlight-value">Weekly</span>
+              <span className="highlight-label">UPI payouts</span>
             </div>
-            <div className="pill-item">
-              <span className="pill-icon">🆓</span>
-              <span>100% Free for Workers</span>
+            <div className="highlight-item">
+              <span className="highlight-value">Free</span>
+              <span className="highlight-label">For all workers</span>
             </div>
           </div>
 
@@ -729,57 +767,41 @@ function SalesPartner() {
                     <a href="/partner/guide#terms">Growth Partner Guide</a>.
                   </p>
 
-                  <label className="checkbox-item">
-                    <input
-                      type="checkbox"
-                      name="agreeNoFee"
-                      checked={formData.agreeNoFee}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <span className="checkbox-label-text">
-                      <strong>Strict Zero-Fee Guarantee:</strong> I understand that creating a ProWorker profile is 100% FREE for workers. I will NEVER ask, collect, or accept any money or fee from workers on behalf of ProWorker.
-                    </span>
-                  </label>
+                  {AGREEMENT_ITEMS.map((item) => {
+                    const isExpanded = Boolean(expandedAgreements[item.name]);
+                    const canExpand = item.detail !== item.summary;
 
-                  <label className="checkbox-item">
-                    <input
-                      type="checkbox"
-                      name="agreeSevenDayRetention"
-                      checked={formData.agreeSevenDayRetention}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <span className="checkbox-label-text">
-                      <strong>Verification & 7-Day Retention:</strong> I understand that ₹50 is paid only after profile verification passes the 9-point criteria and the worker remains active for 7 full days.
-                    </span>
-                  </label>
-
-                  <label className="checkbox-item">
-                    <input
-                      type="checkbox"
-                      name="agreeAntiFraud"
-                      checked={formData.agreeAntiFraud}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <span className="checkbox-label-text">
-                      <strong>Anti-Fraud Policy:</strong> I understand that creating fake accounts, duplicate profiles, self-referrals, or using stock images is fraud. ProWorker will forfeit all commissions and permanently ban violators.
-                    </span>
-                  </label>
-
-                  <label className="checkbox-item">
-                    <input
-                      type="checkbox"
-                      name="agreeGeneralTerms"
-                      checked={formData.agreeGeneralTerms}
-                      onChange={handleInputChange}
-                      required
-                    />
-                    <span className="checkbox-label-text">
-                      I accept the ProWorker Growth Partner Agreement and Code of Conduct.
-                    </span>
-                  </label>
+                    return (
+                      <div key={item.name} className="checkbox-item">
+                        <input
+                          type="checkbox"
+                          id={`agreement-${item.name}`}
+                          name={item.name}
+                          checked={formData[item.name]}
+                          onChange={handleInputChange}
+                          required
+                        />
+                        <div className="checkbox-label-text">
+                          <label htmlFor={`agreement-${item.name}`}>
+                            <strong>{item.title}:</strong>{' '}
+                            <span className={isExpanded ? 'agreement-detail' : 'agreement-summary'}>
+                              {isExpanded ? item.detail : item.summary}
+                            </span>
+                          </label>
+                          {canExpand && (
+                            <button
+                              type="button"
+                              className="agreement-view-more"
+                              onClick={() => toggleAgreementExpand(item.name)}
+                              aria-expanded={isExpanded}
+                            >
+                              {isExpanded ? 'View less' : 'View more'}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
 
                 <div className="form-submit-row">

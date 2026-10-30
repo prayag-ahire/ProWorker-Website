@@ -52,9 +52,6 @@ function WorkerList({ workers }) {
             </div>
 
             <div className="worker-price">
-              {worker.hourlyRate != null && (
-                <p className="price">₹{worker.hourlyRate}/visit</p>
-              )}
               <div className="rating-stars">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <span key={star} className={`star ${star <= (worker.rating || 0) ? 'filled' : 'empty'}`}>
