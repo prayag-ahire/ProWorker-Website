@@ -789,9 +789,9 @@ function SalesPartner() {
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
-                      <span className="loading-spinner-text">Submitting Application...</span>
+                      <span className="loading-spinner-text">Submitting...</span>
                     ) : (
-                      'Submit Registration & Generate Partner Code'
+                      'Submit Registration'
                     )}
                   </button>
                   <p className="privacy-note">
