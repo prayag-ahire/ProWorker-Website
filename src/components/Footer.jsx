@@ -1,5 +1,6 @@
 import './Footer.css';
 import { CLIENT_PLAY_STORE_URL, WORKER_PLAY_STORE_URL } from '../data/appLinks';
+import { WHATSAPP_URL } from '../data/contact';
 
 function Footer() {
     const currentYear = new Date().getFullYear();
@@ -65,6 +66,15 @@ function Footer() {
                                 <li><a href="/#about">About us</a></li>
                                 <li><a href="/#faq">FAQ</a></li>
                                 <li><a href="/partner">Sales Partner Program</a></li>
+                                <li>
+                                    <a
+                                        href={WHATSAPP_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        WhatsApp support
+                                    </a>
+                                </li>
                             </ul>
                         </div>
 

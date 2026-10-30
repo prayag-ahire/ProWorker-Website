@@ -28,6 +28,14 @@
     width: 100%;
 }
 
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+    min-width: 0;
+}
+
 .navbar-logo {
     display: flex;
     align-items: center;
@@ -38,6 +46,33 @@
     padding: 0;
     cursor: pointer;
     color: #000000 !important;
+    flex-shrink: 0;
+}
+
+.nav-chat-with-us {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 14px;
+    border-radius: 9999px;
+    background: #25d366;
+    color: #ffffff !important;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none !important;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.35);
+    transition: background 0.2s ease, transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.nav-chat-with-us:hover {
+    background: #1ebe57;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
+.nav-chat-with-us svg {
     flex-shrink: 0;
 }
 
@@ -130,7 +165,7 @@
 .navbar-actions {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     flex-shrink: 0;
 }
 
@@ -142,6 +177,12 @@
     border-radius: 9999px;
     width: auto;
     letter-spacing: -0.01em;
+}
+
+.navbar-actions .navbar-primary-cta {
+    min-width: 148px;
+    justify-content: center;
+    text-align: center;
 }
 
 .navbar-actions .btn-secondary {
@@ -309,8 +350,24 @@
         display: none;
     }
 
+    .navbar-brand {
+        gap: 8px;
+    }
+
+    .nav-chat-with-us {
+        padding: 7px 10px;
+        font-size: 12px;
+        gap: 5px;
+    }
+
+    .nav-chat-with-us span {
+        display: none;
+    }
+
     .navbar-mobile-toggle {
-        display: block;
+        display: flex;
+        align-items: center;
+        gap: 8px;
         margin-left: auto;
         margin-right: 8px;
         flex-shrink: 0;
@@ -331,6 +388,13 @@
 @media (max-width: 400px) {
     .navbar .logo-text-inner {
         font-size: 20px;
+    }
+
+    .nav-chat-with-us {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        justify-content: center;
     }
 
     .navbar-mobile-toggle {

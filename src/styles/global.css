@@ -82,7 +82,7 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
+  overflow-x: clip;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -571,4 +571,112 @@ p {
 .pw-icon {
   display: block;
   flex-shrink: 0;
+}
+
+/* ==========================================
+   WhatsApp floating chat button
+   ========================================== */
+
+.whatsapp-float {
+  position: fixed !important;
+  right: 24px;
+  bottom: 28px;
+  z-index: 2147483000;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 12px 18px 12px 14px;
+  border-radius: 9999px;
+  background: #25d366;
+  color: #ffffff !important;
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none !important;
+  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45), 0 2px 8px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 14px 32px rgba(37, 211, 102, 0.55), 0 4px 12px rgba(0, 0, 0, 0.14);
+  color: #ffffff !important;
+}
+
+.whatsapp-float:focus-visible {
+  outline: 3px solid #128c7e;
+  outline-offset: 3px;
+}
+
+.whatsapp-float svg {
+  flex-shrink: 0;
+  display: block;
+}
+
+.whatsapp-float-label {
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.whatsapp-float-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: #25d366;
+  z-index: -1;
+  animation: whatsapp-pulse 2s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes whatsapp-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  70% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+}
+
+.nav-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border-radius: 9999px;
+  background: #25d366;
+  color: #ffffff !important;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none !important;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.35);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.nav-whatsapp-btn:hover {
+  background: #1ebe57;
+  color: #ffffff !important;
+  transform: translateY(-1px);
+}
+
+.nav-whatsapp-btn svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float {
+    right: 16px;
+    bottom: 20px;
+    min-height: 52px;
+    padding: 11px 16px 11px 12px;
+    font-size: 14px;
+  }
 }

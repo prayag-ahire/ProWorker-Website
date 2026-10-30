@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './FAQ.css';
 import { useViewMode } from '../context/ViewModeContext';
+import { WHATSAPP_URL } from '../data/contact';
 
 function FAQ() {
     const [openItems, setOpenItems] = useState([]);
@@ -112,8 +113,15 @@ function FAQ() {
 
                 <div className="faq-contact">
                     <h3>Still have questions?</h3>
-                    <p>Contact our support team for personalized assistance</p>
-                    <a href="#contact" className="contact-btn">Get Help</a>
+                    <p>Chat with us on WhatsApp for support or any query</p>
+                    <a
+                        href={WHATSAPP_URL}
+                        className="contact-btn"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Chat on WhatsApp
+                    </a>
                 </div>
             </div>
         </section>

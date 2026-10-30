@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/app.css';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 
 interface Props {
   title: string;
@@ -60,6 +61,7 @@ const ogImage = new URL('/favicon.svg', siteUrl).href;
   </head>
   <body>
     <slot />
+    <WhatsAppFloat />
     <script is:inline>
       (function () {
         var hash = window.location.hash || '';
