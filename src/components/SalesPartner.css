@@ -984,6 +984,13 @@ select.form-control {
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
+.btn-send-otp:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 .badge-verified {
   display: inline-flex;
   align-items: center;
@@ -1012,6 +1019,26 @@ select.form-control {
   padding: 20px;
   margin-top: 14px;
   animation: slideDown 0.3s ease-out;
+}
+
+.partner-otp-step {
+  margin-top: 0;
+}
+
+.partner-otp-step .otp-step-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-gray-900, #0f172a);
+  margin: 0 0 12px;
+}
+
+.btn-verify-otp:disabled,
+.btn-text:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 @keyframes slideDown {
@@ -1880,5 +1907,300 @@ select.form-control {
 
   .antifraud-wrapper {
     padding: 24px 16px;
+  }
+}
+
+/* =========================================================
+   COMPACT APPLY PAGE + INFO LINKS
+   ========================================================= */
+.partner-hero-compact {
+  padding: 108px 0 56px;
+}
+
+.partner-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.partner-hero-secondary {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #E2E8F0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+}
+
+.partner-hero-secondary:hover {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #fff !important;
+}
+
+.partner-calculator-compact {
+  padding: 40px 0 16px;
+}
+
+.partner-calculator-compact .calc-header p {
+  display: none;
+}
+
+.partner-info-links-section {
+  padding: 40px 0 16px;
+}
+
+.partner-info-links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.partner-info-link-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 18px;
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  min-height: 108px;
+}
+
+.partner-info-link-card:hover {
+  border-color: #93C5FD;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.info-link-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  padding-right: 24px;
+}
+
+.info-link-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-gray-500);
+  padding-right: 20px;
+}
+
+.info-link-arrow {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  color: var(--color-brand);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.terms-block-link {
+  font-size: 13px;
+  color: var(--color-gray-500);
+  margin: 0 0 14px;
+}
+
+.terms-block-link a {
+  color: var(--color-brand);
+  font-weight: 600;
+}
+
+/* =========================================================
+   PARTNER GUIDE PAGE
+   ========================================================= */
+.partner-guide-page .partner-guide-hero {
+  padding: 108px 0 28px;
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.guide-back-link {
+  display: inline-block;
+  color: #93C5FD;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.guide-back-link:hover {
+  color: #BFDBFE;
+}
+
+.partner-guide-title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0 0 10px;
+  color: #fff;
+}
+
+.partner-guide-subtitle {
+  font-size: 15px;
+  color: #94A3B8;
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.partner-guide-nav-wrap {
+  position: sticky;
+  top: calc(64px + env(safe-area-inset-top));
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.partner-guide-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 12px 0;
+}
+
+.partner-guide-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.guide-nav-btn {
+  flex: 0 0 auto;
+  border: 1px solid #E2E8F0;
+  background: #fff;
+  color: var(--color-gray-700);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.guide-nav-btn.active,
+.guide-nav-btn:hover {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #fff;
+}
+
+.partner-guide-content {
+  padding: 28px 0 56px;
+}
+
+.guide-section-label {
+  display: none;
+}
+
+.guide-section-panel {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+.guide-section-panel .section-head {
+  margin-bottom: 28px;
+}
+
+.guide-apply-cta {
+  margin-top: 36px;
+  padding: 28px 20px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+}
+
+.guide-apply-cta p {
+  margin: 0 0 14px;
+  color: var(--color-gray-600);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .partner-hero-compact {
+    padding: 92px 0 40px;
+  }
+
+  .partner-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 24px;
+  }
+
+  .partner-hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .partner-calculator-compact {
+    padding: 28px 0 8px;
+  }
+
+  .partner-info-links-section {
+    padding: 28px 0 8px;
+  }
+
+  .partner-info-links-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .partner-info-link-card {
+    min-height: auto;
+    padding: 16px 16px 16px 18px;
+  }
+
+  .partner-guide-page .partner-guide-hero {
+    padding: 92px 0 22px;
+    text-align: left;
+  }
+
+  .partner-guide-subtitle {
+    margin: 0;
+  }
+
+  .partner-guide-nav-wrap {
+    top: calc(58px + env(safe-area-inset-top));
+  }
+
+  .partner-guide-nav {
+    padding: 10px 0;
+    gap: 6px;
+  }
+
+  .guide-nav-btn {
+    padding: 9px 14px;
+    font-size: 12px;
+  }
+
+  .partner-guide-content {
+    padding: 18px 0 40px;
+  }
+
+  .guide-apply-cta {
+    margin-top: 24px;
+    padding: 22px 16px;
+  }
+
+  .guide-apply-cta .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .partner-hero-compact {
+    padding: 84px 0 32px;
+  }
+
+  .info-link-title {
+    font-size: 15px;
   }
 }

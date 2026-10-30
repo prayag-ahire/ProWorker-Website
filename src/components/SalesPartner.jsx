@@ -1,5 +1,23 @@
-import { useState, useId } from 'react';
+import { useState, useId, useEffect } from 'react';
+import { normalizeMobile } from '../services/authService';
+import { partnerService } from '../services/partnerService';
 import './SalesPartner.css';
+
+const RESEND_SECONDS = 30;
+const EMPTY_FORM = {
+  fullName: '',
+  mobile: '',
+  state: 'Maharashtra',
+  city: '',
+  area: '',
+  preferredWorkingArea: '',
+  salesExperience: 'none',
+  customUpi: '',
+  agreeNoFee: false,
+  agreeSevenDayRetention: false,
+  agreeAntiFraud: false,
+  agreeGeneralTerms: false
+};
 
 const INDIAN_STATES = [
   'Maharashtra',
@@ -34,94 +52,50 @@ const EXPERIENCE_OPTIONS = [
   { value: 'shop_owner', label: 'Local shopkeeper / Community representative' }
 ];
 
-const QUALIFICATION_CHECKLIST = [
+const INFO_LINKS = [
   {
-    id: 'mobile',
-    title: 'Verified Mobile Number',
-    desc: 'Worker authenticates via real-time SMS OTP. No duplicate or recycled numbers.',
-    tag: 'Automated'
+    href: '/partner/guide#how-it-works',
+    title: 'How it works',
+    desc: '4 simple steps from signup to weekly UPI payout'
   },
   {
-    id: 'basic_info',
-    title: 'Full Name & Trade Profession',
-    desc: 'Correct professional trade (e.g., Plumber, Electrician, Carpenter, Painter, AC Tech).',
-    tag: 'Required'
+    href: '/partner/guide#qualification',
+    title: 'What qualifies for ₹50',
+    desc: 'Profile checklist workers must complete'
   },
   {
-    id: 'photo',
-    title: 'Genuine Profile Photograph',
-    desc: 'Clear face photo of the worker in good lighting. No stock images or logos.',
-    tag: 'Quality Check'
+    href: '/partner/guide#anti-fraud',
+    title: 'Anti-fraud rules',
+    desc: 'Zero tolerance policy for fake referrals'
   },
   {
-    id: 'service_desc',
-    title: 'Service & Skill Description',
-    desc: 'Clear summary of services provided, specializations, and years of experience.',
-    tag: 'Profile Depth'
+    href: '/partner/guide#terms',
+    title: 'Terms & conduct',
+    desc: 'Zero-fee rule, retention, and penalties'
   },
   {
-    id: 'location',
-    title: 'Operating Territory & Area',
-    desc: 'Specific neighborhood, city, and serviceable radius where the worker operates.',
-    tag: 'Location'
-  },
-  {
-    id: 'availability',
-    title: 'Working Days & Time Availability',
-    desc: 'Working days (e.g. Mon–Sat) and regular service hours so clients can reach them.',
-    tag: 'Schedule'
-  },
-  {
-    id: 'work_photos',
-    title: 'At Least 2 Real Work Photos',
-    desc: 'Photos of recent work, toolkit, or projects. Reused or internet images are rejected.',
-    tag: 'Portfolio'
-  },
-  {
-    id: 'admin_audit',
-    title: 'ProWorker Admin Verification',
-    desc: 'Our review team audits the details and calls the worker to verify authenticity.',
-    tag: 'Audit Pass'
-  },
-  {
-    id: 'retention',
-    title: '7-Day Retention & Liveness',
-    desc: 'Profile must remain active and responsive for 7 full days after passing verification.',
-    tag: '7-Day Validation'
+    href: '/partner/guide#faq',
+    title: 'FAQ',
+    desc: 'Payouts, products, and common questions'
   }
 ];
 
 function SalesPartner() {
-  // Form State
-  const [formData, setFormData] = useState({
-    fullName: '',
-    mobile: '',
-    state: 'Maharashtra',
-    city: '',
-    area: '',
-    preferredWorkingArea: '',
-    salesExperience: 'none',
-    customUpi: '',
-    agreeNoFee: false,
-    agreeSevenDayRetention: false,
-    agreeAntiFraud: false,
-    agreeGeneralTerms: false
-  });
+  const [formData, setFormData] = useState({ ...EMPTY_FORM });
 
-  // OTP Verification Simulation State
-  const [otpStep, setOtpStep] = useState('unverified'); // 'unverified', 'otp_sent', 'verified'
+  const [otpStep, setOtpStep] = useState('unverified');
+  const [otpId, setOtpId] = useState('');
+  const [verifiedMobile, setVerifiedMobile] = useState('');
   const [enteredOtp, setEnteredOtp] = useState('');
   const [otpError, setOtpError] = useState('');
   const [resendCountdown, setResendCountdown] = useState(0);
   const [formError, setFormError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
   const [submittedPartner, setSubmittedPartner] = useState(null);
   const [copiedCode, setCopiedCode] = useState(false);
 
-  // Active accordion state for Terms & Conditions
-  const [activeTermsSection, setActiveTermsSection] = useState('zero-fee');
-
-  // Interactive Earnings Calculator
   const [weeklyWorkers, setWeeklyWorkers] = useState(15);
   const calculatedWeekly = weeklyWorkers * 50;
   const calculatedMonthly = calculatedWeekly * 4;
@@ -136,7 +110,27 @@ function SalesPartner() {
   const experienceId = useId();
   const upiId = useId();
 
-  // Handlers
+  useEffect(() => {
+    if (resendCountdown <= 0) {
+      return undefined;
+    }
+
+    const timer = window.setTimeout(
+      () => setResendCountdown((value) => value - 1),
+      1000
+    );
+    return () => window.clearTimeout(timer);
+  }, [resendCountdown]);
+
+  const resetOtpState = () => {
+    setOtpStep('unverified');
+    setOtpId('');
+    setVerifiedMobile('');
+    setEnteredOtp('');
+    setOtpError('');
+    setResendCountdown(0);
+  };
+
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -144,93 +138,165 @@ function SalesPartner() {
       [name]: type === 'checkbox' ? checked : value
     }));
     if (formError) setFormError('');
-  };
 
-  const handleSendOtp = () => {
-    const cleanMobile = formData.mobile.replace(/\D/g, '');
-    if (cleanMobile.length !== 10) {
-      setOtpError('Please enter a valid 10-digit mobile number first.');
-      return;
+    if (name === 'mobile' && otpStep !== 'unverified') {
+      resetOtpState();
     }
-    setOtpError('');
-    setOtpStep('otp_sent');
-    setResendCountdown(30);
-
-    const interval = setInterval(() => {
-      setResendCountdown((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
   };
 
-  const handleVerifyOtp = () => {
-    if (!enteredOtp || enteredOtp.trim().length < 4) {
-      setOtpError('Enter the 4 or 6-digit OTP sent to your mobile.');
-      return;
-    }
-    setOtpError('');
-    setOtpStep('verified');
+  const buildRegisterPayload = () => {
+    const cleanMobile = normalizeMobile(formData.mobile);
+    return {
+      fullName: formData.fullName.trim(),
+      mobileNumber: cleanMobile,
+      state: formData.state,
+      city: formData.city.trim(),
+      area: formData.area.trim(),
+      preferredWorkingArea: formData.preferredWorkingArea.trim(),
+      salesExperience: formData.salesExperience,
+      upiId: formData.customUpi.trim() || `${cleanMobile}@upi`,
+      agreementAccepted:
+        formData.agreeNoFee &&
+        formData.agreeSevenDayRetention &&
+        formData.agreeAntiFraud &&
+        formData.agreeGeneralTerms,
+    };
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormError('');
-
-    // Validation
+  const validateForm = () => {
     if (!formData.fullName.trim() || formData.fullName.trim().length < 3) {
-      setFormError('Please enter your full name (at least 3 characters).');
-      return;
+      return 'Please enter your full name (at least 3 characters).';
     }
 
-    const cleanMobile = formData.mobile.replace(/\D/g, '');
+    const cleanMobile = normalizeMobile(formData.mobile);
     if (cleanMobile.length !== 10) {
-      setFormError('Please provide a valid 10-digit mobile number.');
-      return;
+      return 'Please provide a valid 10-digit mobile number.';
     }
 
-    if (otpStep !== 'verified') {
-      setFormError('Please verify your mobile number with OTP before submitting.');
-      return;
+    if (otpStep !== 'verified' || verifiedMobile !== cleanMobile) {
+      return 'Please verify your mobile number with OTP before submitting.';
     }
 
     if (!formData.city.trim() || !formData.area.trim()) {
-      setFormError('Please enter both your city and operating area.');
-      return;
+      return 'Please enter both your city and operating area.';
     }
 
     if (!formData.preferredWorkingArea.trim()) {
-      setFormError('Please specify your preferred working area or market reach.');
-      return;
+      return 'Please specify your preferred working area or market reach.';
     }
 
-    // Check mandatory terms
     if (
       !formData.agreeNoFee ||
       !formData.agreeSevenDayRetention ||
       !formData.agreeAntiFraud ||
       !formData.agreeGeneralTerms
     ) {
-      setFormError('You must accept all terms, especially the zero-fee rule and anti-fraud policy.');
+      return 'You must accept all terms, especially the zero-fee rule and anti-fraud policy.';
+    }
+
+    return '';
+  };
+
+  const handleSendOtp = async () => {
+    const cleanMobile = normalizeMobile(formData.mobile);
+    if (cleanMobile.length !== 10) {
+      setOtpError('Please enter a valid 10-digit mobile number first.');
+      return;
+    }
+
+    setOtpError('');
+    setIsSendingOtp(true);
+
+    try {
+      const otpSession = await partnerService.sendOtp(cleanMobile);
+      setOtpId(otpSession.otpId);
+      setEnteredOtp('');
+      setOtpStep('otp_sent');
+      setResendCountdown(RESEND_SECONDS);
+    } catch (err) {
+      setOtpError(err.message || 'Failed to send OTP');
+    } finally {
+      setIsSendingOtp(false);
+    }
+  };
+
+  const handleVerifyOtp = async () => {
+    if (!otpId) {
+      setOtpError('OTP session expired. Please request a new code.');
+      return;
+    }
+
+    if (!enteredOtp || enteredOtp.trim().length < 4) {
+      setOtpError('Enter the 4 or 6-digit OTP sent to your mobile.');
+      return;
+    }
+
+    setOtpError('');
+    setIsVerifyingOtp(true);
+
+    try {
+      await partnerService.verifyOtp({
+        otpId,
+        otp: enteredOtp,
+      });
+
+      const cleanMobile = normalizeMobile(formData.mobile);
+      setVerifiedMobile(cleanMobile);
+      setOtpStep('verified');
+      setEnteredOtp('');
+      setOtpId('');
+    } catch (err) {
+      setOtpError(err.message || 'OTP verification failed');
+    } finally {
+      setIsVerifyingOtp(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    if (resendCountdown > 0 || isSendingOtp) {
+      return;
+    }
+    await handleSendOtp();
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormError('');
+
+    const validationError = validateForm();
+    if (validationError) {
+      setFormError(validationError);
       return;
     }
 
     setIsSubmitting(true);
 
-    // Simulate backend registration & code generation
-    setTimeout(() => {
-      setIsSubmitting(false);
-      const randomCode = `PW-${formData.city.slice(0, 3).toUpperCase() || 'IND'}-${Math.floor(1000 + Math.random() * 9000)}`;
+    try {
+      const payload = buildRegisterPayload();
+      const registration = await partnerService.register(payload);
+
       setSubmittedPartner({
-        ...formData,
-        referralCode: randomCode,
-        effectiveUpi: formData.customUpi.trim() || `${cleanMobile}@upi`
+        fullName: payload.fullName,
+        mobile: payload.mobileNumber,
+        state: payload.state,
+        city: payload.city,
+        area: payload.area,
+        preferredWorkingArea: payload.preferredWorkingArea,
+        referralCode: registration.referralCode,
+        effectiveUpi: registration.upiId || payload.upiId,
       });
-      window.scrollTo({ top: 300, behavior: 'smooth' });
-    }, 700);
+    } catch (err) {
+      setFormError(err.message || 'Failed to register as Growth Partner');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const resetRegistration = () => {
+    setSubmittedPartner(null);
+    resetOtpState();
+    setFormError('');
+    setFormData({ ...EMPTY_FORM });
   };
 
   const copyReferralCode = () => {
@@ -242,8 +308,7 @@ function SalesPartner() {
 
   return (
     <div className="partner-page">
-      {/* Hero Section */}
-      <section className="partner-hero">
+      <section className="partner-hero partner-hero-compact">
         <div className="container">
           <div className="partner-hero-badge">
             <span className="hero-badge-dot"></span>
@@ -253,8 +318,7 @@ function SalesPartner() {
             Earn <span className="highlight-text">₹50</span> for Every Genuine Skilled Worker You Onboard
           </h1>
           <p className="partner-hero-subtitle">
-            Help local plumbers, electricians, carpenters, painters, and technicians create their free digital profile.
-            Zero fee for workers. Direct weekly UPI payouts to your mobile.
+            Help local tradespeople create a free digital profile. Direct weekly UPI payouts to your mobile.
           </p>
 
           <div className="partner-quick-pills">
@@ -270,28 +334,25 @@ function SalesPartner() {
               <span className="pill-icon">🆓</span>
               <span>100% Free for Workers</span>
             </div>
-            <div className="pill-item">
-              <span className="pill-icon">🛡️</span>
-              <span>Zero Joining Fee</span>
-            </div>
           </div>
 
-          <div style={{ marginTop: '36px' }}>
+          <div className="partner-hero-actions">
             <a href="#register-form" className="btn btn-primary btn-lg">
               Apply as Growth Partner →
+            </a>
+            <a href="/partner/guide" className="btn btn-secondary btn-lg partner-hero-secondary">
+              Program details
             </a>
           </div>
         </div>
       </section>
 
-      {/* Interactive Potential Earnings Calculator */}
-      <section className="partner-calculator-section">
+      <section className="partner-calculator-section partner-calculator-compact">
         <div className="container">
           <div className="calc-card">
             <div className="calc-header">
               <span className="calc-tag">Earnings Calculator</span>
               <h2>How much can you earn each month?</h2>
-              <p>Simple math. No ceiling on how many legitimate professionals you can onboard in your territory.</p>
             </div>
 
             <div className="calc-body">
@@ -309,23 +370,16 @@ function SalesPartner() {
                   onChange={(e) => setWeeklyWorkers(Number(e.target.value))}
                   className="calc-range-slider"
                 />
-                <div className="slider-hints">
-                  <span>Part-time (5-10/wk)</span>
-                  <span>Active Field Agent (20-30/wk)</span>
-                  <span>Full-Time Pro (40+/wk)</span>
-                </div>
               </div>
 
               <div className="calc-results-grid">
                 <div className="result-box">
-                  <span className="result-period">Weekly Payout (Every Monday)</span>
+                  <span className="result-period">Weekly Payout</span>
                   <span className="result-amount">₹{calculatedWeekly.toLocaleString('en-IN')}</span>
-                  <span className="result-sub">Direct UPI to Mobile</span>
                 </div>
                 <div className="result-box featured-result">
-                  <span className="result-period">Estimated Monthly Earnings</span>
+                  <span className="result-period">Monthly Estimate</span>
                   <span className="result-amount">₹{calculatedMonthly.toLocaleString('en-IN')}</span>
-                  <span className="result-sub">{weeklyWorkers * 4} Genuine Workers / Month</span>
                 </div>
               </div>
             </div>
@@ -333,161 +387,26 @@ function SalesPartner() {
         </div>
       </section>
 
-      {/* How the Model Works (4 Steps) */}
-      <section className="partner-process-section">
+      <section className="partner-info-links-section">
         <div className="container">
           <div className="section-head text-center">
-            <span className="section-eyebrow">Program Workflow</span>
-            <h2>How the Growth Partner Model Works</h2>
-            <p>Clear, direct, and transparent. From first signup to weekly UPI payout.</p>
+            <span className="section-eyebrow">Learn More</span>
+            <h2>Program details</h2>
+            <p>Keep this page focused on applying. Open any topic below for full details.</p>
           </div>
 
-          <div className="process-grid">
-            <div className="process-card">
-              <div className="process-step-num">01</div>
-              <div className="process-icon">📝</div>
-              <h3>Join Sales Team</h3>
-              <p>
-                Fill out the simple partner registration form below, verify your mobile number with OTP, and get your unique Partner Referral Code.
-              </p>
-            </div>
-
-            <div className="process-card">
-              <div className="process-step-num">02</div>
-              <div className="process-icon">🤝</div>
-              <h3>Approach Workers</h3>
-              <p>
-                Visit local markets and meet plumbers, electricians, carpenters, AC mechanics, etc. Help them download ProWorker and create a free profile.
-              </p>
-            </div>
-
-            <div className="process-card">
-              <div className="process-step-num">03</div>
-              <div className="process-icon">🔍</div>
-              <h3>Profile Verification</h3>
-              <p>
-                Our audit team inspects each profile, verifies trade details, work photographs, and initiates the 7-day retention verification check.
-              </p>
-            </div>
-
-            <div className="process-card">
-              <div className="process-step-num">04</div>
-              <div className="process-icon">💸</div>
-              <h3>Receive ₹50 via UPI</h3>
-              <p>
-                After 7 days of verified activity, ₹50 per eligible worker is credited directly to your registered UPI ID every Monday.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Define What Qualifies for ₹50 */}
-      <section className="partner-qualification-section">
-        <div className="container">
-          <div className="section-head text-center">
-            <span className="section-eyebrow">Quality Benchmark</span>
-            <h2>Define What Qualifies for ₹50</h2>
-            <p>
-              We do not pay for empty, fake, or half-filled accounts. Our goal is to build a reliable local directory customers can trust.
-            </p>
-          </div>
-
-          <div className="qualification-grid">
-            {QUALIFICATION_CHECKLIST.map((item, idx) => (
-              <div key={item.id} className="qual-card">
-                <div className="qual-header">
-                  <div className="qual-check-box">
-                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" strokeWidth="2.5">
-                      <path d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <span className="qual-badge">{item.tag}</span>
-                </div>
-                <h3 className="qual-title">{idx + 1}. {item.title}</h3>
-                <p className="qual-desc">{item.desc}</p>
-              </div>
+          <div className="partner-info-links-grid">
+            {INFO_LINKS.map((link) => (
+              <a key={link.href} href={link.href} className="partner-info-link-card">
+                <span className="info-link-title">{link.title}</span>
+                <span className="info-link-desc">{link.desc}</span>
+                <span className="info-link-arrow" aria-hidden="true">→</span>
+              </a>
             ))}
           </div>
-
-          <div className="product-optional-banner">
-            <div className="banner-icon-col">
-              <span className="banner-icon">💡</span>
-            </div>
-            <div className="banner-content-col">
-              <h4>Important: Product Listings are 100% Optional!</h4>
-              <p>
-                Unlike e-commerce sellers, skilled professionals provide labor, repairs, and technical services.
-                <strong> Do not force workers to list products.</strong> Profiles qualify completely based on trade details,
-                service description, availability, and genuine work photographs.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Anti-Fraud Guardrails (Most Critical Section) */}
-      <section className="partner-antifraud-section">
-        <div className="container">
-          <div className="antifraud-wrapper">
-            <div className="antifraud-header">
-              <div className="shield-icon">🛡️</div>
-              <div>
-                <span className="antifraud-tag">Fraud Prevention Policy</span>
-                <h2>Zero Tolerance for Fake Referrals</h2>
-                <p>
-                  Suppose someone creates 100 fake accounts with fake phone numbers to earn ₹5,000.
-                  We lose money without acquiring real professionals. That is why our system strictly enforces these 6 rules:
-                </p>
-              </div>
-            </div>
-
-            <div className="antifraud-rules-grid">
-              <div className="rule-card">
-                <div className="rule-badge">Rule 1</div>
-                <h3>One Worker, One Commission</h3>
-                <p>Duplicate mobile numbers or recycled accounts never qualify. Each qualified worker must be uniquely verified.</p>
-              </div>
-
-              <div className="rule-card">
-                <div className="rule-badge">Rule 2</div>
-                <h3>Human Profile Verification</h3>
-                <p>Our audit team physically or telephonically verifies worker credentials, shop presence, and actual field activity.</p>
-              </div>
-
-              <div className="rule-card">
-                <div className="rule-badge">Rule 3</div>
-                <h3>Unique Attribution</h3>
-                <p>Every worker is bound directly to your referral code at registration, preventing attribution theft or cross-claims.</p>
-              </div>
-
-              <div className="rule-card">
-                <div className="rule-badge">Rule 4</div>
-                <h3>Seven-Day Validation Check</h3>
-                <p>Commissions are paid only after a 7-day retention period, ensuring the worker is genuinely active and reachable.</p>
-              </div>
-
-              <div className="rule-card">
-                <div className="rule-badge">Rule 5</div>
-                <h3>Audited Payment Records</h3>
-                <p>A transparent ledger tracks all your referrals across Approved, Pending, Rejected, and Paid statuses.</p>
-              </div>
-
-              <div className="rule-card">
-                <div className="rule-badge">Rule 6</div>
-                <h3>No Self-Referrals</h3>
-                <p>Partners cannot earn commissions for their own profile, simulated test devices, or close duplicate family numbers.</p>
-              </div>
-            </div>
-
-            <div className="antifraud-warning-box">
-              <strong>⚠️ Penalty Notice:</strong> Any partner caught uploading stock photos, submitting fake OTP numbers, or charging workers money will have their referral code suspended immediately, all unpaid commissions permanently cancelled, and phone number blacklisted across the ProWorker network.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Registration Form Section */}
       <section className="partner-registration-section" id="register-form">
         <div className="container">
           <div className="registration-container">
@@ -560,34 +479,13 @@ function SalesPartner() {
                   <button
                     type="button"
                     className="btn btn-primary"
-                    onClick={() => {
-                      setSubmittedPartner(null);
-                      setOtpStep('unverified');
-                      setFormData({
-                        fullName: '',
-                        mobile: '',
-                        state: 'Maharashtra',
-                        city: '',
-                        area: '',
-                        preferredWorkingArea: '',
-                        salesExperience: 'none',
-                        customUpi: '',
-                        agreeNoFee: false,
-                        agreeSevenDayRetention: false,
-                        agreeAntiFraud: false,
-                        agreeGeneralTerms: false
-                      });
-                    }}
+                    onClick={resetRegistration}
                   >
                     Submit Another Application
                   </button>
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => window.location.assign('/')}
-                  >
-                    Back to Home
-                  </button>
+                  <a href="/partner/guide" className="btn btn-secondary">
+                    Read Program Guide
+                  </a>
                 </div>
               </div>
             ) : (
@@ -599,7 +497,6 @@ function SalesPartner() {
                   </div>
                 )}
 
-                {/* Field 1: Full Name */}
                 <div className="form-group">
                   <label htmlFor={fullNameId}>
                     Full Name <span className="req">*</span>
@@ -617,7 +514,6 @@ function SalesPartner() {
                   <span className="field-hint">Identify yourself as the official registered partner.</span>
                 </div>
 
-                {/* Field 2: Mobile Number with OTP Verification */}
                 <div className="form-group">
                   <label htmlFor={mobileId}>
                     Mobile Number (for OTP & UPI payout) <span className="req">*</span>
@@ -634,6 +530,7 @@ function SalesPartner() {
                         placeholder="10-digit mobile number"
                         className="form-control"
                         maxLength={10}
+                        inputMode="numeric"
                         disabled={otpStep === 'verified'}
                         required
                       />
@@ -644,8 +541,9 @@ function SalesPartner() {
                         type="button"
                         className="btn-send-otp"
                         onClick={handleSendOtp}
+                        disabled={isSendingOtp}
                       >
-                        Verify OTP
+                        {isSendingOtp ? 'Sending...' : 'Verify OTP'}
                       </button>
                     )}
 
@@ -661,7 +559,9 @@ function SalesPartner() {
 
                   {otpStep === 'otp_sent' && (
                     <div className="inline-otp-box">
-                      <span className="otp-prompt">Enter 4 or 6-digit OTP sent to +91 {formData.mobile}:</span>
+                      <span className="otp-prompt">
+                        Enter OTP sent to +91 {formData.mobile}:
+                      </span>
                       <div className="otp-input-row">
                         <label htmlFor={otpInputId} className="visually-hidden">
                           Enter OTP code
@@ -671,31 +571,36 @@ function SalesPartner() {
                           id={otpInputId}
                           value={enteredOtp}
                           onChange={(e) => setEnteredOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-                          placeholder="Enter OTP (e.g. 1234)"
+                          placeholder="Enter OTP"
                           className="form-control otp-input"
                           maxLength={6}
+                          inputMode="numeric"
+                          autoComplete="one-time-code"
+                          disabled={isVerifyingOtp}
                         />
                         <button
                           type="button"
                           className="btn-verify-otp"
                           onClick={handleVerifyOtp}
+                          disabled={isVerifyingOtp || isSendingOtp}
                         >
-                          Confirm OTP
+                          {isVerifyingOtp ? 'Verifying...' : 'Confirm OTP'}
                         </button>
                       </div>
                       <div className="otp-sub-actions">
                         <button
                           type="button"
                           className="btn-text"
-                          disabled={resendCountdown > 0}
-                          onClick={handleSendOtp}
+                          disabled={resendCountdown > 0 || isSendingOtp || isVerifyingOtp}
+                          onClick={handleResendOtp}
                         >
                           {resendCountdown > 0 ? `Resend in ${resendCountdown}s` : 'Resend OTP'}
                         </button>
                         <button
                           type="button"
                           className="btn-text"
-                          onClick={() => setOtpStep('unverified')}
+                          disabled={isSendingOtp || isVerifyingOtp}
+                          onClick={resetOtpState}
                         >
                           Change Number
                         </button>
@@ -705,11 +610,10 @@ function SalesPartner() {
 
                   {otpError && <div className="field-error">{otpError}</div>}
                   <span className="field-hint">
-                    Commissions will be sent to the UPI account linked with this number.
+                    Verify this number with SMS OTP before submitting. Commissions go to the linked UPI account.
                   </span>
                 </div>
 
-                {/* Field 3: State, City, Area (Operating Territory) */}
                 <div className="form-row-three">
                   <div className="form-group">
                     <label htmlFor={stateId}>
@@ -764,7 +668,6 @@ function SalesPartner() {
                   </div>
                 </div>
 
-                {/* Field 4: Preferred Working Area (Reach) */}
                 <div className="form-group">
                   <label htmlFor={preferredAreaId}>
                     Preferred Working Area & Reach <span className="req">*</span>
@@ -782,7 +685,6 @@ function SalesPartner() {
                   <span className="field-hint">Help us understand which local markets or societies you frequently visit.</span>
                 </div>
 
-                {/* Field 5: Previous Sales Experience (Optional) */}
                 <div className="form-group">
                   <label htmlFor={experienceId}>
                     Previous Sales / Field Experience <span className="opt">(Optional)</span>
@@ -802,7 +704,6 @@ function SalesPartner() {
                   </select>
                 </div>
 
-                {/* Payment Detail: UPI Confirmation */}
                 <div className="form-group">
                   <label htmlFor={upiId}>
                     Custom UPI ID for Payouts <span className="opt">(Optional - defaults to mobile@upi)</span>
@@ -821,9 +722,12 @@ function SalesPartner() {
                   </span>
                 </div>
 
-                {/* Agreement & Anti-Fraud Acceptance (Mandatory) */}
                 <div className="terms-acceptance-block">
                   <h4 className="terms-block-title">Program Rules & Declarations</h4>
+                  <p className="terms-block-link">
+                    Read full details in the{' '}
+                    <a href="/partner/guide#terms">Growth Partner Guide</a>.
+                  </p>
 
                   <label className="checkbox-item">
                     <input
@@ -885,7 +789,7 @@ function SalesPartner() {
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
-                      <span className="loading-spinner-text">Registering Application...</span>
+                      <span className="loading-spinner-text">Submitting Application...</span>
                     ) : (
                       'Submit Registration & Generate Partner Code'
                     )}
@@ -896,179 +800,6 @@ function SalesPartner() {
                 </div>
               </form>
             )}
-          </div>
-        </div>
-      </section>
-
-      {/* Terms & Conditions & Anti-Fraud Details Section */}
-      <section className="partner-terms-section">
-        <div className="container">
-          <div className="section-head text-center">
-            <span className="section-eyebrow">Legal & Guidelines</span>
-            <h2>Terms of Engagement & Code of Conduct</h2>
-            <p>Transparent rules that keep ProWorker genuine, trusted, and free for hard-working professionals.</p>
-          </div>
-
-          <div className="terms-tabs-wrapper">
-            <div className="terms-tab-nav">
-              <button
-                type="button"
-                className={`terms-tab-btn ${activeTermsSection === 'zero-fee' ? 'active' : ''}`}
-                onClick={() => setActiveTermsSection('zero-fee')}
-              >
-                1. Zero-Fee Policy
-              </button>
-              <button
-                type="button"
-                className={`terms-tab-btn ${activeTermsSection === 'qualification' ? 'active' : ''}`}
-                onClick={() => setActiveTermsSection('qualification')}
-              >
-                2. What Qualifies for ₹50
-              </button>
-              <button
-                type="button"
-                className={`terms-tab-btn ${activeTermsSection === 'retention' ? 'active' : ''}`}
-                onClick={() => setActiveTermsSection('retention')}
-              >
-                3. 7-Day Retention & Ledger
-              </button>
-              <button
-                type="button"
-                className={`terms-tab-btn ${activeTermsSection === 'fraud' ? 'active' : ''}`}
-                onClick={() => setActiveTermsSection('fraud')}
-              >
-                4. Fraud & Penalties
-              </button>
-            </div>
-
-            <div className="terms-tab-content">
-              {activeTermsSection === 'zero-fee' && (
-                <div className="terms-panel">
-                  <h3>Strict Prohibition: You Cannot Charge Workers Money</h3>
-                  <p>
-                    ProWorker was founded to help local skilled workers build a digital identity without middlemen or extortion.
-                    Creating a profile on ProWorker is <strong>100% free forever</strong>.
-                  </p>
-                  <ul>
-                    <li>Sales partners are strictly forbidden from demanding any cash, registration charges, or tips from workers.</li>
-                    <li>If a partner tells a worker &quot;Pay ₹50 or ₹100 for ProWorker verification&quot;, this constitutes criminal fraud and extortion.</li>
-                    <li>Any complaint from a worker regarding extortion will result in immediate termination, blacklisting, and referral to law enforcement.</li>
-                  </ul>
-                </div>
-              )}
-
-              {activeTermsSection === 'qualification' && (
-                <div className="terms-panel">
-                  <h3>Qualification Requirements for the ₹50 Referral</h3>
-                  <p>
-                    To maintain directory quality, commissions are only disbursed for profiles that have all mandatory details filled:
-                  </p>
-                  <ul>
-                    <li><strong>Verified Phone:</strong> Worker must verify their own phone number with SMS OTP.</li>
-                    <li><strong>Complete Profile:</strong> Worker name, professional trade, operating area, working days, and working hours.</li>
-                    <li><strong>Photographs:</strong> 1 clear face profile photo + minimum 2 genuine photos of their tools, workshop, or completed work.</li>
-                    <li><strong>Products Are Optional:</strong> You do NOT need to add product listings. Plumbers, carpenters, and technicians provide services, not retail goods.</li>
-                  </ul>
-                </div>
-              )}
-
-              {activeTermsSection === 'retention' && (
-                <div className="terms-panel">
-                  <h3>Seven-Day Retention & Payment Ledger</h3>
-                  <p>
-                    Why 7 days? A hit-and-run account that deletes the app or abandons the account immediately does not help customers or the community.
-                  </p>
-                  <ul>
-                    <li><strong>Day 0:</strong> Worker completes profile; submitted to admin queue.</li>
-                    <li><strong>Day 1–2:</strong> Admin approves profile; 7-day retention counter starts.</li>
-                    <li><strong>Day 7:</strong> System verifies worker profile is in good standing and responsive.</li>
-                    <li><strong>Monday:</strong> Approved commissions are aggregated and paid in bulk directly to your UPI ID.</li>
-                  </ul>
-                </div>
-              )}
-
-              {activeTermsSection === 'fraud' && (
-                <div className="terms-panel">
-                  <h3>Fraud Detection & Immediate Disqualification</h3>
-                  <p>
-                    Our backend continuously tracks automated fraud heuristics:
-                  </p>
-                  <ul>
-                    <li><strong>Duplicate Phone Numbers:</strong> Re-registering existing workers earns ₹0.</li>
-                    <li><strong>Device ID Clustering:</strong> Registering 20 accounts from the same smartphone in one hour triggers an automatic fraud hold.</li>
-                    <li><strong>Stock Image Detection:</strong> Perceptual image hashing detects downloaded stock photos from Google/Pinterest.</li>
-                    <li><strong>Self-Referrals:</strong> Partners attempting to refer their own secondary numbers will have their account banned.</li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="partner-faq-section">
-        <div className="container">
-          <div className="section-head text-center">
-            <span className="section-eyebrow">Common Questions</span>
-            <h2>Frequently Asked Questions</h2>
-          </div>
-
-          <div className="faq-grid">
-            <div className="faq-card">
-              <h3>When and how will I receive my money?</h3>
-              <p>
-                All approved commissions are paid weekly every Monday via direct UPI transfer to the mobile number or custom UPI ID you registered with.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Does every worker need to list products to qualify?</h3>
-              <p>
-                No! Product listings are strictly optional. As long as the professional lists their service description, availability, and 2 work photos, they qualify.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Can I collect money from workers to create their profile?</h3>
-              <p>
-                NO. ProWorker is 100% free for workers. Charging any fee from workers is strictly prohibited and will lead to an immediate ban and forfeiture of all commissions.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>What if a worker deletes the app before 7 days?</h3>
-              <p>
-                Profiles that are abandoned, deleted, or fail our retention check within 7 days do not qualify for the ₹50 commission. We only pay for genuine, retained workers.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Who can join as a ProWorker Growth Partner?</h3>
-              <p>
-                Anyone who has access to local communities, markets, or tradespeople—such as field agents, college students, hardware shop owners, or active freelancers.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>How does ProWorker know I referred the worker?</h3>
-              <p>
-                Each partner receives a unique referral code. During signup, the worker enters your code, which permanently binds their profile to your partner account.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="partner-bottom-cta">
-        <div className="container">
-          <div className="cta-box text-center">
-            <h2>Ready to Start Earning with ProWorker?</h2>
-            <p>Join hundreds of local partners helping skilled tradespeople get discovered.</p>
-            <a href="#register-form" className="btn btn-primary btn-lg">
-              Register as Growth Partner Now
-            </a>
           </div>
         </div>
       </section>

@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PartnerGuidePage from '../../components/react/PartnerGuidePage.jsx';
+
+const title = 'Growth Partner Guide — ProWorker';
+const description =
+  'Learn how the ProWorker Growth Partner program works: qualification rules, payouts, anti-fraud policy, terms, and FAQs.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: 'https://proworker.co/partner/guide',
+};
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/partner/guide" jsonLd={jsonLd}>
+  <PartnerGuidePage client:load />
+</BaseLayout>
