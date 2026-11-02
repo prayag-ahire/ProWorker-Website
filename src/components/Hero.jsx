@@ -23,7 +23,7 @@ function Hero() {
                 <div className="hero-content">
                     <div className="hero-copy">
                         <p className="hero-kicker">
-                            {isWorker ? 'ProWorker Worker' : 'Hyperlocal marketplace'}
+                            {isWorker ? 'ProWorker for Skilled Workers' : 'Hyperlocal Skilled Workers & Services'}
                         </p>
                         <h1>
                             {isWorker
@@ -32,7 +32,7 @@ function Hero() {
                         </h1>
                         <p className="hero-subtitle">
                             {isWorker
-                                ? 'A free professional app to showcase your work, set prices and availability, and receive direct customer inquiries. No booking platform. No commission.'
+                                ? 'A free professional app to showcase your trade skills, set prices and availability, and receive direct customer inquiries. 0% commission.'
                                 : 'Search plumbers, electricians, carpenters, painters, cleaners, AC technicians, and more. Compare profiles, ratings, pricing, and availability—then connect yourself.'}
                         </p>
 
@@ -43,7 +43,7 @@ function Hero() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                {isWorker ? 'Download Worker app' : 'Download Customer app'}
+                                {isWorker ? 'Download Worker & Seller app' : 'Download Customer app'}
                             </a>
                             <button
                                 type="button"
@@ -55,6 +55,14 @@ function Hero() {
                                 {isWorker ? 'How it works' : 'Browse services'}
                             </button>
                         </div>
+
+                        <a href="/store" className="hero-store-callout">
+                            <div className="store-callout-left">
+                                <span className="store-callout-badge">🏪 Store</span>
+                                <span className="store-callout-text">Sell or buy <strong>homemade products</strong> directly from home</span>
+                            </div>
+                            <span className="hero-store-link">Explore Store →</span>
+                        </a>
 
                         {!isWorker && (
                             <form className="hero-search" onSubmit={handleSearch}>
@@ -83,8 +91,8 @@ function Hero() {
 
                         <div className="hero-chips">
                             {(isWorker
-                                ? ['Free to join', 'No commission', 'Direct inquiries']
-                                : ['Free for customers', 'No booking fee', 'Direct contact']
+                                ? ['Free to join', 'Set your own prices', '0% Commission', 'Direct customer calls']
+                                : ['Free for customers', 'No booking fee', 'Direct contact', '0% Commission']
                             ).map((chip) => (
                                 <span key={chip} className="hero-chip">
                                     <Icon name="check" size={14} />

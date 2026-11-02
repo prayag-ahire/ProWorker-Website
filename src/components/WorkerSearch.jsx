@@ -139,14 +139,14 @@ function WorkerSearch() {
       <form className="search-toolbar" onSubmit={handleRefine}>
         <div className="search-toolbar-fields">
           <div className="form-group">
-            <label htmlFor="profession">Service</label>
+            <label htmlFor="profession">Service / Product</label>
             <select
               id="profession"
               value={profession}
               onChange={(e) => handleProfessionChange(e.target.value)}
               className="form-select"
             >
-              <option value="">Select a profession...</option>
+              <option value="">Select a service or homemade category...</option>
               {profession && !professions.some((prof) => prof.name === profession) && (
                 <option value={profession}>{profession}</option>
               )}
@@ -215,15 +215,23 @@ function WorkerSearch() {
       <div className="search-listing">
         {!listingActive && (
           <div className="search-prompt">
-            <h2>Find nearby workers</h2>
-            <p>Choose a service to see skilled workers near you.</p>
+            <h2>Find nearby services & homemade products</h2>
+            <p>Choose a category above to discover skilled trade workers near you.</p>
+            <div className="search-store-cta-box">
+              <span className="search-store-cta-icon">🏪</span>
+              <div>
+                <strong>Looking for homemade food, custom clothing, or crafts?</strong>
+                <span>ProWorker has a dedicated Store marketplace where neighbors sell & buy homemade products directly.</span>
+              </div>
+              <a href="/store" className="btn-search-store-link">Visit Store →</a>
+            </div>
           </div>
         )}
 
         {listingActive && !location && !locationLoading && (
           <div className="search-prompt">
-            <h2>Enable location to see nearby {profession} workers</h2>
-            <p>We use your location once to show workers around you. Nothing is booked from this page.</p>
+            <h2>Enable location to see nearby {profession} providers & sellers</h2>
+            <p>We use your location once to show providers and home sellers around you. Contact them directly with 0% commission.</p>
             <button type="button" className="btn-search btn-search-inline" onClick={refreshLocation}>
               Enable location
             </button>
@@ -242,14 +250,14 @@ function WorkerSearch() {
             {searchLoading && workers.length === 0 ? (
               <div className="loading-state">
                 <div className="spinner"></div>
-                <p>Finding nearby {profession} workers...</p>
+                <p>Finding nearby {profession} providers & sellers...</p>
               </div>
             ) : searchAttempted && workers.length > 0 ? (
               <>
                 <div className="results-header">
                   <h3>
                     {pagination?.total_workers || workers.length}{' '}
-                    {(pagination?.total_workers || workers.length) === 1 ? 'Professional' : 'Professionals'} Found
+                    {(pagination?.total_workers || workers.length) === 1 ? 'Provider / Seller' : 'Providers & Sellers'} Found
                   </h3>
                   <p className="results-subtitle">
                     {searchMessage || (
@@ -288,10 +296,18 @@ function WorkerSearch() {
               </>
             ) : searchAttempted && !searchLoading ? (
               <div className="no-results">
-                <h3>No professionals found nearby.</h3>
+                <h3>No service providers found nearby.</h3>
                 <p className="no-results-subtitle">
-                  Try expanding your search area or choosing a different service.
+                  Try expanding your search area or choosing a different trade category.
                 </p>
+                <div className="search-store-cta-box">
+                  <span className="search-store-cta-icon">🏪</span>
+                  <div>
+                    <strong>Looking for homemade products instead?</strong>
+                    <span>Discover homemade food, tailoring, and crafts on ProWorker Store.</span>
+                  </div>
+                  <a href="/store" className="btn-search-store-link">Explore Store →</a>
+                </div>
               </div>
             ) : null}
           </div>

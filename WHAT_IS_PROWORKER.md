@@ -1,23 +1,23 @@
 # What is ProWorker?
 
-ProWorker is a professional home services application designed to connect verified, high-quality workers with clients in need of their services. The platform bridges the gap between service providers and customers looking for reliable, transparent, and easy-to-book home service solutions.
+ProWorker is a hyperlocal marketplace platform designed to connect local clients with nearby skilled workers and home-based sellers. Whether users need professional home services (plumbers, electricians, cleaners) or want to buy authentic homemade products (home-cooked food & tiffins, bespoke tailoring & clothing, handmade crafts), ProWorker provides a direct, transparent, and 0% commission connection.
 
 ## What ProWorker Provides
 
-ProWorker offers tailored features and benefits for both sides of the marketplace:
+ProWorker offers tailored features and benefits for both sides of the community:
 
-### For Clients (Customers)
-ProWorker provides a hassle-free, secure, and transparent way to find and hire home service professionals:
-- **Verified Professionals:** Access to background-checked and verified workers, ensuring safety and quality.
-- **Rich Profiles:** View real photos, videos, and authentic reviews before making a hiring decision.
-- **Convenient Booking:** Instant booking capabilities with visibility into live worker availability.
-- **Flexibility:** Easy options for rescheduling appointments as needed.
-- **Transparency:** Clear pricing with absolutely no hidden charges.
+### For Customers & Buyers
+ProWorker provides a hassle-free, secure, and transparent way to discover nearby services and homemade goods:
+- **Direct Local Discovery:** Find trusted technicians, plumbers, cleaners, home chefs, bakers, tailors, and handmade artisans nearby.
+- **Rich Profiles & Portfolios:** View photos of dishes, stitched clothes, crafts, or completed trade jobs alongside authentic reviews before contacting anyone.
+- **Convenient Connection:** Reach out directly via call or WhatsApp with live visibility into opening hours and availability.
+- **Transparency & Fair Pricing:** Clear per-item product pricing and visit charges with absolutely no hidden platform fees or commission markups.
 
-### For Workers (Service Providers)
-ProWorker empowers professionals to grow their business and manage their work on their own terms:
-- **Revenue Growth:** Opportunities to increase daily earnings through a steady stream of client bookings.
-- **Digital Presence:** Tools to build a strong online profile and portfolio to attract more clients.
-- **Schedule Management:** Full control over personal schedules, including the ability to manage working hours and holidays.
-- **24/7 Bookings:** The ability to receive bookings automatically at any time.
-- **Skill Development:** Access to free training videos to improve skills and service quality.
+### For Workers & Home Sellers (Sell & Serve From Home)
+ProWorker empowers professionals, homemakers, and home entrepreneurs to grow their business on their own terms:
+- **Sell From Home:** Cook and sell homemade meals, bake treats, stitch clothing, or craft handmade goods directly from home to neighborhood buyers.
+- **0% Commission:** Keep 100% of your earnings—clients connect and pay you directly.
+- **Digital Storefront & Portfolio:** Tools to build a strong online identity, showcase photo and video catalogs, and attract more local orders.
+- **Schedule & Availability Management:** Full control over your operating hours, order prep times, and monthly leave schedule.
+- **Direct Customer Relationships:** Build long-term trust, genuine reviews, and repeat neighborhood clientele.
+

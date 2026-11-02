@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StorePage from '../components/react/StorePage.jsx';
+
+const title = 'ProWorker Store — Sell & Buy Homemade Products | 0% Commission';
+const description =
+  'ProWorker Store is an open local marketplace to sell or buy homemade products from home. Homemade food, tiffins, custom clothing, handmade crafts, and more with 0% platform commission.';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: 'https://proworker.co/store',
+};
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/store" jsonLd={jsonLd}>
+  <StorePage client:load />
+</BaseLayout>
+

@@ -124,6 +124,27 @@
     color: #0B1220;
 }
 
+.nav-link-active {
+    color: #2563EB !important;
+    font-weight: 750 !important;
+}
+
+.nav-store-badge {
+    font-size: 10px;
+    font-weight: 750;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 2px 7px;
+    border-radius: 9999px;
+    background: #EFF6FF;
+    color: #2563EB;
+    border: 1px solid #BFDBFE;
+    margin-left: 6px;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1.2;
+}
+
 /* Growth Partner nav item */
 .nav-partner-link {
     display: inline-flex !important;
@@ -156,6 +177,31 @@
     white-space: nowrap;
     box-shadow: 0 1px 3px rgba(16, 185, 129, 0.35);
 }
+
+/* Instagram nav item */
+.nav-instagram-link {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+    color: #E1306C !important;
+    transition: transform 0.2s ease, opacity 0.2s ease !important;
+}
+
+.nav-instagram-link:hover {
+    transform: scale(1.1);
+    opacity: 0.85;
+}
+
+.nav-social-text {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .nav-social-text {
+        display: inline;
+    }
+}
+
 
 .navbar-menu li.mobile-only-link {
     display: none !important;

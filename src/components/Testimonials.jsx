@@ -18,6 +18,13 @@ function Testimonials() {
             avatar: 'PS'
         },
         {
+            name: 'Sneha Kulkarni',
+            role: 'Working Professional',
+            rating: 5,
+            text: 'I ordered daily homemade tiffins and snacks from a home chef 1 km away. Fresh warm food, transparent per-meal rates, and zero commission markup!',
+            avatar: 'SK'
+        },
+        {
             name: 'Arjun Patel',
             role: 'Apartment Owner',
             rating: 5,
@@ -25,11 +32,11 @@ function Testimonials() {
             avatar: 'AP'
         },
         {
-            name: 'Kavya Reddy',
-            role: 'Small Business Owner',
+            name: 'Ananya Verma',
+            role: 'Customer',
             rating: 5,
-            text: 'I compared working hours and monthly availability on profiles before contacting anyone. Completely free to use as a customer.',
-            avatar: 'KR'
+            text: 'Found a talented local home boutique maker who tailored custom ethnic suits for Diwali. Checking her work photos on ProWorker was super convenient.',
+            avatar: 'AV'
         },
         {
             name: 'Rohit Gupta',
@@ -42,6 +49,13 @@ function Testimonials() {
 
     const workerTestimonials = [
         {
+            name: 'Sunita Rao',
+            role: 'Home Chef & Tiffin Maker',
+            rating: 5,
+            text: 'I run a tiffin and homemade food service from my kitchen. ProWorker lets me display daily menus and dish photos. Nearby neighbors order directly with 0% commission!',
+            avatar: 'SR'
+        },
+        {
             name: 'Rajesh Kumar',
             role: 'Electrician',
             rating: 5,
@@ -49,11 +63,11 @@ function Testimonials() {
             avatar: 'RK'
         },
         {
-            name: 'Sunita Singh',
-            role: 'House Cleaner',
+            name: 'Poonam Deshmukh',
+            role: 'Boutique Tailor & Designer',
             rating: 5,
-            text: 'I marked my working days and leave calendar so people know when I am available. Reviews from real customers have grown my local reputation.',
-            avatar: 'SS'
+            text: 'I stitch custom dresses and sell homemade clothing right from my home. ProWorker brought regular neighborhood clients without taking any commission cuts.',
+            avatar: 'PD'
         },
         {
             name: 'Vikram Joshi',
@@ -64,9 +78,9 @@ function Testimonials() {
         },
         {
             name: 'Meera Agarwal',
-            role: 'Beautician',
+            role: 'Handmade Crafts & Beauty',
             rating: 5,
-            text: 'ProWorker gave me an online presence in my area. I showcase specialties, pricing, and portfolio instead of competing only on cheap rates.',
+            text: 'ProWorker gave me an online presence in my area for my homemade herbal products and bridal mehendi. Clients contact me directly on WhatsApp.',
             avatar: 'MA'
         }
     ];
@@ -164,7 +178,7 @@ function Testimonials() {
                         </div>
                     ) : (
                         <div className="testimonials-column scroll-animate delay-100">
-                            <h3 className="testimonials-title">Worker reviews</h3>
+                            <h3 className="testimonials-title">Worker & seller reviews</h3>
                             <div className="testimonials-carousel" ref={workerCarouselRef}>
                                 {workerTestimonials.map((testimonial, index) => (
                                     <TestimonialCard

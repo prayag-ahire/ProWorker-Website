@@ -1,65 +1,66 @@
 export const clientFeatures = [
     {
         icon: 'pin',
-        title: 'Nearby Worker Discovery',
-        description: 'Search by profession or category and find skilled workers near you, sorted by distance'
+        title: 'Services & Homemade Products Nearby',
+        description: 'Search plumbers and technicians, or discover fresh homemade food, tiffins, custom clothing, and handmade crafts nearby'
     },
     {
         icon: 'user',
-        title: 'Professional Profiles',
-        description: 'See photos, skills, specialties, service areas, working hours, and monthly availability'
+        title: 'Profiles & Product Portfolios',
+        description: 'Browse photos, specialties, product listings, service areas, working hours, and availability before you reach out'
     },
     {
         icon: 'star',
-        title: 'Ratings & Reviews',
-        description: 'Read genuine reviews and ratings to compare workers and choose reliable professionals'
+        title: 'Genuine Ratings & Reviews',
+        description: 'Read reviews from local neighbors to choose trusted tradespeople, talented home chefs, and artisan makers'
     },
     {
         icon: 'camera',
-        title: 'Photo & Video Portfolio',
-        description: 'Browse work photos and videos to trust a worker\'s craftsmanship before you contact them'
+        title: 'Photo & Video Showcases',
+        description: 'Inspect real photos of home-cooked dishes, custom stitched dresses, and craftsmanship before placing an inquiry'
     },
     {
         icon: 'tag',
         title: 'Transparent Pricing',
-        description: 'View visit charges and service pricing on each profile—no hidden platform fees'
+        description: 'View upfront product prices, item rates, or visit charges—never any platform markups or hidden fees'
     },
     {
         icon: 'phone',
-        title: 'Direct Connection',
-        description: 'Contact workers directly. No booking system, no booking fee, and no commission'
+        title: 'Direct Connection, 0% Commission',
+        description: 'Call or message sellers and workers directly. No middleman, no booking fees, and no commission'
     }
 ];
 
 export const workerFeatures = [
     {
         icon: 'spark',
-        title: 'Free Professional Profile',
-        description: 'Create your digital identity with a photo, profession, about section, experience, skills, and service areas'
-    },
-    {
-        icon: 'tag',
-        title: 'Set Your Own Pricing',
-        description: 'Define visit charges, service pricing, and notes so nearby customers know your rates before they contact you'
-    },
-    {
-        icon: 'clock',
-        title: 'Working Days & Hours',
-        description: 'Set weekly working days and daily start and end times so customers can see when you are normally available'
-    },
-    {
-        icon: 'calendar',
-        title: 'Monthly Leave Schedule',
-        description: 'Mark holidays and unavailable dates so customers do not reach you while you are on leave'
-    },
-    {
-        icon: 'camera',
-        title: 'Photo & Video Portfolio',
-        description: 'Upload completed work to showcase craftsmanship, before-and-after results, and the jobs you do best'
+        title: 'Free Profile & Digital Storefront',
+        description: 'Build your digital presence for skilled services or home business—food, baking, tailoring, clothes, crafts, and repairs'
     },
     {
         icon: 'pin',
-        title: 'Local Visibility',
-        description: 'Get discovered by nearby customers searching in your area—and grow through ratings, reviews, and reputation'
+        title: 'Sell & Serve From Your Home',
+        description: 'Turn your passion into income: sell homemade food, boutique clothes, or handmade goods directly to nearby neighbors'
+    },
+    {
+        icon: 'tag',
+        title: 'Set Your Own Prices',
+        description: 'Define product prices, meal/item rates, or service visit charges. Keep 100% of what you earn with zero commission'
+    },
+    {
+        icon: 'camera',
+        title: 'Photo & Video Portfolios',
+        description: 'Upload pictures and videos of your food, clothing, crafts, or completed jobs to win trust and orders'
+    },
+    {
+        icon: 'clock',
+        title: 'Operating Hours & Schedule',
+        description: 'Set your daily working hours, prep times, and available days so neighbors know when you are open'
+    },
+    {
+        icon: 'calendar',
+        title: 'Leave & Availability Management',
+        description: 'Mark holidays and unavailable dates on your calendar so customers know your availability in advance'
     }
 ];
+

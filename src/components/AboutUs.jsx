@@ -5,19 +5,19 @@ const founder = {
     name: 'Prayag Ahire',
     role: 'Founder, Product Designer & Full-Stack Developer',
     image: prayagImg,
-    quote: 'Your skill is your brand.',
+    quote: 'Your craft is your brand.',
     paragraphs: [
-        'I created ProWorker from the ground up, developing both the client and worker applications, designing the product experience, and building the business logic behind the platform.',
-        'Every skilled worker is a business. We help professionals build a digital identity, showcase quality work, earn genuine reviews, and become visible in their local area—so they can attract better-paying work through craftsmanship and reputation, not only cheap pricing.',
-        "At ProWorker, we don't believe platforms create value—workers do. Our job is to give them the tools to grow their own brand and earn with dignity."
+        'I created ProWorker from the ground up, developing both the customer and worker applications, designing the product experience, and building the business logic behind the platform.',
+        'Every skilled worker and home-based creator is a business. Whether you are an electrician, a home chef delivering wholesome tiffins, a tailor stitching custom clothing, or an artisan making handmade goods from home—we help you build a digital identity, showcase photos and menus, earn genuine reviews, and become visible locally.',
+        "At ProWorker, we don't believe platforms create value—workers and home creators do. Our job is to give you the tools to sell and serve from home, build your own brand, and earn with dignity with 0% commission."
     ]
 };
 
 const principles = [
-    { title: 'Build your identity', description: 'A complete profile, portfolio, and specialties make your skill visible as a brand.' },
-    { title: 'Charge for quality', description: 'Set visit charges and service pricing that match your craftsmanship—not a race to the bottom.' },
-    { title: 'Work on your terms', description: 'Choose working days, hours, and leave dates so customers know when you are available.' },
-    { title: 'Own your reputation', description: 'Reviews and local visibility belong to you, not the marketplace.' }
+    { title: 'Build your identity', description: 'A complete profile, product photos, and specialties make your craft visible as a local brand.' },
+    { title: 'Sell & earn from home', description: 'Empower homemakers, home chefs, tailors, and tradespeople to earn directly from their own home.' },
+    { title: 'Charge what you are worth', description: 'Set your own item prices or service charges—with 0% commission and no platform cuts.' },
+    { title: 'Own your reputation', description: 'Reviews and local neighborhood visibility belong to you, not the marketplace.' }
 ];
 
 function AboutUs() {
@@ -28,7 +28,7 @@ function AboutUs() {
                     <div className="badge badge-outline mb-sm">Our Story</div>
                     <h2>About Us</h2>
                     <p className="section-subtitle">
-                        A hyperlocal marketplace that helps customers discover nearby skilled workers—and helps professionals own their brand.
+                        A hyperlocal marketplace that connects you with nearby skilled services and authentic homemade products—and empowers home sellers and workers to own their brand.
                     </p>
                 </div>
 

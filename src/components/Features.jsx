@@ -11,12 +11,12 @@ function Features() {
         <section id="features" className="section">
             <div className="container">
                 <div className="section-header text-center mb-xl">
-                    <div className="badge badge-outline mb-sm">{isWorker ? 'For professionals' : 'For customers'}</div>
-                    <h2>{isWorker ? 'Tools to grow your local brand' : 'Everything you need to choose with confidence'}</h2>
+                    <div className="badge badge-outline mb-sm">{isWorker ? 'For workers & home sellers' : 'For customers & buyers'}</div>
+                    <h2>{isWorker ? 'Tools to build your business & sell from home' : 'Everything you need to discover & order locally'}</h2>
                     <p className="section-subtitle" style={{ maxWidth: '600px', margin: '0 auto' }}>
                         {isWorker
-                            ? 'Showcase your skills, pricing, availability, and portfolio so nearby customers can find you and contact you directly.'
-                            : 'Transparent profiles, ratings, portfolios, pricing, and availability—then contact workers directly.'}
+                            ? 'Showcase your skills or homemade products, set your prices and operating hours, and receive direct inquiries from nearby neighbors.'
+                            : 'Browse rich profiles, authentic reviews, product portfolios, and transparent pricing—then connect directly with zero fees.'}
                     </p>
                 </div>
 

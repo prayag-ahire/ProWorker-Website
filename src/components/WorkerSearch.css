@@ -344,6 +344,69 @@
   text-align: center;
 }
 
+.search-store-cta-box {
+  margin-top: 24px;
+  background: linear-gradient(135deg, #EFF6FF 0%, #F0FDF4 100%);
+  border: 1px solid #BFDBFE;
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+}
+
+.search-store-cta-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.search-store-cta-box strong {
+  display: block;
+  font-size: 15px;
+  color: #0F172A;
+  margin-bottom: 2px;
+}
+
+.search-store-cta-box span {
+  display: block;
+  font-size: 13px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.btn-search-store-link {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: #2563EB;
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-search-store-link:hover {
+  background: #1D4ED8;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .search-store-cta-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn-search-store-link {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
 @media (max-width: 768px) {
   .worker-search-container {
     margin: calc(88px + env(safe-area-inset-top)) auto 40px;

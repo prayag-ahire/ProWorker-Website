@@ -6,3 +6,8 @@ export const WHATSAPP_URL =
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     'Hi ProWorker, I need help with a query.'
   )}`;
+
+/** Official Social Media */
+export const INSTAGRAM_URL = 'https://www.instagram.com/proworker.co/';
+export const INSTAGRAM_HANDLE = '@proworker.co';
+

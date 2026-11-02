@@ -8,13 +8,13 @@ function CTA() {
     const clientStats = [
         { number: 'Free', label: 'For Customers' },
         { number: '0', label: 'Booking Fees' },
-        { number: '0', label: 'Commission' }
+        { number: '0%', label: 'Commission' }
     ];
 
     const workerStats = [
-        { number: 'Free', label: 'Professional Profile' },
-        { number: '0', label: 'Commission' },
-        { number: 'Direct', label: 'Customer Inquiries' }
+        { number: 'Free', label: 'Storefront & Profile' },
+        { number: '0%', label: 'Commission' },
+        { number: 'Direct', label: 'Customer Orders' }
     ];
 
     const stats = isWorker ? workerStats : clientStats;
@@ -24,10 +24,10 @@ function CTA() {
             <div className="container">
                 <div className="cta-wrapper">
                     <div className="cta-content">
-                        <h2>{isWorker ? 'Ready to Build Your Professional Brand?' : 'Ready to Find Nearby Skilled Workers?'}</h2>
+                        <h2>{isWorker ? 'Ready to Sell from Home or Grow Your Trade?' : 'Ready to Find Nearby Services & Homemade Goods?'}</h2>
                         <p>{isWorker
-                            ? 'Create a free profile, showcase your work, set your prices and availability, and get discovered by nearby customers. No booking system. No commission.'
-                            : 'Search local professionals, compare profiles, ratings, pricing, and portfolios—then contact them directly. Completely free.'
+                            ? 'Whether you cook homemade food, stitch custom clothing, make crafts, or offer home services—create your free storefront, showcase your work, and get direct customer orders with 0% commission.'
+                            : 'Search local skilled workers and home-based sellers. Compare profiles, ratings, menus, clothing, and crafts—then contact them directly. 100% free.'
                         }</p>
                         <a
                             className="cta-btn"
@@ -35,7 +35,7 @@ function CTA() {
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            {isWorker ? 'Download Worker app' : 'Get it on Google Play'}
+                            {isWorker ? 'Download Worker & Seller app' : 'Get it on Google Play'}
                         </a>
                     </div>
 

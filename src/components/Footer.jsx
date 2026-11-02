@@ -1,6 +1,6 @@
 import './Footer.css';
 import { CLIENT_PLAY_STORE_URL, WORKER_PLAY_STORE_URL } from '../data/appLinks';
-import { WHATSAPP_URL } from '../data/contact';
+import { WHATSAPP_URL, INSTAGRAM_URL, INSTAGRAM_HANDLE } from '../data/contact';
 
 function Footer() {
     const currentYear = new Date().getFullYear();
@@ -17,7 +17,7 @@ function Footer() {
                             </div>
                         </div>
                         <p className="brand-description">
-                            A hyperlocal marketplace that helps customers discover nearby skilled workers—and helps professionals build their digital identity. Direct connection, no commissions.
+                            A hyperlocal marketplace connecting you directly with nearby skilled services and home-based businesses—from electricians and plumbers to homemade food, custom clothing, and handmade crafts. Sell and hire right from home with 0% commission.
                         </p>
                     </div>
 
@@ -25,7 +25,8 @@ function Footer() {
                         <div className="link-group">
                             <h4>For customers</h4>
                             <ul>
-                                <li><a href="/#categories">Services</a></li>
+                                <li><a href="/#categories">Hire Services</a></li>
+                                <li><a href="/store">ProWorker Store (Shop nearby)</a></li>
                                 <li><a href="/#how-it-works">How it works</a></li>
                                 <li><a href="/#testimonials">Reviews</a></li>
                                 <li><a href="/search">Find workers</a></li>
@@ -35,17 +36,18 @@ function Footer() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        Download the app
+                                        Download Customer app
                                     </a>
                                 </li>
                             </ul>
                         </div>
 
                         <div className="link-group">
-                            <h4>For workers</h4>
+                            <h4>For workers & sellers</h4>
                             <ul>
+                                <li><a href="/store">Sell from home (Store)</a></li>
                                 <li><a href="/#how-it-works">How it works</a></li>
-                                <li><a href="/#features">Build your profile</a></li>
+                                <li><a href="/#features">Worker profile</a></li>
                                 <li><a href="/#pricing">Free to join</a></li>
                                 <li>
                                     <a
@@ -53,7 +55,7 @@ function Footer() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        Download Worker app
+                                        Download Worker & Seller app
                                     </a>
                                 </li>
                                 <li><a href="/partner">Growth Partners (Earn ₹50)</a></li>
@@ -66,6 +68,16 @@ function Footer() {
                                 <li><a href="/#about">About us</a></li>
                                 <li><a href="/#faq">FAQ</a></li>
                                 <li><a href="/partner">Sales Partner Program</a></li>
+                                <li>
+                                    <a
+                                        href={INSTAGRAM_URL}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="footer-instagram-link"
+                                    >
+                                        Instagram ({INSTAGRAM_HANDLE})
+                                    </a>
+                                </li>
                                 <li>
                                     <a
                                         href={WHATSAPP_URL}
@@ -92,7 +104,7 @@ function Footer() {
                 <div className="footer-bottom">
                     <div className="footer-copyright">
                         <p>&copy; {currentYear} ProWorker. All rights reserved.</p>
-                        <p>Built for skilled workers and the customers who need them nearby.</p>
+                        <p>Built for skilled workers, home creators, and the community members who support them.</p>
                     </div>
                 </div>
             </div>

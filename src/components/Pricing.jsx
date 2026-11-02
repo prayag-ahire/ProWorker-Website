@@ -12,15 +12,15 @@ function Pricing() {
                     <h2 className="mb-md">Simple, transparent pricing</h2>
                     <p className="section-subtitle">
                         {isWorker
-                            ? 'Free to join. Set your own prices. No commission. Direct inquiries from nearby customers.'
-                            : 'Free for customers. No booking fee. No commission. Direct connection with workers.'}
+                            ? 'Free to join. Sell homemade goods or offer skilled services. 0% commission. Direct inquiries.'
+                            : 'Free for customers. No booking fees. No middleman markup. Direct connection with local sellers & workers.'}
                     </p>
                 </div>
 
                 <div className="pricing-grid" key={isWorker ? 'worker-pricing' : 'client-pricing'}>
                     {!isWorker && (
                         <div className="pricing-card featured scroll-animate delay-100">
-                            <h3>For customers</h3>
+                            <h3>For customers & buyers</h3>
                             <div className="pricing-feature-list">
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
@@ -28,19 +28,19 @@ function Pricing() {
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>No booking fee</span>
+                                    <span>No booking fee or middleman markup</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>No commission</span>
+                                    <span>0% commission on orders or jobs</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>See visit charges and service pricing on profiles</span>
+                                    <span>See menu prices, custom clothing rates & visit charges</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Contact workers directly—pay them yourself</span>
+                                    <span>Contact sellers and workers directly—pay them yourself</span>
                                 </div>
                             </div>
                         </div>
@@ -48,28 +48,32 @@ function Pricing() {
 
                     {isWorker && (
                         <div className="pricing-card featured scroll-animate delay-100">
-                            <div className="pricing-badge">Most Popular</div>
-                            <h3>For workers</h3>
+                            <div className="pricing-badge">100% Free</div>
+                            <h3>For workers & home sellers</h3>
                             <div className="pricing-feature-list">
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Completely free professional profile</span>
+                                    <span>Free profile & home business storefront</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Set visit charges and service pricing</span>
+                                    <span>Sell homemade food, clothes, crafts or offer trade services</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Manage working hours and leave days</span>
+                                    <span>Set your own product prices or visit charges</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Photo and video portfolio</span>
+                                    <span>Manage operating hours and leave days</span>
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>No commission—customers contact you directly</span>
+                                    <span>Photo & video portfolio for dishes, apparel & work</span>
+                                </div>
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>0% commission—keep 100% of what you earn</span>
                                 </div>
                             </div>
                             <a
@@ -78,7 +82,7 @@ function Pricing() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Download Worker app
+                                Download Worker & Seller app
                             </a>
                         </div>
                     )}
@@ -91,6 +95,10 @@ function Pricing() {
                                     <div className="pricing-feature">
                                         <span className="check">✓</span>
                                         <span>Online bookings</span>
+                                    </div>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>Doorstep delivery & pickup features for Store</span>
                                     </div>
                                     <div className="pricing-feature">
                                         <span className="check">✓</span>
@@ -114,6 +122,10 @@ function Pricing() {
                                     <div className="pricing-feature">
                                         <span className="check">✓</span>
                                         <span>Online booking</span>
+                                    </div>
+                                    <div className="pricing-feature">
+                                        <span className="check">✓</span>
+                                        <span>In-app product delivery to your doorstep</span>
                                     </div>
                                     <div className="pricing-feature">
                                         <span className="check">✓</span>
