@@ -1,38 +1,118 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HomePage from '../components/react/HomePage.jsx';
+import { homeSeo, SITE_URL, SERVICE_PROFESSIONS } from '../data/seo.js';
+import { INSTAGRAM_URL } from '../data/contact.js';
+import { CLIENT_PLAY_STORE_URL, WORKER_PLAY_STORE_URL } from '../data/appLinks.js';
 
-const title = 'ProWorker — Local Services & Homemade Products Marketplace';
-const description =
-  'ProWorker is a free hyperlocal marketplace to discover nearby services and homemade products. Find trusted trades, home-cooked food, custom clothing, and crafts, or sell from home with 0% commission.';
+const { title, description, keywords } = homeSeo;
 
 const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'ProWorker',
-    url: 'https://proworker.co',
+    alternateName: ['Pro Worker', 'ProWorker India'],
+    url: SITE_URL,
     description,
-    logo: 'https://proworker.co/favicon.svg',
+    logo: `${SITE_URL}/favicon.svg`,
+    image: `${SITE_URL}/og-image.jpg`,
+    areaServed: {
+      '@type': 'Country',
+      name: 'India',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'IN',
+    },
+    sameAs: [INSTAGRAM_URL, CLIENT_PLAY_STORE_URL, WORKER_PLAY_STORE_URL],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      areaServed: 'IN',
+      availableLanguage: ['English', 'Hindi'],
+    },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'ProWorker',
-    url: 'https://proworker.co',
+    alternateName: 'ProWorker India — Workers Platform',
+    url: SITE_URL,
     description,
+    inLanguage: 'en-IN',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://proworker.co/search?profession={search_term_string}',
+        urlTemplate: `${SITE_URL}/search?profession={search_term_string}`,
       },
       'query-input': 'required name=search_term_string',
     },
   },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'ProWorker',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Android',
+    description:
+      'India’s free workers platform and homemade store. Hire local skilled workers or sell homemade products with 0% commission.',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'INR',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'India',
+    },
+    url: CLIENT_PLAY_STORE_URL,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Popular worker services in India on ProWorker',
+    itemListElement: SERVICE_PROFESSIONS.map((profession, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: profession.name,
+      url: `${SITE_URL}/search?profession=${encodeURIComponent(profession.search)}`,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Is ProWorker a workers platform for India?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. ProWorker is built for India—a free hyperlocal workers platform to hire nearby skilled workers and buy or sell homemade products across Indian neighborhoods with 0% commission.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do I find workers near me in India on ProWorker?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Open the ProWorker app or website search, pick a profession like plumber or electrician, and browse workers sorted by distance, ratings, and visit charges—then contact them directly.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Does ProWorker charge commission in India?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'No. ProWorker takes 0% commission. Customers and home sellers connect directly. Workers and sellers keep 100% of what they earn, with weekly bank settlement every Monday.',
+        },
+      },
+    ],
+  },
 ];
 ---
 
-<BaseLayout title={title} description={description} canonicalPath="/" jsonLd={jsonLd}>
+<BaseLayout title={title} description={description} keywords={keywords} canonicalPath="/" jsonLd={jsonLd}>
   <HomePage client:load />
 </BaseLayout>

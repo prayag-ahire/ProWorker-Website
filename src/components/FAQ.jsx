@@ -42,7 +42,15 @@ function FAQ() {
         },
         {
             question: 'Does ProWorker take a commission on my orders?',
-            answer: 'No. ProWorker takes 0% commission. You deal directly with the local provider or home-based seller and pay them according to the prices listed on their profile.'
+            answer: 'No. ProWorker takes 0% commission. You deal directly with the local provider or home-based seller according to the prices listed on their profile—with no middleman markup.'
+        },
+        {
+            question: 'What is the difference between Services and Store?',
+            answer: 'Services helps you hire nearby skilled workers like plumbers, electricians, and cleaners. Store is the dedicated marketplace for homemade products—food, tiffins, custom clothes, crafts, and decor—sold by neighbors from home.'
+        },
+        {
+            question: 'Is ProWorker a workers platform for India?',
+            answer: 'Yes. ProWorker is built specifically for India—a free hyperlocal workers platform and homemade store for Indian neighborhoods. Hire local skilled workers or sell from home with 0% commission and INR pricing.'
         }
     ];
 
@@ -60,6 +68,10 @@ function FAQ() {
             answer: 'Yes, it is 100% free. Creating your profile, listing products or services, managing your calendar, and uploading portfolios cost nothing. ProWorker takes 0% commission—you keep every rupee you earn.'
         },
         {
+            question: 'When do sellers receive money? What is the payment cycle?',
+            answer: 'The payment cycle settles in 1 week. Sellers receive their money deposited directly into their bank account every Monday with 0% platform cuts.'
+        },
+        {
             question: 'How do customers discover my home business or trade?',
             answer: 'Nearby customers search for food, clothing, crafts, or local services and see your profile sorted by distance. They inspect your work photos, read reviews, check prices, and contact you directly via phone or WhatsApp.'
         },
@@ -70,6 +82,10 @@ function FAQ() {
         {
             question: 'Can I manage my own hours and holidays?',
             answer: 'Yes! You have full control. Set your weekly operating days and daily working hours, and mark leaves or vacation days on your calendar so customers know exactly when you are accepting orders.'
+        },
+        {
+            question: 'Is ProWorker available for workers across India?',
+            answer: 'Yes. ProWorker is a workers platform made for India. Skilled workers and home sellers across Indian cities and towns can create a free profile, get discovered nearby, and keep 100% of earnings with 0% commission.'
         }
     ];
 

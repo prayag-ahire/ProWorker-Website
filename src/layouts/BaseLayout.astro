@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '../styles/app.css';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import { SITE_LOCALE, SITE_LANG, DEFAULT_KEYWORDS } from '../data/seo.js';
 
 interface Props {
   title: string;
@@ -10,6 +11,7 @@ interface Props {
   ogType?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
+  keywords?: string;
 }
 
 const {
@@ -19,28 +21,46 @@ const {
   ogType = 'website',
   jsonLd,
   noindex = false,
+  keywords = DEFAULT_KEYWORDS,
 } = Astro.props;
 
 const siteUrl = Astro.site?.href.replace(/\/$/, '') || 'https://proworker.co';
 const canonical = new URL(canonicalPath, siteUrl).href;
-const ogImage = new URL('/favicon.svg', siteUrl).href;
+const ogImage = new URL('/og-image.jpg', siteUrl).href;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={SITE_LANG}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en-IN" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <link rel="dns-prefetch" href="https://play.google.com" />
+    <link rel="preconnect" href="https://play.google.com" crossorigin />
     {noindex ? (
       <meta name="robots" content="noindex, nofollow" />
     ) : (
-      <meta name="robots" content="index, follow" />
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     )}
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="ProWorker" />
+    <meta name="application-name" content="ProWorker" />
+    <meta name="apple-mobile-web-app-title" content="ProWorker" />
+    <meta name="geo.region" content="IN" />
+    <meta name="geo.placename" content="India" />
+    <meta name="language" content="English" />
+    <meta name="coverage" content="India" />
+    <meta name="target" content="India" />
+    <meta name="rating" content="general" />
+    <meta name="theme-color" content="#2563EB" />
+    <meta name="format-detection" content="telephone=no" />
 
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content="ProWorker" />
@@ -48,7 +68,11 @@ const ogImage = new URL('/favicon.svg', siteUrl).href;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content="en_IN" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ProWorker — Workers platform in India" />
+    <meta property="og:locale" content={SITE_LOCALE} />
+    <meta property="og:country-name" content="India" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -82,6 +106,7 @@ const ogImage = new URL('/favicon.svg', siteUrl).href;
           partner: '/partner',
           'sales-partner': '/partner',
           'growth-partner': '/partner',
+          store: '/store',
         };
         var target = map[path];
         if (target) {

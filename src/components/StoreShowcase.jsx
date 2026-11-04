@@ -13,7 +13,7 @@ const storeHighlights = [
     },
     {
         icon: '👗',
-        title: 'Homemade Clothes & Tailoring',
+        title: 'Clothes & Custom Tailoring',
         description: 'Bespoke kurtas, stitched blouses, boutique dresses, festive wear, and alterations crafted by local home tailors.'
     },
     {
@@ -22,9 +22,9 @@ const storeHighlights = [
         description: 'Handcrafted pottery, organic soaps, scented candles, macrame, festival decor, and custom handmade gifts.'
     },
     {
-        icon: '📦',
-        title: 'Homemade Crafts & Specials',
-        description: 'From home-grown garden plants and organic handmade goods to DIY creations and decor—if you craft products from home, list with 0% commission.'
+        icon: '🪴',
+        title: 'Plants & Home Decor',
+        description: 'Balcony plants, planters, wall hangings, and handmade decor—list what you grow or craft from home with 0% commission.'
     }
 ];
 
@@ -45,12 +45,11 @@ function StoreShowcase() {
                 <div className="store-header-grid scroll-animate">
                     <div className="store-header-copy">
                         <h2>
-                            Two Worlds in One App: <br />
-                            <span className="highlight-gradient">Skilled Workers & Local Home Stores</span>
+                            Services for hire. Store for homemade goods.
                         </h2>
                         <p className="store-subtitle">
-                            Unlike traditional service apps, ProWorker features a dedicated <strong>Store</strong> tab.
-                            Sell &amp; buy homemade products directly from home—homemade food, custom tailoring, crafts, and home decor—with direct customer-to-seller contact, <strong>0% commission</strong>, and upcoming doorstep delivery!
+                            ProWorker has a dedicated <strong>Store</strong> tab alongside skilled services.
+                            Sell or buy homemade food, custom tailoring, crafts, and decor near you—with direct seller contact, <strong>0% commission</strong>, weekly bank settlement, and doorstep delivery coming soon.
                         </p>
                     </div>
 
@@ -60,12 +59,12 @@ function StoreShowcase() {
                             <span className="stat-label">Platform Commission</span>
                         </div>
                         <div className="store-stat-box">
-                            <span className="stat-value">100%</span>
-                            <span className="stat-label">Direct Customer Contact</span>
+                            <span className="stat-value">Direct</span>
+                            <span className="stat-label">Seller Contact</span>
                         </div>
                         <div className="store-stat-box">
-                            <span className="stat-value">Instant</span>
-                            <span className="stat-label">Nearby Discovery</span>
+                            <span className="stat-value">Monday</span>
+                            <span className="stat-label">Weekly Bank Payout</span>
                         </div>
                     </div>
                 </div>

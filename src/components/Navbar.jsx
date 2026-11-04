@@ -47,7 +47,9 @@ function Navbar({ viewMode, onViewModeChange }) {
 
     const primaryCta = isSearchPage
         ? { href: '/', label: 'Back to home', external: false, secondary: true }
-        : { ...appCta, external: true, secondary: false };
+        : isStorePage
+            ? { href: viewMode === 'worker' ? WORKER_PLAY_STORE_URL : CLIENT_PLAY_STORE_URL, label: viewMode === 'worker' ? 'Start selling' : 'Shop in app', external: true, secondary: false }
+            : { ...appCta, external: true, secondary: false };
 
     const toggleMarkup = (
         <div className="view-toggle">

@@ -116,7 +116,7 @@ const sellerStories = [
         role: 'Home Chef & Tiffin Maker',
         location: 'Kandivali, Mumbai',
         stars: '★★★★★',
-        story: 'I started listing daily tiffins on ProWorker Store. Neighbors within 1.5 km discover my menu, message me on WhatsApp, and pay directly. 0% commission means I keep every single rupee I earn!',
+        story: 'I started listing daily tiffins on ProWorker Store. Neighbors within 1.5 km discover my menu, message me on WhatsApp, and my earnings settle into my bank every Monday. 0% commission means I keep every rupee!',
         highlight: '30+ daily neighborhood tiffins'
     },
     {
@@ -148,11 +148,15 @@ const storeFaqs = [
     },
     {
         q: 'Does ProWorker charge commission on my store sales?',
-        a: 'Never. ProWorker takes 0% commission. You set your own prices (e.g. ₹499), keep 100% of your earnings, and customers pay you directly.'
+        a: 'Never. ProWorker takes 0% commission. You set your own prices (e.g. ₹499), keep 100% of your earnings, and payouts settle into your bank account with zero deductions.'
+    },
+    {
+        q: 'When and how do sellers receive their money? What is the payment cycle?',
+        a: 'The payment cycle settles in 1 week. After customers place orders, sellers receive their money deposited directly into their bank account every Monday with 0% platform cuts.'
     },
     {
         q: 'How does a customer buy? Who contacts whom?',
-        a: 'The customer contacts the seller! When a customer finds a product they like, they tap the seller card or call/WhatsApp button to contact the seller directly to confirm and place their order.'
+        a: 'The customer contacts the seller. When someone finds a product they like, they tap call or WhatsApp on the seller card to confirm details and place the order. Seller payouts then settle on the weekly Monday cycle.'
     },
     {
         q: 'How does delivery work? Is in-app delivery coming?',
@@ -185,15 +189,15 @@ export default function StorePage() {
                         <div className="store-hero-copy">
                             <div className="store-kicker-badge">
                                 <span className="kicker-icon">🏪</span>
-                                <span>The Open Local Marketplace</span>
+                                <span>Homemade Marketplace in India</span>
                                 <span className="kicker-pill">0% Commission</span>
                             </div>
                             <h1>
-                                Sell & Buy <span className="text-store-highlight">Homemade Products</span> Directly From Home.
+                                Sell & Buy <span className="text-store-highlight">Homemade Products</span> Across India From Home.
                             </h1>
                             <p className="store-hero-desc">
-                                Inside the ProWorker app, discover the dedicated <strong>Store</strong> tab.
-                                An authentic local marketplace to sell or buy homemade food, tailored clothing, handcrafted decor, and artisan products directly from neighbors with zero middleman cuts.
+                                Inside the ProWorker app, discover the dedicated <strong>Store</strong> tab—
+                                India’s authentic local marketplace to sell or buy homemade food, tailored clothing, handcrafted decor, and artisan products from neighbors with zero middleman cuts.
                             </p>
 
                             <div className="store-hero-buttons">
@@ -219,6 +223,10 @@ export default function StorePage() {
                                 <div className="guarantee-item">
                                     <span className="check-icon">✓</span>
                                     <span><strong>0% Commission</strong> on all sales</span>
+                                </div>
+                                <div className="guarantee-item">
+                                    <span className="check-icon">✓</span>
+                                    <span><strong>Weekly Settlement</strong>: Money in your bank every Monday</span>
                                 </div>
                                 <div className="guarantee-item">
                                     <span className="check-icon">✓</span>
@@ -441,10 +449,10 @@ export default function StorePage() {
                                 <div className="store-step-item">
                                     <div className="step-header-row">
                                         <div className="step-num-badge">04</div>
-                                        <span className="step-icon-emoji">💬</span>
+                                        <span className="step-icon-emoji">🏦</span>
                                     </div>
-                                    <h3>Customers Contact You Directly</h3>
-                                    <p>Customers tap your product and contact you directly on WhatsApp or call. You keep 100% of your earnings. In-app delivery coming soon!</p>
+                                    <h3>Get Contacted & Paid Weekly</h3>
+                                    <p>Customers reach you on call or WhatsApp to place orders. Your payment cycle settles in 1 week—money lands in your bank every Monday with 0% commission.</p>
                                 </div>
                             </>
                         ) : (
@@ -571,8 +579,8 @@ export default function StorePage() {
                                     </div>
                                     <ul className="comp-features">
                                         <li><span className="comp-check">✓</span> <strong>0% Commission</strong> forever</li>
+                                        <li><span className="comp-check">✓</span> <strong>Weekly Bank Settlement</strong> every Monday</li>
                                         <li><span className="comp-check">✓</span> 100% free to start from home</li>
-                                        <li><span className="comp-check">✓</span> Direct instant payments to you</li>
                                         <li><span className="comp-check">✓</span> In-app delivery rolling out soon</li>
                                     </ul>
                                 </div>

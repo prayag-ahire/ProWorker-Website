@@ -1,21 +1,52 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StorePage from '../components/react/StorePage.jsx';
+import { storeSeo, SITE_URL } from '../data/seo.js';
 
-const title = 'ProWorker Store — Sell & Buy Homemade Products | 0% Commission';
-const description =
-  'ProWorker Store is an open local marketplace to sell or buy homemade products from home. Homemade food, tiffins, custom clothing, handmade crafts, and more with 0% platform commission.';
+const { title, description, keywords } = storeSeo;
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebPage',
-  name: title,
-  description,
-  url: 'https://proworker.co/store',
-};
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description,
+    url: `${SITE_URL}/store`,
+    inLanguage: 'en-IN',
+    about: {
+      '@type': 'Thing',
+      name: 'Homemade products marketplace in India',
+    },
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'ProWorker',
+      url: SITE_URL,
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'ProWorker Store',
+    description,
+    provider: {
+      '@type': 'Organization',
+      name: 'ProWorker',
+      url: SITE_URL,
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'India',
+    },
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'INR',
+      description: '0% platform commission for sellers in India',
+    },
+  },
+];
 ---
 
-<BaseLayout title={title} description={description} canonicalPath="/store" jsonLd={jsonLd}>
+<BaseLayout title={title} description={description} keywords={keywords} canonicalPath="/store" jsonLd={jsonLd}>
   <StorePage client:load />
 </BaseLayout>
-

@@ -17,7 +17,7 @@ function Footer() {
                             </div>
                         </div>
                         <p className="brand-description">
-                            A hyperlocal marketplace connecting you directly with nearby skilled services and home-based businesses—from electricians and plumbers to homemade food, custom clothing, and handmade crafts. Sell and hire right from home with 0% commission.
+                            ProWorker is a workers platform built for India—connecting you with nearby skilled services and home-based businesses. From electricians and plumbers to homemade food, custom clothing, and handmade crafts. Hire and sell locally with 0% commission.
                         </p>
                     </div>
 
@@ -66,6 +66,7 @@ function Footer() {
                             <h4>Company</h4>
                             <ul>
                                 <li><a href="/#about">About us</a></li>
+                                <li><a href="/workers-in-india">Workers platform in India</a></li>
                                 <li><a href="/#faq">FAQ</a></li>
                                 <li><a href="/partner">Sales Partner Program</a></li>
                                 <li>

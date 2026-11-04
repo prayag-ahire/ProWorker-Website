@@ -1,12 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SearchPage from '../components/react/SearchPage.jsx';
+import { searchSeo, SITE_URL } from '../data/seo.js';
 
-const title = 'Find Nearby Services & Homemade Products — ProWorker';
-const description =
-  'Search verified service providers and home-based sellers near you on ProWorker. Discover home repairs, homemade food, custom clothing, and crafts with 0% commission.';
+const { title, description, keywords } = searchSeo;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: `${SITE_URL}/search`,
+  inLanguage: 'en-IN',
+  about: {
+    '@type': 'Thing',
+    name: 'Find skilled workers near me in India',
+  },
+};
 ---
 
-<BaseLayout title={title} description={description} canonicalPath="/search">
+<BaseLayout title={title} description={description} keywords={keywords} canonicalPath="/search" jsonLd={jsonLd}>
   <SearchPage client:load />
 </BaseLayout>

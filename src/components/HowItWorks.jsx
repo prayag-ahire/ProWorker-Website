@@ -53,26 +53,34 @@ function HowItWorks() {
                         <p>{isWorker ? 'Create a free profile, showcase your food, clothes, or craftsmanship, and attract direct inquiries from nearby customers' : 'Browse profiles, ratings, and portfolios—then contact workers and home sellers directly'}</p>
                     </div>
                     {isWorker ? (
-                        <a
-                            className="btn btn-primary"
-                            href={WORKER_PLAY_STORE_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Download Worker & Seller app
-                        </a>
+                        <div className="how-it-works-cta-actions">
+                            <a className="btn btn-secondary" href="/store">
+                                Explore Store
+                            </a>
+                            <a
+                                className="btn btn-primary"
+                                href={WORKER_PLAY_STORE_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Download Worker & Seller app
+                            </a>
+                        </div>
                     ) : (
                         <div className="how-it-works-cta-actions">
                             <button type="button" className="btn btn-secondary" onClick={() => goToSearch()}>
-                                Explore nearby
+                                Find workers
                             </button>
+                            <a className="btn btn-secondary" href="/store">
+                                Visit Store
+                            </a>
                             <a
                                 className="btn btn-primary"
                                 href={CLIENT_PLAY_STORE_URL}
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
-                                Get the app
+                                Download app
                             </a>
                         </div>
                     )}

@@ -7,9 +7,9 @@ const founder = {
     image: prayagImg,
     quote: 'Your craft is your brand.',
     paragraphs: [
-        'I created ProWorker from the ground up, developing both the customer and worker applications, designing the product experience, and building the business logic behind the platform.',
-        'Every skilled worker and home-based creator is a business. Whether you are an electrician, a home chef delivering wholesome tiffins, a tailor stitching custom clothing, or an artisan making handmade goods from home—we help you build a digital identity, showcase photos and menus, earn genuine reviews, and become visible locally.',
-        "At ProWorker, we don't believe platforms create value—workers and home creators do. Our job is to give you the tools to sell and serve from home, build your own brand, and earn with dignity with 0% commission."
+        'I created ProWorker from the ground up for India—developing both the customer and worker applications, designing the product experience, and building the business logic behind the platform.',
+        'Every skilled worker and home-based creator in India is a business. Whether you are an electrician, a home chef delivering wholesome tiffins, a tailor stitching custom clothing, or an artisan making handmade goods from home—we help you build a digital identity, showcase photos and menus, earn genuine reviews, and become visible in your locality.',
+        "At ProWorker, we don't believe platforms create value—Indian workers and home creators do. Our job is to give you the tools to sell and serve from home, build your own brand, and earn with dignity with 0% commission."
     ]
 };
 
@@ -28,7 +28,7 @@ function AboutUs() {
                     <div className="badge badge-outline mb-sm">Our Story</div>
                     <h2>About Us</h2>
                     <p className="section-subtitle">
-                        A hyperlocal marketplace that connects you with nearby skilled services and authentic homemade products—and empowers home sellers and workers to own their brand.
+                        ProWorker is a workers platform built for India—connecting you with nearby skilled services and authentic homemade products, and empowering Indian home sellers and workers to own their brand.
                     </p>
                 </div>
 

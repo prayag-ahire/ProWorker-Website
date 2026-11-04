@@ -35,22 +35,15 @@ function ServiceCategories() {
                             className="category-tile"
                             onClick={() => handleCategoryClick(category)}
                         >
-                            <img src={category.image} alt={category.name} />
+                            <img
+                                src={category.image}
+                                alt={`${category.name} near me in India — hire on ProWorker`}
+                                loading="lazy"
+                                decoding="async"
+                            />
                             <span>{category.name}</span>
                         </button>
                     ))}
-                </div>
-
-                {/* Banner introducing the separate Store */}
-                <div className="store-intro-banner">
-                    <div className="store-intro-icon">🏪</div>
-                    <div className="store-intro-text">
-                        <h4>Looking for homemade products or want to sell from home? Discover <strong>ProWorker Store</strong></h4>
-                        <p>From fresh daily tiffins and baked treats to custom tailoring and handcrafted decor—connect directly with nearby neighbors with 0% platform cuts. In-app delivery rolling out soon!</p>
-                    </div>
-                    <a href="/store" className="btn btn-store-banner">
-                        Explore Store →
-                    </a>
                 </div>
             </div>
         </section>

@@ -1,0 +1,455 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  workersInIndiaSeo,
+  SITE_URL,
+  INDIA_CITIES,
+  SERVICE_PROFESSIONS,
+} from '../data/seo.js';
+import { CLIENT_PLAY_STORE_URL, WORKER_PLAY_STORE_URL } from '../data/appLinks.js';
+
+const { title, description, keywords } = workersInIndiaSeo;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description,
+    url: `${SITE_URL}/workers-in-india`,
+    inLanguage: 'en-IN',
+    about: [
+      { '@type': 'Thing', name: 'Workers platform in India' },
+      { '@type': 'Thing', name: 'Skilled workers India' },
+      { '@type': 'Thing', name: 'Local services marketplace India' },
+    ],
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'ProWorker',
+      url: SITE_URL,
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Workers Platform in India',
+        item: `${SITE_URL}/workers-in-india`,
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Skilled worker categories in India on ProWorker',
+    itemListElement: SERVICE_PROFESSIONS.map((profession, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: `${profession.name} near me in India`,
+      url: `${SITE_URL}/search?profession=${encodeURIComponent(profession.search)}`,
+    })),
+  },
+];
+---
+
+<BaseLayout title={title} description={description} keywords={keywords} canonicalPath="/workers-in-india" jsonLd={jsonLd}>
+  <main class="seo-india-page">
+    <header class="seo-india-hero">
+      <div class="container">
+        <p class="seo-kicker">Built for India · भारत के लिए</p>
+        <h1>ProWorker — Workers Platform in India</h1>
+        <p class="seo-lead">
+          ProWorker is a free hyperlocal <strong>workers platform for India</strong>.
+          Hire nearby skilled workers, discover homemade products from local home sellers,
+          or grow your own trade and home business with <strong>0% commission</strong>.
+        </p>
+        <div class="seo-actions">
+          <a class="btn btn-primary" href={CLIENT_PLAY_STORE_URL} target="_blank" rel="noopener noreferrer">
+            Download Customer App
+          </a>
+          <a class="btn btn-secondary" href={WORKER_PLAY_STORE_URL} target="_blank" rel="noopener noreferrer">
+            Download Worker &amp; Seller App
+          </a>
+          <a class="btn btn-secondary" href="/search">Find workers near me</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="seo-section">
+      <div class="container">
+        <h2>Why India needs a local workers platform</h2>
+        <p>
+          Across Indian cities and towns, customers need trusted plumbers, electricians, carpenters,
+          painters, cleaners, AC technicians, and beauticians nearby. At the same time, home chefs,
+          tailors, and artisans want a simple way to sell homemade food, clothes, and crafts without
+          heavy platform cuts. ProWorker is designed exactly for that Indian neighborhood economy.
+        </p>
+      </div>
+    </section>
+
+    <section class="seo-section seo-alt">
+      <div class="container">
+        <h2>What you can do on ProWorker in India</h2>
+        <div class="seo-grid">
+          <article>
+            <h3>Hire skilled workers in India</h3>
+            <p>
+              Search local service professionals near you, compare ratings, visit charges, portfolios,
+              and distance—then contact workers directly. No booking fee. No middleman markup.
+            </p>
+            <a href="/search">Search workers →</a>
+          </article>
+          <article>
+            <h3>Shop homemade products nearby</h3>
+            <p>
+              Use ProWorker Store to buy homemade tiffins, custom stitched clothes, crafts, and decor
+              from neighbors in your area—with transparent prices and direct seller contact.
+            </p>
+            <a href="/store">Explore Store →</a>
+          </article>
+          <article>
+            <h3>Sell services or products from home</h3>
+            <p>
+              Workers and home sellers in India can create a free profile, set prices, upload photos,
+              manage hours, and receive direct local orders while keeping 100% with 0% commission.
+            </p>
+            <a href={WORKER_PLAY_STORE_URL} target="_blank" rel="noopener noreferrer">Start selling →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seo-section">
+      <div class="container">
+        <h2>Who ProWorker is for</h2>
+        <ul class="seo-list">
+          <li><strong>Customers in India</strong> looking for nearby workers and authentic homemade goods</li>
+          <li><strong>Skilled workers</strong> — plumbers, electricians, carpenters, painters, cleaners, technicians</li>
+          <li><strong>Home sellers</strong> — tiffin makers, home chefs, tailors, boutique creators, craft artisans</li>
+          <li><strong>Growth partners</strong> helping workers in their locality go digital and earn referral rewards</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="seo-section seo-alt">
+      <div class="container">
+        <h2>Hire popular skilled workers in India</h2>
+        <p>
+          Search these high-demand professions on ProWorker and connect with nearby workers directly—
+          no booking fee, no commission markup.
+        </p>
+        <div class="seo-profession-grid">
+          {SERVICE_PROFESSIONS.map((profession) => (
+            <a
+              class="seo-profession-card"
+              href={`/search?profession=${encodeURIComponent(profession.search)}`}
+            >
+              <h3>{profession.name} near me</h3>
+              <p>{profession.blurb}</p>
+              <span>Find {profession.name.toLowerCase()} →</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="seo-section">
+      <div class="container">
+        <h2>Workers platform for cities across India</h2>
+        <p>
+          ProWorker is built for hyperlocal discovery in Indian neighborhoods. Whether you are in a metro
+          or a growing city, search nearby workers and home sellers by distance.
+        </p>
+        <div class="seo-city-wrap">
+          {INDIA_CITIES.map((city) => (
+            <span class="seo-city-chip">{city}</span>
+          ))}
+        </div>
+        <p class="seo-note">
+          Start with <a href="/search">Find workers near me</a> or explore
+          <a href="/store">ProWorker Store</a> for homemade products.
+        </p>
+      </div>
+    </section>
+
+    <section class="seo-section seo-alt">
+      <div class="container">
+        <h2>ProWorker vs traditional platforms in India</h2>
+        <ul class="seo-list">
+          <li><strong>0% commission</strong> — workers and home sellers keep what they earn</li>
+          <li><strong>Direct contact</strong> — customers call or WhatsApp the worker/seller themselves</li>
+          <li><strong>Hyperlocal discovery</strong> — results sorted by distance in your neighborhood</li>
+          <li><strong>Weekly bank settlement</strong> — seller payouts every Monday</li>
+          <li><strong>Made for India</strong> — INR pricing, local categories, WhatsApp-friendly workflows</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="seo-section">
+      <div class="container">
+        <h2>Frequently asked questions</h2>
+        <div class="seo-faq">
+          <details open>
+            <summary>Is ProWorker available only in India?</summary>
+            <p>
+              Yes. ProWorker is a workers and homemade-products platform built for India.
+              We focus on Indian neighborhoods, local trades, home businesses, and INR pricing.
+            </p>
+          </details>
+          <details>
+            <summary>How do I find workers near me in India?</summary>
+            <p>
+              Go to <a href="/search">ProWorker Search</a>, choose a profession, allow location access,
+              and browse nearby workers sorted by distance. Then contact them directly.
+            </p>
+          </details>
+          <details>
+            <summary>Can I sell homemade products on ProWorker in India?</summary>
+            <p>
+              Yes. Open the Worker &amp; Seller app, use the Store tab, list food, clothes, crafts, or decor,
+              and start receiving local inquiries with 0% commission.
+            </p>
+          </details>
+          <details>
+            <summary>Is ProWorker free for workers and customers?</summary>
+            <p>
+              Yes. It is free for customers and free for workers/sellers to join. ProWorker charges
+              0% commission on jobs and store sales.
+            </p>
+          </details>
+        </div>
+        <p class="seo-home-link">
+          <a href="/">← Back to ProWorker home</a>
+          ·
+          <a href="/partner">Become a Growth Partner in India</a>
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .seo-india-page {
+    color: #0f172a;
+    background: #f8fafc;
+    min-height: 100vh;
+  }
+
+  .container {
+    width: min(920px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+
+  .seo-india-hero {
+    padding: 96px 0 56px;
+    background:
+      radial-gradient(ellipse 80% 50% at 90% 0%, rgba(37, 99, 235, 0.12), transparent 55%),
+      #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .seo-kicker {
+    display: inline-flex;
+    margin: 0 0 14px;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .seo-india-hero h1 {
+    margin: 0 0 16px;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+  }
+
+  .seo-lead {
+    margin: 0 0 28px;
+    font-size: 17px;
+    line-height: 1.65;
+    color: #475569;
+    max-width: 62ch;
+  }
+
+  .seo-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .seo-section {
+    padding: 48px 0;
+  }
+
+  .seo-section.seo-alt {
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .seo-section h2 {
+    margin: 0 0 14px;
+    font-size: clamp(22px, 3vw, 30px);
+    letter-spacing: -0.02em;
+  }
+
+  .seo-section p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #475569;
+  }
+
+  .seo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+  }
+
+  .seo-grid article {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 20px;
+  }
+
+  .seo-grid h3 {
+    margin: 0 0 10px;
+    font-size: 17px;
+  }
+
+  .seo-grid p {
+    margin: 0 0 14px;
+    font-size: 14.5px;
+  }
+
+  .seo-grid a,
+  .seo-home-link a {
+    color: #1d4ed8;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  .seo-list {
+    margin: 12px 0 0;
+    padding-left: 18px;
+    color: #334155;
+    line-height: 1.7;
+  }
+
+  .seo-list li + li {
+    margin-top: 8px;
+  }
+
+  .seo-profession-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 22px;
+  }
+
+  .seo-profession-card {
+    display: block;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    padding: 18px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .seo-profession-card:hover {
+    border-color: #93c5fd;
+    transform: translateY(-2px);
+  }
+
+  .seo-profession-card h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+  }
+
+  .seo-profession-card p {
+    margin: 0 0 12px;
+    font-size: 14px;
+  }
+
+  .seo-profession-card span {
+    color: #1d4ed8;
+    font-size: 13.5px;
+    font-weight: 700;
+  }
+
+  .seo-city-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
+  .seo-city-chip {
+    background: #eff6ff;
+    color: #1e3a8a;
+    border: 1px solid #bfdbfe;
+    border-radius: 9999px;
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: 650;
+  }
+
+  .seo-note {
+    margin-top: 16px !important;
+    font-size: 14.5px !important;
+  }
+
+  .seo-note a {
+    color: #1d4ed8;
+    font-weight: 650;
+  }
+
+  .seo-faq details {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 10px;
+  }
+
+  .seo-faq summary {
+    cursor: pointer;
+    font-weight: 700;
+  }
+
+  .seo-faq p {
+    margin-top: 10px;
+  }
+
+  .seo-home-link {
+    margin-top: 28px !important;
+    font-size: 14px !important;
+  }
+
+  @media (max-width: 800px) {
+    .seo-grid,
+    .seo-profession-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .seo-india-hero {
+      padding-top: 84px;
+    }
+  }
+</style>

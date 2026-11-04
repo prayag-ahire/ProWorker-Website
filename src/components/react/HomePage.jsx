@@ -3,6 +3,7 @@ import { ViewModeContext } from '../../context/ViewModeContext';
 import Navbar from '../Navbar';
 import Hero from '../Hero';
 import ServiceCategories from '../ServiceCategories';
+import StoreShowcase from '../StoreShowcase';
 import HowItWorks from '../HowItWorks';
 import Features from '../Features';
 import Testimonials from '../Testimonials';
@@ -88,6 +89,7 @@ export default function HomePage() {
         <Navbar viewMode={viewMode} onViewModeChange={setViewMode} />
         <Hero />
         <ServiceCategories />
+        <StoreShowcase />
         <HowItWorks />
         <Features />
         <Testimonials />

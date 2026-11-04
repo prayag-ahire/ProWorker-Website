@@ -40,7 +40,7 @@ function Pricing() {
                                 </div>
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
-                                    <span>Contact sellers and workers directly—pay them yourself</span>
+                                    <span>Contact sellers and workers directly—no middleman markup</span>
                                 </div>
                             </div>
                         </div>
@@ -74,6 +74,10 @@ function Pricing() {
                                 <div className="pricing-feature">
                                     <span className="check">✓</span>
                                     <span>0% commission—keep 100% of what you earn</span>
+                                </div>
+                                <div className="pricing-feature">
+                                    <span className="check">✓</span>
+                                    <span>1-week payment cycle—money in your bank every Monday</span>
                                 </div>
                             </div>
                             <a

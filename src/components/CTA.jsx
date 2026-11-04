@@ -14,7 +14,7 @@ function CTA() {
     const workerStats = [
         { number: 'Free', label: 'Storefront & Profile' },
         { number: '0%', label: 'Commission' },
-        { number: 'Direct', label: 'Customer Orders' }
+        { number: 'Mon', label: 'Weekly Bank Payout' }
     ];
 
     const stats = isWorker ? workerStats : clientStats;

@@ -1,0 +1,20 @@
+{
+  "name": "ProWorker — Workers Platform in India",
+  "short_name": "ProWorker",
+  "description": "India's free workers platform to hire local skilled workers and buy or sell homemade products with 0% commission.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563EB",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["business", "lifestyle", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

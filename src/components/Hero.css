@@ -28,7 +28,7 @@
     font-size: var(--font-size-hero);
     line-height: 1.08;
     margin-bottom: 16px;
-    max-width: 16ch;
+    max-width: 18ch;
 }
 
 .hero-subtitle {

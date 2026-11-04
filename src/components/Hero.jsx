@@ -23,17 +23,17 @@ function Hero() {
                 <div className="hero-content">
                     <div className="hero-copy">
                         <p className="hero-kicker">
-                            {isWorker ? 'ProWorker for Skilled Workers' : 'Hyperlocal Skilled Workers & Services'}
+                            {isWorker ? 'Workers Platform in India · For Workers & Home Sellers' : 'Workers Platform in India · Services & Homemade Store'}
                         </p>
                         <h1>
                             {isWorker
-                                ? 'Build your digital identity. Get discovered nearby.'
-                                : 'Find nearby skilled workers. Contact them directly.'}
+                                ? 'Offer skilled services or sell homemade products across India.'
+                                : 'Hire skilled workers in India. Shop homemade goods nearby.'}
                         </h1>
                         <p className="hero-subtitle">
                             {isWorker
-                                ? 'A free professional app to showcase your trade skills, set prices and availability, and receive direct customer inquiries. 0% commission.'
-                                : 'Search plumbers, electricians, carpenters, painters, cleaners, AC technicians, and more. Compare profiles, ratings, pricing, and availability—then connect yourself.'}
+                                ? 'ProWorker is India’s free app for trade services and a home storefront—set prices, showcase your work, get direct inquiries, and keep 100% with 0% commission.'
+                                : 'India’s free workers platform to find plumbers, electricians, and more—or browse homemade food, clothes, and crafts in Store. Compare profiles, ratings, and prices, then connect directly.'}
                         </p>
 
                         <div className="hero-actions">
@@ -91,8 +91,8 @@ function Hero() {
 
                         <div className="hero-chips">
                             {(isWorker
-                                ? ['Free to join', 'Set your own prices', '0% Commission', 'Direct customer calls']
-                                : ['Free for customers', 'No booking fee', 'Direct contact', '0% Commission']
+                                ? ['Free to join', 'Services + Store', '0% Commission', 'Weekly bank payout']
+                                : ['Free for customers', 'Services + Store', 'Direct contact', '0% Commission']
                             ).map((chip) => (
                                 <span key={chip} className="hero-chip">
                                     <Icon name="check" size={14} />
@@ -105,7 +105,15 @@ function Hero() {
                     <div className="hero-media">
                         <img
                             src={isWorker ? heroWorker : heroCustomer}
-                            alt={isWorker ? 'Skilled worker building a professional brand' : 'Customer meeting a nearby skilled worker'}
+                            alt={
+                                isWorker
+                                    ? 'Skilled worker in India building a professional ProWorker profile'
+                                    : 'Customer in India hiring a nearby skilled worker on ProWorker'
+                            }
+                            width={720}
+                            height={900}
+                            decoding="async"
+                            fetchPriority="high"
                         />
                         <div className="hero-media-card">
                             {isWorker ? (
