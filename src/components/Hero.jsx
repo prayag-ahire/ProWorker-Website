@@ -49,7 +49,7 @@ function Hero() {
                                 type="button"
                                 className="btn btn-secondary"
                                 onClick={() => {
-                                    window.location.assign(isWorker ? '/#how-it-works' : '/#categories');
+                                    window.location.assign(isWorker ? '/#how-it-works' : '/search');
                                 }}
                             >
                                 {isWorker ? 'How it works' : 'Browse services'}

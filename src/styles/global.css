@@ -673,10 +673,23 @@ p {
 
 @media (max-width: 768px) {
   .whatsapp-float {
-    right: 16px;
-    bottom: 20px;
+    right: 14px;
+    bottom: 16px;
+    width: 52px;
+    height: 52px;
     min-height: 52px;
-    padding: 11px 16px 11px 12px;
-    font-size: 14px;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .whatsapp-float-label {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  body:has(.pdp-sticky-bar) .whatsapp-float {
+    display: none !important;
   }
 }

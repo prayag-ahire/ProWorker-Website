@@ -18,30 +18,38 @@ function ServiceCategories() {
         <section id="categories" className="section categories-section">
             <div className="container">
                 <div className="section-header">
-                    <p className="categories-kicker">{isWorker ? 'Your trade' : 'Popular services'}</p>
-                    <h2>{isWorker ? 'Built for every skilled professional' : 'Find skilled service professionals nearby'}</h2>
+                    <p className="categories-kicker">{isWorker ? 'Your trade' : 'Hire nearby'}</p>
+                    <h2>{isWorker ? 'Built for every skilled professional' : 'Popular services'}</h2>
                     <p className="section-subtitle">
                         {isWorker
                             ? 'Plumbers, electricians, carpenters, painters, cleaners, AC technicians, beauticians, and more—each with a professional profile customers can find locally.'
-                            : 'Browse by profession, compare nearby workers by distance, ratings, pricing, and portfolios—then connect directly.'}
+                            : 'Tap a category to find nearby workers. Compare ratings, distance, and prices, then connect directly.'}
                     </p>
                 </div>
 
-                <div className="categories-grid">
+                <div className="svc-grid">
                     {serviceCategories.map((category) => (
                         <button
                             key={category.id}
                             type="button"
-                            className="category-tile"
+                            className="svc-card"
                             onClick={() => handleCategoryClick(category)}
                         >
-                            <img
-                                src={category.image}
-                                alt={`${category.name} near me in India — hire on ProWorker`}
-                                loading="lazy"
-                                decoding="async"
-                            />
-                            <span>{category.name}</span>
+                            <div className="svc-card-media">
+                                <img
+                                    src={category.image}
+                                    alt={`${category.name} near me in India — hire on ProWorker`}
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </div>
+                            <div className="svc-card-body">
+                                <span className="svc-card-icon" aria-hidden="true">{category.icon}</span>
+                                <div>
+                                    <h3>{category.name}</h3>
+                                    <p>{isWorker ? 'Show your work' : category.hint}</p>
+                                </div>
+                            </div>
                         </button>
                     ))}
                 </div>

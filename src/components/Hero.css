@@ -22,6 +22,7 @@
     font-size: 13px;
     font-weight: 650;
     letter-spacing: 0.02em;
+    max-width: 100%;
 }
 
 .hero-copy h1 {
@@ -29,6 +30,8 @@
     line-height: 1.08;
     margin-bottom: 16px;
     max-width: 18ch;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .hero-subtitle {
@@ -36,6 +39,7 @@
     line-height: 1.65;
     max-width: 540px;
     margin-bottom: 28px;
+    overflow-wrap: break-word;
 }
 
 .hero-actions {
@@ -94,6 +98,8 @@
 
 .store-callout-text {
     line-height: 1.4;
+    min-width: 0;
+    overflow-wrap: break-word;
 }
 
 .hero-store-link {
@@ -254,17 +260,41 @@
 
 @media (max-width: 768px) {
     .hero {
-        padding: calc(96px + env(safe-area-inset-top)) 0 32px;
+        padding: calc(84px + env(safe-area-inset-top)) 0 28px;
+    }
+
+    .hero-copy h1 {
+        max-width: none;
+        margin-bottom: 12px;
+        font-size: clamp(26px, 7.5vw, 32px);
+        line-height: 1.18;
+    }
+
+    .hero-kicker {
+        white-space: normal;
+        line-height: 1.4;
+        max-width: 100%;
+    }
+
+    .store-callout-text {
+        min-width: 0;
+    }
+
+    .store-callout-left {
+        min-width: 0;
+        flex: 1;
     }
 
     .hero-subtitle {
         font-size: 15px;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
     }
 
     .hero-search {
         flex-direction: column;
         min-width: 0;
+        padding: 6px;
+        margin-bottom: 16px;
     }
 
     .hero-search-field {
@@ -274,34 +304,47 @@
 
     .hero-search-field select {
         width: 100%;
+        min-height: 28px;
     }
 
     .hero-search .btn,
     .hero-actions .btn {
         width: 100%;
+        min-height: 48px;
+        justify-content: center;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
     }
 
     .hero-media img {
-        height: 240px;
+        height: 220px;
         border-radius: 16px;
     }
 
     .hero-media-card {
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
         max-width: none;
         padding: 10px 12px;
     }
 }
 
 @media (max-width: 480px) {
+    .hero {
+        padding: calc(80px + env(safe-area-inset-top)) 0 24px;
+    }
+
     .hero-kicker {
-        font-size: 12px;
+        font-size: 11px;
+        margin-bottom: 10px;
     }
 
     .hero-chips {
-        gap: 8px;
+        gap: 6px;
     }
 
     .hero-chip {
@@ -310,7 +353,7 @@
     }
 
     .hero-media img {
-        height: 200px;
+        height: 180px;
         border-radius: 14px;
     }
 }

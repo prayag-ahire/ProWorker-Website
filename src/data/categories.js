@@ -12,22 +12,25 @@ import crafts from '../assets/marketplace/cat-crafts.jpg?url';
 
 /** Professional Service Categories (Home & Trade Services) */
 export const serviceCategories = [
-  { id: 'plumber', name: 'Plumber', image: plumber },
-  { id: 'electrician', name: 'Electrician', image: electrician },
-  { id: 'carpenter', name: 'Carpenter', image: carpenter },
-  { id: 'painter', name: 'Painter', image: painter },
-  { id: 'cleaner', name: 'Cleaner & Househelp', image: cleaner },
-  { id: 'ac', name: 'AC Technician', image: ac },
-  { id: 'beautician', name: 'Beautician', image: beautician },
-  { id: 'more', name: 'More services', image: more, browseAll: true },
+  { id: 'plumber', name: 'Plumber', image: plumber, icon: '🔧', hint: 'Leaks, taps & fittings' },
+  { id: 'electrician', name: 'Electrician', image: electrician, icon: '💡', hint: 'Wiring, fans & repairs' },
+  { id: 'carpenter', name: 'Carpenter', image: carpenter, icon: '🪵', hint: 'Furniture & woodwork' },
+  { id: 'painter', name: 'Painter', image: painter, icon: '🎨', hint: 'Walls, wood & polish' },
+  { id: 'cleaner', name: 'Cleaner & Househelp', image: cleaner, icon: '🧹', hint: 'Home & deep cleaning' },
+  { id: 'ac', name: 'AC Technician', image: ac, icon: '❄️', hint: 'Service, gas & install' },
+  { id: 'beautician', name: 'Beautician', image: beautician, icon: '💅', hint: 'Salon at home' },
+  { id: 'more', name: 'More services', image: more, icon: '➕', hint: 'Browse all trades', browseAll: true },
 ];
 
-/** ProWorker Store — Open Local Marketplace (Sell Homemade Products) */
+/** ProWorker Store — sell / rent products only (not services) */
 export const storeCategories = [
-  { id: 'food', title: 'Homemade Food & Tiffins', desc: 'Fresh home-cooked meals, daily tiffins, bakery, sweets & snacks', image: food },
-  { id: 'clothing', title: 'Clothes & Custom Tailoring', desc: 'Handcrafted apparel, boutique dresses, ethnic wear & alterations', image: clothing },
-  { id: 'crafts', title: 'Handmade Crafts & Art', desc: 'Artisan decor, handmade candles, pottery, paintings & gifts', image: crafts },
-  { id: 'homemade', title: 'Homemade Specialities & Goods', desc: 'Organic items, herbal care, festive hampers & homemade creations', isGeneral: true },
+  { id: 'food', title: 'Food Product', desc: 'Homemade meals, tiffins, bakery, sweets & snacks for sale', image: food },
+  { id: 'clothing', title: 'Clothing', desc: 'Clothes for sale or rent — ethnic wear, party & formal outfits', image: clothing },
+  { id: 'crafts', title: 'Crafts', desc: 'Handmade decor, candles, pottery, paintings & gifts for sale', image: crafts },
+  { id: 'plants', title: 'Plants', desc: 'Indoor plants, planters and green gifts for sale' },
+  { id: 'electronics', title: 'Electronics', desc: 'Gadgets and AV gear for sale or rent' },
+  { id: 'furniture', title: 'Furniture', desc: 'Home and event furniture for sale or rent' },
+  { id: 'tools', title: 'Tools & Gear', desc: 'Tools, camping and utility gear for sale or rent' },
 ];
 
 

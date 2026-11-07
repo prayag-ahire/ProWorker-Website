@@ -346,9 +346,17 @@
 }
 
 @media (max-width: 640px) {
+    .store-showcase-section {
+        padding: 40px 0 48px;
+    }
+
+    .store-phone-mockup {
+        display: none;
+    }
+
     .store-features-list {
         grid-template-columns: 1fr;
-        gap: 14px;
+        gap: 12px;
     }
 
     .store-cta-bar {

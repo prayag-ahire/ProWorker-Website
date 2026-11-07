@@ -69,11 +69,11 @@ export const storeSeo = {
 };
 
 export const searchSeo = {
-  title: 'Find Workers Near Me in India — ProWorker Local Search',
+  title: 'Find Services Near Me in India — Hire Local Workers | ProWorker',
   description:
-    'Search skilled workers and home sellers near you across India on ProWorker. Compare distance, ratings, prices—then contact plumbers, electricians, chefs & more directly.',
+    'Search skilled workers near you across India on ProWorker. Compare distance, ratings, and visit charges—then contact plumbers, electricians, carpenters & more directly.',
   keywords:
-    'find workers near me India, local plumber India, electrician near me, carpenter near me, AC technician near me, workers search India, ProWorker search',
+    'find workers near me India, hire plumber India, electrician near me, carpenter near me, AC technician near me, local services India, ProWorker services',
 };
 
 export const partnerSeo = {

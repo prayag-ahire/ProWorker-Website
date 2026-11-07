@@ -3,6 +3,7 @@ import { workerService } from '../services/workerService';
 import WorkerList from './WorkerList';
 import { getSearchProfessionFromUrl, goToSearch } from '../utils/goToSearch';
 import { useLocation } from '../context/LocationContext';
+import { serviceCategories } from '../data/categories';
 import './WorkerSearch.css';
 
 function WorkerSearch() {
@@ -124,42 +125,41 @@ function WorkerSearch() {
     goToSearch(nextProfession);
   };
 
-  const handleRefine = (event) => {
-    event.preventDefault();
-    lastSearchKeyRef.current = '';
-    runSearch(1);
-  };
-
   const listingActive = Boolean(profession);
   const locationLabel = locationName
     || (location ? `${location.latitude.toFixed(4)}, ${location.longitude.toFixed(4)}` : '');
 
+  const knownNames = new Set(serviceCategories.map((category) => category.name));
+  const extraProfessions = professions.filter((prof) => !knownNames.has(prof.name));
+  const sidebarCategories = [
+    ...serviceCategories.filter((category) => !category.browseAll),
+    ...extraProfessions.map((prof) => ({ id: prof.id, name: prof.name, icon: '🧰' })),
+  ];
+
   return (
     <div className="worker-search-container">
-      <form className="search-toolbar" onSubmit={handleRefine}>
-        <div className="search-toolbar-fields">
-          <div className="form-group">
-            <label htmlFor="profession">Service / Product</label>
-            <select
-              id="profession"
-              value={profession}
-              onChange={(e) => handleProfessionChange(e.target.value)}
-              className="form-select"
-            >
-              <option value="">Select a service or homemade category...</option>
-              {profession && !professions.some((prof) => prof.name === profession) && (
-                <option value={profession}>{profession}</option>
-              )}
-              {professions.map((prof) => (
-                <option key={prof.id} value={prof.name}>
-                  {prof.name}
-                </option>
-              ))}
-            </select>
-          </div>
+      <div className="svc-search-layout">
+        <aside className="svc-sidebar" aria-label="Service categories">
+          {sidebarCategories.map((category) => {
+            const isActive = profession === category.name;
+            return (
+              <button
+                key={category.id}
+                type="button"
+                className={`svc-side-item ${isActive ? 'active' : ''}`}
+                onClick={() => handleProfessionChange(category.name)}
+              >
+                <span className="svc-side-emoji" aria-hidden="true">{category.icon}</span>
+                <span className="svc-side-label">{category.name}</span>
+              </button>
+            );
+          })}
+        </aside>
 
+        <div className="svc-search-main">
+      <div className="search-toolbar">
           <div className="form-group">
-            <label htmlFor="location">Location</label>
+            <label htmlFor="location">Near you</label>
             <div className="location-input-group">
               <input
                 id="location"
@@ -185,16 +185,7 @@ function WorkerSearch() {
               </button>
             </div>
           </div>
-        </div>
-
-        <button
-          type="submit"
-          disabled={searchLoading || !location || !profession}
-          className="btn-search btn-search-compact"
-        >
-          {searchLoading && location ? 'Searching...' : 'Refine search'}
-        </button>
-      </form>
+      </div>
 
       {(locationError || searchError) && (
         <div className="error-message">
@@ -215,23 +206,15 @@ function WorkerSearch() {
       <div className="search-listing">
         {!listingActive && (
           <div className="search-prompt">
-            <h2>Find nearby services & homemade products</h2>
-            <p>Choose a category above to discover skilled trade workers near you.</p>
-            <div className="search-store-cta-box">
-              <span className="search-store-cta-icon">🏪</span>
-              <div>
-                <strong>Looking for homemade food, custom clothing, or crafts?</strong>
-                <span>ProWorker has a dedicated Store marketplace where neighbors sell & buy homemade products directly.</span>
-              </div>
-              <a href="/store" className="btn-search-store-link">Visit Store →</a>
-            </div>
+            <h2>Pick a trade</h2>
+            <p>Choose a category to see nearby workers.</p>
           </div>
         )}
 
         {listingActive && !location && !locationLoading && (
           <div className="search-prompt">
-            <h2>Enable location to see nearby {profession} providers & sellers</h2>
-            <p>We use your location once to show providers and home sellers around you. Contact them directly with 0% commission.</p>
+            <h2>Enable location to see nearby {profession} workers</h2>
+            <p>We use your location once to show workers around you. Contact them directly with 0% commission.</p>
             <button type="button" className="btn-search btn-search-inline" onClick={refreshLocation}>
               Enable location
             </button>
@@ -250,14 +233,14 @@ function WorkerSearch() {
             {searchLoading && workers.length === 0 ? (
               <div className="loading-state">
                 <div className="spinner"></div>
-                <p>Finding nearby {profession} providers & sellers...</p>
+                <p>Finding nearby {profession} workers...</p>
               </div>
             ) : searchAttempted && workers.length > 0 ? (
               <>
                 <div className="results-header">
                   <h3>
                     {pagination?.total_workers || workers.length}{' '}
-                    {(pagination?.total_workers || workers.length) === 1 ? 'Provider / Seller' : 'Providers & Sellers'} Found
+                    {(pagination?.total_workers || workers.length) === 1 ? 'worker' : 'workers'} nearby
                   </h3>
                   <p className="results-subtitle">
                     {searchMessage || (
@@ -298,20 +281,14 @@ function WorkerSearch() {
               <div className="no-results">
                 <h3>No service providers found nearby.</h3>
                 <p className="no-results-subtitle">
-                  Try expanding your search area or choosing a different trade category.
+                  Try another trade on the left, or search from a different location.
                 </p>
-                <div className="search-store-cta-box">
-                  <span className="search-store-cta-icon">🏪</span>
-                  <div>
-                    <strong>Looking for homemade products instead?</strong>
-                    <span>Discover homemade food, tailoring, and crafts on ProWorker Store.</span>
-                  </div>
-                  <a href="/store" className="btn-search-store-link">Explore Store →</a>
-                </div>
               </div>
             ) : null}
           </div>
         )}
+      </div>
+        </div>
       </div>
     </div>
   );

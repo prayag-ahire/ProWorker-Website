@@ -25,11 +25,10 @@ function Footer() {
                         <div className="link-group">
                             <h4>For customers</h4>
                             <ul>
-                                <li><a href="/#categories">Hire Services</a></li>
+                                <li><a href="/search">Hire Services</a></li>
                                 <li><a href="/store">ProWorker Store (Shop nearby)</a></li>
                                 <li><a href="/#how-it-works">How it works</a></li>
                                 <li><a href="/#testimonials">Reviews</a></li>
-                                <li><a href="/search">Find workers</a></li>
                                 <li>
                                     <a
                                         href={CLIENT_PLAY_STORE_URL}

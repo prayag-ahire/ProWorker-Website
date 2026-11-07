@@ -1,622 +1,337 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
-import { CLIENT_PLAY_STORE_URL, WORKER_PLAY_STORE_URL } from '../../data/appLinks';
-import { WHATSAPP_URL } from '../../data/contact';
-import storeFeedFullImg from '../../assets/store/store-feed-full.jpg?url';
-import productDetailImg from '../../assets/store/product-detail.jpg?url';
-import robotCleanImg from '../../assets/store/robot-clean.jpg?url';
-import foodImg from '../../assets/marketplace/cat-food.jpg?url';
-import clothingImg from '../../assets/marketplace/cat-clothing.jpg?url';
-import craftsImg from '../../assets/marketplace/cat-crafts.jpg?url';
-import plantsImg from '../../assets/marketplace/cat-plants.jpg?url';
-import bakeryImg from '../../assets/marketplace/cat-bakery.jpg?url';
+import { CLIENT_PLAY_STORE_URL } from '../../data/appLinks';
+import ProductDetail from './ProductDetail';
 import '../StorePage.css';
 
+// Product photos
+import imgTiffin from '../../assets/store/products/product-tiffin.jpg?url';
+import imgThali from '../../assets/store/products/product-thali.jpg?url';
+import imgParatha from '../../assets/store/products/product-paratha.jpg?url';
+import imgSabzi from '../../assets/store/products/product-sabzi.jpg?url';
+import imgLadoo from '../../assets/store/products/product-ladoo.jpg?url';
+import imgPickle from '../../assets/store/products/product-pickle.jpg?url';
+import imgCake from '../../assets/store/products/product-cake.jpg?url';
+import imgCookies from '../../assets/store/products/product-cookies.jpg?url';
+import imgKurta from '../../assets/store/products/product-kurta.jpg?url';
+import imgBlouse from '../../assets/store/products/product-blouse.jpg?url';
+import imgDress from '../../assets/store/products/product-dress.jpg?url';
+import imgKidswear from '../../assets/store/products/product-kidswear.jpg?url';
+import imgDupatta from '../../assets/store/products/product-dupatta.jpg?url';
+import imgSherwani from '../../assets/store/products/product-sherwani.jpg?url';
+import imgLehenga from '../../assets/store/products/product-lehenga.jpg?url';
+import imgSuit from '../../assets/store/products/product-suit.jpg?url';
+import imgCandles from '../../assets/store/products/product-candles.jpg?url';
+import imgSoap from '../../assets/store/products/product-soap.jpg?url';
+import imgPottery from '../../assets/store/products/product-pottery.jpg?url';
+import imgResin from '../../assets/store/products/product-resin.jpg?url';
+import imgMacrame from '../../assets/store/products/product-macrame.jpg?url';
+import imgFrame from '../../assets/store/products/product-frame.jpg?url';
+import imgPlantMoney from '../../assets/store/products/product-plant-money.jpg?url';
+import imgPlantSnake from '../../assets/store/products/product-plant-snake.jpg?url';
+import imgPlantSucculent from '../../assets/store/products/product-plant-succulent.jpg?url';
+import imgPlanter from '../../assets/store/products/product-planter.jpg?url';
+import imgVase from '../../assets/store/products/product-vase.jpg?url';
+import imgProjector from '../../assets/store/products/product-projector.jpg?url';
+import imgSpeaker from '../../assets/store/products/product-speaker.jpg?url';
+import imgCamera from '../../assets/store/products/product-camera.jpg?url';
+import imgLaptop from '../../assets/store/products/product-laptop.jpg?url';
+import imgConsole from '../../assets/store/products/product-console.jpg?url';
+import imgEarbuds from '../../assets/store/products/product-earbuds.jpg?url';
+import imgChairs from '../../assets/store/products/product-chairs.jpg?url';
+import imgTable from '../../assets/store/products/product-table.jpg?url';
+import imgSofa from '../../assets/store/products/product-sofa.jpg?url';
+import imgShelf from '../../assets/store/products/product-shelf.jpg?url';
+import imgStool from '../../assets/store/products/product-stool.jpg?url';
+import imgDrill from '../../assets/store/products/product-drill.jpg?url';
+import imgLadder from '../../assets/store/products/product-ladder.jpg?url';
+import imgMixer from '../../assets/store/products/product-mixer.jpg?url';
+import imgRobot from '../../assets/store/products/product-robot.jpg?url';
+import imgWoodtoy from '../../assets/store/products/product-woodtoy.jpg?url';
+import imgTent from '../../assets/store/products/product-tent.jpg?url';
+
+/** Product categories only — sell / rent marketplace (no services) */
+const browseCategories = [
+    { id: 'all', label: 'All Products', icon: '🛍️' },
+    { id: 'food', label: 'Food', icon: '🍲' },
+    { id: 'clothing', label: 'Clothing', icon: '👗' },
+    { id: 'crafts', label: 'Crafts', icon: '🎨' },
+    { id: 'plants', label: 'Plants', icon: '🪴' },
+    { id: 'electronics', label: 'Electronics', icon: '🎧' },
+    { id: 'furniture', label: 'Furniture', icon: '🛋️' },
+    { id: 'tools', label: 'Tools & Gear', icon: '🛠️' },
+];
+
+/**
+ * Mock catalog — sell + rent products only.
+ * status: 'For sale' | 'For rent'
+ */
 const sampleStoreProducts = [
-    {
-        id: 'robot',
-        title: 'Handcrafted Robot Figurine',
-        price: '₹499',
-        rating: '4.9',
-        reviews: 14,
-        distance: '1.2 km away',
-        seller: 'Prayag A. (Creator)',
-        status: 'For sale',
-        image: robotCleanImg,
-        category: 'Craft & Art'
-    },
-    {
-        id: 'tiffin',
-        title: 'Daily Homestyle Veg Tiffin',
-        price: '₹120',
-        unit: '/ meal',
-        rating: '5.0',
-        reviews: 32,
-        distance: '0.8 km away',
-        seller: "Sunita's Home Kitchen",
-        status: 'For sale',
-        image: foodImg,
-        category: 'Homemade Food'
-    },
-    {
-        id: 'kurta',
-        title: 'Custom Stitched Ethnic Kurta',
-        price: '₹799',
-        rating: '4.8',
-        reviews: 21,
-        distance: '1.6 km away',
-        seller: 'Poonam Tailoring Studio',
-        status: 'For sale',
-        image: clothingImg,
-        category: 'Custom Clothes'
-    },
-    {
-        id: 'candles',
-        title: 'Aromatic Soy Candle Set',
-        price: '₹349',
-        rating: '5.0',
-        reviews: 18,
-        distance: '2.4 km away',
-        seller: 'Aarti Handmade Studio',
-        status: 'For sale',
-        image: craftsImg,
-        category: 'Handmade Crafts'
-    }
+    // —— Food ——
+    { id: 'tiffin', title: 'Daily Homestyle Veg Tiffin', qty: '1 full meal', image: imgTiffin, price: 120, mrp: 150, unit: '/ meal', rating: '5.0', reviews: 32, distance: '0.8 km', seller: "Sunita's Home Kitchen", status: 'For sale', categoryId: 'food', category: 'Food' },
+    { id: 'thali', title: 'Gujarati Thali Lunch Box', qty: '1 box', image: imgThali, price: 150, mrp: 180, unit: '/ meal', rating: '4.9', reviews: 48, distance: '1.1 km', seller: 'Meena Home Kitchen', status: 'For sale', categoryId: 'food', category: 'Food' },
+    { id: 'paratha', title: 'Stuffed Paratha Combo', qty: '4 pieces', image: imgParatha, price: 180, mrp: 220, rating: '4.8', reviews: 27, distance: '1.4 km', seller: "Kavita's Kitchen", status: 'For sale', categoryId: 'food', category: 'Food' },
+    { id: 'sabzi', title: 'Fresh Sabzi & Roti Pack', qty: '1 pack', image: imgSabzi, price: 99, mrp: 130, unit: '/ pack', rating: '4.7', reviews: 19, distance: '0.6 km', seller: 'Anita Dabba', status: 'For sale', categoryId: 'food', category: 'Food' },
+    { id: 'ladoo', title: 'Besan Ladoo Box', qty: '500 g', image: imgLadoo, price: 320, mrp: 400, rating: '5.0', reviews: 39, distance: '1.1 km', seller: "Aaji's Sweets", status: 'For sale', categoryId: 'food', category: 'Food' },
+    { id: 'pickle', title: 'Homestyle Mango Pickle', qty: '400 g jar', image: imgPickle, price: 180, mrp: 240, rating: '4.9', reviews: 52, distance: '0.9 km', seller: 'Desi Jar Kitchen', status: 'For sale', categoryId: 'food', category: 'Food' },
+    { id: 'cake', title: 'Eggless Chocolate Cake', qty: '1 kg', image: imgCake, price: 650, mrp: 800, rating: '4.8', reviews: 28, distance: '1.5 km', seller: 'HomeBake Studio', status: 'For sale', categoryId: 'food', category: 'Food' },
+    { id: 'cookies', title: 'Butter Cookies Gift Tin', qty: '300 g', image: imgCookies, price: 280, mrp: 350, rating: '4.9', reviews: 20, distance: '2.0 km', seller: 'Oven & Whisk', status: 'For sale', categoryId: 'food', category: 'Food' },
+
+    // —— Clothing ——
+    { id: 'kurta', title: 'Custom Stitched Ethnic Kurta', qty: 'Made to size', image: imgKurta, price: 799, mrp: 1099, rating: '4.8', reviews: 21, distance: '1.6 km', seller: 'Poonam Boutique', status: 'For sale', categoryId: 'clothing', category: 'Clothing' },
+    { id: 'blouse', title: 'Designer Embroidered Blouse', qty: 'Made to size', image: imgBlouse, price: 650, mrp: 999, rating: '4.9', reviews: 36, distance: '1.2 km', seller: 'Sneha Boutique Home', status: 'For sale', categoryId: 'clothing', category: 'Clothing' },
+    { id: 'dress', title: 'Handcrafted Party Dress', qty: 'Free size', image: imgDress, price: 1299, mrp: 1799, rating: '4.7', reviews: 12, distance: '2.3 km', seller: 'Riya Custom Wear', status: 'For sale', categoryId: 'clothing', category: 'Clothing' },
+    { id: 'kidswear', title: 'Kids Ethnic Wear Set', qty: '2-8 yrs', image: imgKidswear, price: 549, mrp: 799, rating: '4.8', reviews: 24, distance: '0.9 km', seller: 'Little Threads', status: 'For sale', categoryId: 'clothing', category: 'Clothing' },
+    { id: 'dupatta', title: 'Hand-Embroidered Dupatta', qty: '2.5 m', image: imgDupatta, price: 449, mrp: 699, rating: '4.9', reviews: 17, distance: '1.9 km', seller: 'Zara Embroidery', status: 'For sale', categoryId: 'clothing', category: 'Clothing' },
+    { id: 'sherwani-rent', title: 'Wedding Sherwani', qty: 'Size 40', image: imgSherwani, price: 499, mrp: 700, unit: '/ day', rating: '4.8', reviews: 31, distance: '1.3 km', seller: 'Occasion Wear Rentals', status: 'For rent', categoryId: 'clothing', category: 'Clothing' },
+    { id: 'lehenga-rent', title: 'Bridal Lehenga Set', qty: 'Free size', image: imgLehenga, price: 899, mrp: 1400, unit: '/ day', rating: '4.9', reviews: 22, distance: '2.1 km', seller: 'Festive Closet', status: 'For rent', categoryId: 'clothing', category: 'Clothing' },
+    { id: 'suit-rent', title: 'Formal Blazer Suit', qty: 'Size 38-42', image: imgSuit, price: 350, mrp: 500, unit: '/ day', rating: '4.7', reviews: 18, distance: '1.0 km', seller: 'City Suit Rentals', status: 'For rent', categoryId: 'clothing', category: 'Clothing' },
+
+    // —— Crafts ——
+    { id: 'candles', title: 'Aromatic Soy Candle Set', qty: 'Set of 3', image: imgCandles, price: 349, mrp: 499, rating: '5.0', reviews: 18, distance: '2.4 km', seller: 'Aarti Handmade', status: 'For sale', categoryId: 'crafts', category: 'Crafts' },
+    { id: 'soap', title: 'Organic Herbal Soap Pack', qty: 'Pack of 4', image: imgSoap, price: 299, mrp: 420, rating: '4.8', reviews: 29, distance: '1.5 km', seller: 'NatureCraft Home', status: 'For sale', categoryId: 'crafts', category: 'Crafts' },
+    { id: 'pottery', title: 'Handmade Clay Diya Set', qty: 'Set of 12', image: imgPottery, price: 249, mrp: 350, rating: '4.9', reviews: 33, distance: '2.1 km', seller: 'Clay & Co Studio', status: 'For sale', categoryId: 'crafts', category: 'Crafts' },
+    { id: 'resin', title: 'Resin Keychain Gift Box', qty: 'Set of 6', image: imgResin, price: 399, mrp: 550, rating: '4.7', reviews: 22, distance: '1.7 km', seller: 'GlossArt Creations', status: 'For sale', categoryId: 'crafts', category: 'Crafts' },
+    { id: 'macrame', title: 'Macrame Wall Hanging', qty: '60 cm', image: imgMacrame, price: 599, mrp: 850, rating: '5.0', reviews: 11, distance: '2.8 km', seller: 'Knot & Loom', status: 'For sale', categoryId: 'crafts', category: 'Crafts' },
+    { id: 'frame', title: 'Pressed Flower Photo Frame', qty: 'A4 size', image: imgFrame, price: 379, mrp: 520, rating: '4.9', reviews: 21, distance: '1.9 km', seller: 'Bloom Frames', status: 'For sale', categoryId: 'crafts', category: 'Crafts' },
+
+    // —— Plants ——
+    { id: 'plant1', title: 'Money Plant in Ceramic Pot', qty: '1 plant', image: imgPlantMoney, price: 199, mrp: 280, rating: '4.8', reviews: 44, distance: '0.7 km', seller: 'Green Balcony Co.', status: 'For sale', categoryId: 'plants', category: 'Plants' },
+    { id: 'plant2', title: 'Snake Plant (Low Maintenance)', qty: 'Medium', image: imgPlantSnake, price: 279, mrp: 380, rating: '4.9', reviews: 31, distance: '1.3 km', seller: 'Urban Leaves', status: 'For sale', categoryId: 'plants', category: 'Plants' },
+    { id: 'plant3', title: 'Succulent Trio Gift Set', qty: 'Set of 3', image: imgPlantSucculent, price: 349, mrp: 450, rating: '5.0', reviews: 26, distance: '1.0 km', seller: 'Tiny Garden Home', status: 'For sale', categoryId: 'plants', category: 'Plants' },
+    { id: 'planter', title: 'Hand-Painted Planter Pot', qty: '6 inch', image: imgPlanter, price: 229, mrp: 320, rating: '4.6', reviews: 14, distance: '2.2 km', seller: 'Painted Earth', status: 'For sale', categoryId: 'plants', category: 'Plants' },
+    { id: 'vase', title: 'Terracotta Mini Vase Duo', qty: 'Set of 2', image: imgVase, price: 329, mrp: 460, rating: '4.8', reviews: 19, distance: '2.1 km', seller: 'Earthen Decor', status: 'For sale', categoryId: 'plants', category: 'Plants' },
+
+    // —— Electronics ——
+    { id: 'projector-rent', title: 'HD Projector + Screen', qty: '1080p', image: imgProjector, price: 499, mrp: 700, unit: '/ day', rating: '4.8', reviews: 41, distance: '1.2 km', seller: 'ScreenShare Rentals', status: 'For rent', categoryId: 'electronics', category: 'Electronics' },
+    { id: 'speaker-rent', title: 'Bluetooth Party Speaker', qty: '80 W', image: imgSpeaker, price: 299, mrp: 450, unit: '/ day', rating: '4.7', reviews: 35, distance: '0.9 km', seller: 'BeatBox Rentals', status: 'For rent', categoryId: 'electronics', category: 'Electronics' },
+    { id: 'camera-rent', title: 'DSLR Camera Kit', qty: 'With lens', image: imgCamera, price: 650, mrp: 900, unit: '/ day', rating: '4.9', reviews: 27, distance: '1.8 km', seller: 'LensLane Store', status: 'For rent', categoryId: 'electronics', category: 'Electronics' },
+    { id: 'laptop-rent', title: 'Laptop (i5 / 16GB)', qty: '15.6 inch', image: imgLaptop, price: 400, mrp: 600, unit: '/ day', rating: '4.6', reviews: 16, distance: '2.0 km', seller: 'TechTemp Rentals', status: 'For rent', categoryId: 'electronics', category: 'Electronics' },
+    { id: 'console-rent', title: 'Gaming Console + 2 Pads', qty: '1 TB', image: imgConsole, price: 550, mrp: 800, unit: '/ day', rating: '4.8', reviews: 23, distance: '1.5 km', seller: 'GameNight Rentals', status: 'For rent', categoryId: 'electronics', category: 'Electronics' },
+    { id: 'earbuds-sale', title: 'Wireless Earbuds (Open Box)', qty: 'ANC', image: imgEarbuds, price: 1199, mrp: 1999, rating: '4.5', reviews: 14, distance: '1.1 km', seller: 'Local Gadget Hub', status: 'For sale', categoryId: 'electronics', category: 'Electronics' },
+
+    // —— Furniture ——
+    { id: 'chair-rent', title: 'Banquet Chairs', qty: 'Set of 10', image: imgChairs, price: 800, mrp: 1200, unit: '/ day', rating: '4.8', reviews: 19, distance: '2.4 km', seller: 'Event Seat Rentals', status: 'For rent', categoryId: 'furniture', category: 'Furniture' },
+    { id: 'table-rent', title: 'Folding Round Table', qty: '4 ft', image: imgTable, price: 600, mrp: 900, unit: '/ day', rating: '4.7', reviews: 15, distance: '1.7 km', seller: 'Party Setup Co.', status: 'For rent', categoryId: 'furniture', category: 'Furniture' },
+    { id: 'sofa-rent', title: '3-Seater Sofa', qty: 'Fabric', image: imgSofa, price: 450, mrp: 700, unit: '/ day', rating: '4.6', reviews: 11, distance: '2.2 km', seller: 'HomeFlex Rentals', status: 'For rent', categoryId: 'furniture', category: 'Furniture' },
+    { id: 'shelf-sale', title: 'Wooden Wall Shelf Unit', qty: '3 tier', image: imgShelf, price: 1499, mrp: 2200, rating: '4.9', reviews: 18, distance: '1.4 km', seller: 'WoodCraft Home', status: 'For sale', categoryId: 'furniture', category: 'Furniture' },
+    { id: 'stool-sale', title: 'Handcrafted Stool Pair', qty: 'Set of 2', image: imgStool, price: 899, mrp: 1300, rating: '4.8', reviews: 13, distance: '1.9 km', seller: 'Timber & Tone', status: 'For sale', categoryId: 'furniture', category: 'Furniture' },
+
+    // —— Tools & Gear ——
+    { id: 'drill-rent', title: 'Cordless Drill Kit', qty: '18 V', image: imgDrill, price: 199, mrp: 300, unit: '/ day', rating: '4.8', reviews: 42, distance: '0.8 km', seller: 'ToolShare Local', status: 'For rent', categoryId: 'tools', category: 'Tools & Gear' },
+    { id: 'ladder-rent', title: 'Aluminium Step Ladder', qty: '6 ft', image: imgLadder, price: 150, mrp: 250, unit: '/ day', rating: '4.7', reviews: 28, distance: '1.2 km', seller: 'HandyRent Hub', status: 'For rent', categoryId: 'tools', category: 'Tools & Gear' },
+    { id: 'mixer-rent', title: 'Concrete Mixer', qty: 'Half day', image: imgMixer, price: 700, mrp: 1000, unit: '/ ½ day', rating: '4.6', reviews: 9, distance: '3.0 km', seller: 'BuildGear Rentals', status: 'For rent', categoryId: 'tools', category: 'Tools & Gear' },
+    { id: 'robot', title: 'Handcrafted Robot Figurine', qty: '1 piece', image: imgRobot, price: 499, mrp: 750, rating: '4.9', reviews: 14, distance: '1.2 km', seller: 'Prayag A. (Creator)', status: 'For sale', categoryId: 'tools', category: 'Tools & Gear' },
+    { id: 'woodtoy', title: 'Wooden Puzzle Toy Set', qty: '1 set', image: imgWoodtoy, price: 399, mrp: 550, rating: '4.8', reviews: 23, distance: '1.6 km', seller: 'WoodPlay Workshop', status: 'For sale', categoryId: 'tools', category: 'Tools & Gear' },
+    { id: 'camping-rent', title: 'Camping Tent', qty: '4 person', image: imgTent, price: 350, mrp: 500, unit: '/ day', rating: '4.9', reviews: 20, distance: '2.5 km', seller: 'TrailGear Rentals', status: 'For rent', categoryId: 'tools', category: 'Tools & Gear' },
 ];
 
-const storeCategoriesList = [
-    {
-        title: 'Homemade Food & Tiffins',
-        icon: '🍲',
-        image: foodImg,
-        badge: 'Fresh Daily',
-        examples: 'Daily lunch & dinner dabbas, homestyle thalis, fresh breads, snacks, and wholesome meals.'
-    },
-    {
-        title: 'Clothing & Custom Tailoring',
-        icon: '👗',
-        image: clothingImg,
-        badge: 'Custom Stitched',
-        examples: 'Handcrafted kurtas, bespoke blouses, boutique designer dresses, festive wear, and alterations.'
-    },
-    {
-        title: 'Handmade Crafts & Art',
-        icon: '🎨',
-        image: craftsImg,
-        badge: 'Artisan Made',
-        examples: 'Artisan pottery, aromatic soy candles, organic soaps, resin art, festival decor, and custom gifts.'
-    },
-    {
-        title: 'Handcrafted Toys & Creations',
-        icon: '🤖',
-        image: robotCleanImg,
-        badge: 'Home Creations',
-        examples: 'Handmade wooden toys, DIY electronics, custom robots, collectibles, and artistic crafts.'
-    },
-    {
-        title: 'Home Decor & Balcony Plants',
-        icon: '🪴',
-        image: plantsImg,
-        badge: 'Green & Living',
-        examples: 'Indoor nursery plants, macrame wall hangings, handcrafted planters, and artisan tableware.'
-    },
-    {
-        title: 'Traditional Sweets & Pickles',
-        icon: '🍯',
-        image: bakeryImg,
-        badge: 'Homemade Special',
-        examples: 'Homestyle festive laddoos, regional jarred pickles, crispy namkeens, and seasonal hampers.'
-    }
+const listingFilters = [
+    { id: 'all', label: 'All' },
+    { id: 'For sale', label: 'For sale' },
+    { id: 'For rent', label: 'For rent' },
 ];
 
-const sellerStories = [
-    {
-        name: 'Sunita Rao',
-        role: 'Home Chef & Tiffin Maker',
-        location: 'Kandivali, Mumbai',
-        stars: '★★★★★',
-        story: 'I started listing daily tiffins on ProWorker Store. Neighbors within 1.5 km discover my menu, message me on WhatsApp, and my earnings settle into my bank every Monday. 0% commission means I keep every rupee!',
-        highlight: '30+ daily neighborhood tiffins'
-    },
-    {
-        name: 'Poonam Deshmukh',
-        role: 'Tailor & Boutique Designer',
-        location: 'Borivali West, Mumbai',
-        stars: '★★★★★',
-        story: 'I stitch custom dresses and festive wear from my home. Having a dedicated store profile lets women in my society browse photos of my work and contact me for tailoring.',
-        highlight: 'Regular neighborhood orders'
-    },
-    {
-        name: 'Aarti Mehta',
-        role: 'Handmade Candles & Crafts',
-        location: 'Thane West',
-        stars: '★★★★★',
-        story: 'Big e-commerce sites take a 30% cut. On ProWorker Store, local customers call me directly and pick up gift hampers the same day. It is direct and hassle-free.',
-        highlight: 'Zero platform cuts'
-    }
-];
+const formatPrice = (value) => `₹${value.toLocaleString('en-IN')}`;
 
-const storeFaqs = [
-    {
-        q: 'What is ProWorker Store?',
-        a: 'ProWorker Store is a dedicated in-app marketplace separate from trade services. It allows anyone—homemakers, home chefs, tailors, artisans, and creators—to list and sell homemade products directly to nearby neighbors with 0% commission.'
-    },
-    {
-        q: 'Is the Store restricted to service-related products?',
-        a: 'No! The Store is dedicated to homemade products. You can sell homemade food, tiffins, cakes, custom stitched clothes, pottery, candles, organic soaps, and handmade crafts. It is not limited to service tools or parts.'
-    },
-    {
-        q: 'Does ProWorker charge commission on my store sales?',
-        a: 'Never. ProWorker takes 0% commission. You set your own prices (e.g. ₹499), keep 100% of your earnings, and payouts settle into your bank account with zero deductions.'
-    },
-    {
-        q: 'When and how do sellers receive their money? What is the payment cycle?',
-        a: 'The payment cycle settles in 1 week. After customers place orders, sellers receive their money deposited directly into their bank account every Monday with 0% platform cuts.'
-    },
-    {
-        q: 'How does a customer buy? Who contacts whom?',
-        a: 'The customer contacts the seller. When someone finds a product they like, they tap call or WhatsApp on the seller card to confirm details and place the order. Seller payouts then settle on the weekly Monday cycle.'
-    },
-    {
-        q: 'How does delivery work? Is in-app delivery coming?',
-        a: 'Currently, customers contact sellers directly via call or WhatsApp to arrange convenient local pickup or local delivery. Integrated in-app delivery features are also coming very soon to the ProWorker app!'
-    },
-    {
-        q: 'Do I need a commercial shop or GST to sell from home?',
-        a: 'No. ProWorker Store is built to empower home-based sellers and local creators. You can start right from your home kitchen, living room, or workshop.'
-    }
-];
+const discountPct = (price, mrp) => {
+    if (!mrp || mrp <= price) return 0;
+    return Math.round(((mrp - price) / mrp) * 100);
+};
+
+const productHash = (id) => `#p=${encodeURIComponent(id)}`;
+
+const readProductHash = () => {
+    if (typeof window === 'undefined') return null;
+    const match = window.location.hash.match(/[#&]p=([^&]+)/);
+    return match ? decodeURIComponent(match[1]) : null;
+};
 
 export default function StorePage() {
     const [viewMode, setViewMode] = useState('client');
-    const [sellerTab, setSellerTab] = useState('seller');
-    const [activeScreenshot, setActiveScreenshot] = useState('feed');
-    const [openFaq, setOpenFaq] = useState(null);
+    const [activeCategory, setActiveCategory] = useState('all');
+    const [listingFilter, setListingFilter] = useState('all');
+    const [selectedId, setSelectedId] = useState(null);
 
-    const toggleFaq = (index) => {
-        setOpenFaq(openFaq === index ? null : index);
+    useEffect(() => {
+        const syncFromHash = () => setSelectedId(readProductHash());
+        syncFromHash();
+        window.addEventListener('hashchange', syncFromHash);
+        return () => window.removeEventListener('hashchange', syncFromHash);
+    }, []);
+
+    useEffect(() => {
+        if (selectedId) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [selectedId]);
+
+    const openProduct = (id) => {
+        setSelectedId(id);
+        if (window.location.hash !== productHash(id)) {
+            window.location.hash = productHash(id).slice(1);
+        }
     };
+
+    const closeProduct = () => {
+        setSelectedId(null);
+        if (window.location.hash) {
+            history.pushState('', document.title, `${window.location.pathname}${window.location.search}`);
+        }
+    };
+
+    const filteredProducts = useMemo(() => {
+        return sampleStoreProducts.filter((product) => {
+            const matchCategory = activeCategory === 'all' || product.categoryId === activeCategory;
+            const matchListing = listingFilter === 'all' || product.status === listingFilter;
+            return matchCategory && matchListing;
+        });
+    }, [activeCategory, listingFilter]);
+
+    const selectedProduct = sampleStoreProducts.find((product) => product.id === selectedId) || null;
+    const relatedProducts = selectedProduct
+        ? sampleStoreProducts
+            .filter((product) => product.categoryId === selectedProduct.categoryId && product.id !== selectedProduct.id)
+            .slice(0, 4)
+        : [];
+
+    const activeCategoryLabel =
+        browseCategories.find((c) => c.id === activeCategory)?.label || 'All Products';
 
     return (
         <div className="store-page-root">
             <Navbar viewMode={viewMode} onViewModeChange={setViewMode} />
 
-            {/* Store Hero */}
-            <header className="store-hero">
+            <section className={`qc-page${selectedProduct ? ' has-pdp' : ''}`}>
                 <div className="container">
-                    <div className="store-hero-inner">
-                        <div className="store-hero-copy">
-                            <div className="store-kicker-badge">
-                                <span className="kicker-icon">🏪</span>
-                                <span>Homemade Marketplace in India</span>
-                                <span className="kicker-pill">0% Commission</span>
-                            </div>
-                            <h1>
-                                Sell & Buy <span className="text-store-highlight">Homemade Products</span> Across India From Home.
-                            </h1>
-                            <p className="store-hero-desc">
-                                Inside the ProWorker app, discover the dedicated <strong>Store</strong> tab—
-                                India’s authentic local marketplace to sell or buy homemade food, tailored clothing, handcrafted decor, and artisan products from neighbors with zero middleman cuts.
-                            </p>
-
-                            <div className="store-hero-buttons">
-                                <a
-                                    href={WORKER_PLAY_STORE_URL}
-                                    className="btn btn-store-primary"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Start Selling from Home
-                                </a>
-                                <a
-                                    href={CLIENT_PLAY_STORE_URL}
-                                    className="btn btn-store-secondary"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    Download App to Shop Nearby
-                                </a>
-                            </div>
-
-                            <div className="store-guarantees">
-                                <div className="guarantee-item">
-                                    <span className="check-icon">✓</span>
-                                    <span><strong>0% Commission</strong> on all sales</span>
-                                </div>
-                                <div className="guarantee-item">
-                                    <span className="check-icon">✓</span>
-                                    <span><strong>Weekly Settlement</strong>: Money in your bank every Monday</span>
-                                </div>
-                                <div className="guarantee-item">
-                                    <span className="check-icon">✓</span>
-                                    <span><strong>Customer Contacts Seller</strong> directly via WhatsApp / Call</span>
-                                </div>
-                                <div className="guarantee-item">
-                                    <span className="check-icon">✓</span>
-                                    <span><strong>🚚 Delivery Features</strong> rolling out soon on app!</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Interactive Phone Mockup from Real App */}
-                        <div className="store-hero-mockup-wrapper">
-                            <div className="store-phone-frame">
-                                <div className="phone-camera-island"></div>
-                                <div className="phone-screen-container">
-                                    <img
-                                        src={activeScreenshot === 'feed' ? storeFeedFullImg : productDetailImg}
-                                        alt="ProWorker Store in-app preview"
-                                        className="phone-screenshot"
-                                    />
-                                </div>
-                                <div className="mockup-tab-selector">
-                                    <button
-                                        type="button"
-                                        className={`mockup-tab-btn ${activeScreenshot === 'feed' ? 'active' : ''}`}
-                                        onClick={() => setActiveScreenshot('feed')}
-                                    >
-                                        🏪 In-App Store Feed
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className={`mockup-tab-btn ${activeScreenshot === 'detail' ? 'active' : ''}`}
-                                        onClick={() => setActiveScreenshot('detail')}
-                                    >
-                                        📦 Product Details
-                                    </button>
-                                </div>
-                            </div>
-                            <div className="phone-mockup-tag">
-                                <strong>Actual App Screens</strong>
-                                <span>Browse the dedicated Store tab inside ProWorker</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            {/* Live Store Feed Preview (Simulating In-App Experience) */}
-            <section className="store-feed-preview-section">
-                <div className="container">
-                    <div className="section-title-center">
-                        <span className="store-subhead-pill">Live In-App Experience</span>
-                        <h2>Explore What Neighbors Sell on ProWorker Store</h2>
-                        <p>
-                            Here is a preview of how homemade items appear to local shoppers in the app.
-                            Sorted by distance with real prices, direct seller contact, and zero middleman fee.
-                        </p>
-                    </div>
-
-                    {/* Simulated In-App Search Bar */}
-                    <div className="simulated-app-search-bar">
-                        <div className="sim-search-input">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                            </svg>
-                            <span>Search nearby homemade products (food, clothes, crafts...)</span>
-                        </div>
-                        <div className="sim-search-location">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2.5">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
-                            <span>Near your location • Sorted by distance</span>
-                        </div>
-                    </div>
-
-                    {/* Simulated Product Cards Grid */}
-                    <div className="preview-products-grid">
-                        {sampleStoreProducts.map((prod) => (
-                            <div key={prod.id} className="feed-product-card">
-                                <div className="product-card-img-wrap">
-                                    <img src={prod.image} alt={prod.title} />
-                                    <span className="product-for-sale-pill">{prod.status}</span>
-                                    <span className="product-category-tag">{prod.category}</span>
-                                </div>
-                                <div className="product-card-details">
-                                    <div className="product-card-header">
-                                        <h3 className="product-card-title">{prod.title}</h3>
-                                        <div className="product-card-price">
-                                            {prod.price}
-                                            {prod.unit && <span className="price-unit">{prod.unit}</span>}
-                                        </div>
-                                    </div>
-
-                                    <div className="product-card-meta">
-                                        <div className="product-rating">
-                                            <span className="star-icon">★</span>
-                                            <strong>{prod.rating}</strong>
-                                            <span className="reviews-count">({prod.reviews})</span>
-                                        </div>
-                                        <div className="product-distance">
-                                            <span className="dist-icon">📍</span>
-                                            <span>{prod.distance}</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="product-card-seller">
-                                        <div className="seller-avatar">
-                                            {prod.seller.charAt(0)}
-                                        </div>
-                                        <div className="seller-info-text">
-                                            <span className="seller-label">Sold by</span>
-                                            <span className="seller-name">{prod.seller}</span>
-                                        </div>
-                                        <a
-                                            href={CLIENT_PLAY_STORE_URL}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="btn-product-contact"
-                                            title="Download app to contact seller"
-                                        >
-                                            Contact
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* What Homemade Products Can You Sell */}
-            <section className="store-categories-section">
-                <div className="container">
-                    <div className="section-title-center">
-                        <span className="store-subhead-pill">Authentic & Local</span>
-                        <h2>What Homemade Products Can You Sell?</h2>
-                        <p>
-                            ProWorker Store is not tied to trade repairs. It is an authentic local marketplace where home entrepreneurs, artisans, and home chefs can sell the homemade products they create!
-                        </p>
-                    </div>
-
-                    <div className="store-cards-grid">
-                        {storeCategoriesList.map((cat, i) => (
-                            <div key={i} className="store-category-box">
-                                {cat.image ? (
-                                    <div className="store-card-image-wrap">
-                                        <img src={cat.image} alt={cat.title} />
-                                        <span className="store-card-badge">{cat.badge}</span>
-                                    </div>
-                                ) : (
-                                    <div className="store-card-icon-wrap">
-                                        <span className="store-big-icon">{cat.icon}</span>
-                                        <span className="store-card-badge">{cat.badge}</span>
-                                    </div>
-                                )}
-                                <div className="store-card-body">
-                                    <h3>{cat.title}</h3>
-                                    <p>{cat.examples}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* How Store Works */}
-            <section className="store-how-it-works">
-                <div className="container">
-                    <div className="store-how-header">
-                        <h2>How ProWorker Store Works</h2>
-                        <div className="seller-buyer-toggle">
-                            <button
-                                type="button"
-                                className={`sb-btn ${sellerTab === 'seller' ? 'active' : ''}`}
-                                onClick={() => setSellerTab('seller')}
-                            >
-                                🏡 For Home Sellers
-                            </button>
-                            <button
-                                type="button"
-                                className={`sb-btn ${sellerTab === 'buyer' ? 'active' : ''}`}
-                                onClick={() => setSellerTab('buyer')}
-                            >
-                                🛍️ For Local Shoppers
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="store-steps-grid">
-                        {sellerTab === 'seller' ? (
-                            <>
-                                <div className="store-step-item">
-                                    <div className="step-header-row">
-                                        <div className="step-num-badge">01</div>
-                                        <span className="step-icon-emoji">📲</span>
-                                    </div>
-                                    <h3>Open the Store Tab</h3>
-                                    <p>Download the free ProWorker Worker app and tap on the Store section to set up your home shop profile.</p>
-                                </div>
-                                <div className="store-step-item">
-                                    <div className="step-header-row">
-                                        <div className="step-num-badge">02</div>
-                                        <span className="step-icon-emoji">📸</span>
-                                    </div>
-                                    <h3>Snap Photos & Add Price</h3>
-                                    <p>Upload real pictures of your homemade food, tailored clothing, crafts, or plants. Set your own fair price (₹).</p>
-                                </div>
-                                <div className="store-step-item">
-                                    <div className="step-header-row">
-                                        <div className="step-num-badge">03</div>
-                                        <span className="step-icon-emoji">📍</span>
-                                    </div>
-                                    <h3>Nearby Neighbors Discover You</h3>
-                                    <p>Your products appear to nearby local customers, sorted by distance with clear "For sale" tags.</p>
-                                </div>
-                                <div className="store-step-item">
-                                    <div className="step-header-row">
-                                        <div className="step-num-badge">04</div>
-                                        <span className="step-icon-emoji">🏦</span>
-                                    </div>
-                                    <h3>Get Contacted & Paid Weekly</h3>
-                                    <p>Customers reach you on call or WhatsApp to place orders. Your payment cycle settles in 1 week—money lands in your bank every Monday with 0% commission.</p>
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                <div className="store-step-item">
-                                    <div className="step-header-row">
-                                        <div className="step-num-badge">01</div>
-                                        <span className="step-icon-emoji">🔍</span>
-                                    </div>
-                                    <h3>Tap Store in the App</h3>
-                                    <p>Open the ProWorker app and switch to the dedicated Store tab right from the navigation bar.</p>
-                                </div>
-                                <div className="store-step-item">
-                                    <div className="step-header-row">
-                                        <div className="step-num-badge">02</div>
-                                        <span className="step-icon-emoji">🍲</span>
-                                    </div>
-                                    <h3>Search & Browse Nearby</h3>
-                                    <p>Filter by distance to find homemade meals, custom tailored dresses, or unique crafts in your neighborhood.</p>
-                                </div>
-                                <div className="store-step-item">
-                                    <div className="step-header-row">
-                                        <div className="step-num-badge">03</div>
-                                        <span className="step-icon-emoji">🏷️</span>
-                                    </div>
-                                    <h3>Check Real Photos & Prices</h3>
-                                    <p>Inspect real photos, clear per-item prices (e.g. ₹499), ratings, and distance before purchasing.</p>
-                                </div>
-                                <div className="store-step-item">
-                                    <div className="step-header-row">
-                                        <div className="step-num-badge">04</div>
-                                        <span className="step-icon-emoji">📞</span>
-                                    </div>
-                                    <h3>You Contact the Seller Directly</h3>
-                                    <p>Chat on WhatsApp or call the seller directly to confirm details and place your order. In-app delivery features are launching soon!</p>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                </div>
-            </section>
-
-            {/* Seller Stories / Testimonials */}
-            <section className="store-stories-section">
-                <div className="container">
-                    <div className="section-title-center">
-                        <span className="store-subhead-pill">Real Success Stories</span>
-                        <h2>Home Sellers Thriving on ProWorker Store</h2>
-                        <p>Discover how everyday home chefs, tailors, and creators earn directly from their homes.</p>
-                    </div>
-
-                    <div className="store-stories-grid">
-                        {sellerStories.map((story, i) => (
-                            <div key={i} className="seller-story-card">
-                                <div className="story-card-top">
-                                    <div className="story-badge">{story.highlight}</div>
-                                    <div className="story-stars">{story.stars}</div>
-                                </div>
-                                <p className="story-quote">“{story.story}”</p>
-                                <div className="story-author">
-                                    <div className="author-avatar">{story.name.charAt(0)}</div>
-                                    <div className="author-meta">
-                                        <strong>{story.name}</strong>
-                                        <span className="author-role">{story.role}</span>
-                                        <span className="author-loc">📍 {story.location}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Why ProWorker Store Banner */}
-            <section className="store-comparison-section">
-                <div className="container">
-                    <div className="store-banner-card">
-                        <div className="store-banner-layout">
-                            <div className="store-banner-content">
-                                <span className="banner-pill">Why Sellers Love ProWorker Store</span>
-                                <h2>Keep 100% of What You Earn. No 30% Delivery App Cuts.</h2>
-                                <p>
-                                    Traditional e-commerce and food delivery platforms charge hefty 25% to 40% commissions and high onboarding fees.
-                                    ProWorker Store is 100% free with <strong>0% commission</strong>, so home makers can earn with dignity and neighbors get authentic homemade quality at fair prices.
-                                </p>
-                                <div className="banner-action-row">
-                                    <a
-                                        href={WORKER_PLAY_STORE_URL}
-                                        className="btn btn-store-light"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        Open Your Home Store Now
-                                    </a>
-                                    <a
-                                        href={WHATSAPP_URL}
-                                        className="btn btn-store-outline"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        Have Questions? Chat on WhatsApp
-                                    </a>
-                                </div>
-                            </div>
-
-                            {/* Side-by-side comparison box */}
-                            <div className="store-comparison-table-box">
-                                <div className="comp-col traditional-apps">
-                                    <div className="comp-col-header">
-                                        <span className="comp-title">Traditional Apps</span>
-                                        <span className="comp-badge bad">High Cuts</span>
-                                    </div>
-                                    <ul className="comp-features">
-                                        <li><span className="comp-cross">✕</span> 25% – 35% commission per order</li>
-                                        <li><span className="comp-cross">✕</span> Mandatory GST & onboarding fees</li>
-                                        <li><span className="comp-cross">✕</span> Payouts delayed by 7–14 days</li>
-                                        <li><span className="comp-cross">✕</span> Strict corporate listing rules</li>
-                                    </ul>
-                                </div>
-                                <div className="comp-col proworker-app">
-                                    <div className="comp-col-header">
-                                        <span className="comp-title">ProWorker Store</span>
-                                        <span className="comp-badge good">0% Cut</span>
-                                    </div>
-                                    <ul className="comp-features">
-                                        <li><span className="comp-check">✓</span> <strong>0% Commission</strong> forever</li>
-                                        <li><span className="comp-check">✓</span> <strong>Weekly Bank Settlement</strong> every Monday</li>
-                                        <li><span className="comp-check">✓</span> 100% free to start from home</li>
-                                        <li><span className="comp-check">✓</span> In-app delivery rolling out soon</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Store FAQs */}
-            <section className="store-faq-section">
-                <div className="container">
-                    <div className="section-title-center">
-                        <h2>Frequently Asked Questions About Store</h2>
-                        <p>Got questions about selling or shopping on ProWorker Store? We’ve got answers.</p>
-                    </div>
-
-                    <div className="store-faq-list">
-                        {storeFaqs.map((faq, i) => (
-                            <div key={i} className={`store-faq-item ${openFaq === i ? 'open' : ''}`}>
+                    {selectedProduct ? (
+                        <ProductDetail
+                            product={selectedProduct}
+                            related={relatedProducts}
+                            onBack={closeProduct}
+                            onOpenProduct={openProduct}
+                        />
+                    ) : (
+                    <div className="qc-layout">
+                        {/* Left category rail */}
+                        <aside className="qc-sidebar" aria-label="Product categories">
+                            {browseCategories.map((cat) => (
                                 <button
+                                    key={cat.id}
                                     type="button"
-                                    className="store-faq-question"
-                                    onClick={() => toggleFaq(i)}
+                                    className={`qc-side-item ${activeCategory === cat.id ? 'active' : ''}`}
+                                    onClick={() => setActiveCategory(cat.id)}
                                 >
-                                    <span>{faq.q}</span>
-                                    <span className="faq-toggle-icon">{openFaq === i ? '−' : '+'}</span>
+                                    <span className="qc-side-emoji" aria-hidden="true">{cat.icon}</span>
+                                    <span className="qc-side-label">{cat.label}</span>
                                 </button>
-                                {openFaq === i && (
-                                    <div className="store-faq-answer">
-                                        <p>{faq.a}</p>
-                                    </div>
-                                )}
+                            ))}
+                        </aside>
+
+                        {/* Main content */}
+                        <div className="qc-main">
+                            <div className="qc-main-head">
+                                <div>
+                                    <h1 className="qc-main-title">{activeCategoryLabel}</h1>
+                                    <p className="qc-main-count">{filteredProducts.length} items near you</p>
+                                </div>
+                                <div className="qc-listing-filters">
+                                    {listingFilters.map((filter) => (
+                                        <button
+                                            key={filter.id}
+                                            type="button"
+                                            className={`qc-chip ${listingFilter === filter.id ? 'active' : ''}`}
+                                            onClick={() => setListingFilter(filter.id)}
+                                        >
+                                            {filter.label}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
-                        ))}
+
+                            {filteredProducts.length === 0 ? (
+                                <div className="qc-empty">
+                                    <p>No products in this filter yet. Try another category or listing type.</p>
+                                    <button
+                                        type="button"
+                                        className="qc-chip active"
+                                        onClick={() => {
+                                            setActiveCategory('all');
+                                            setListingFilter('all');
+                                        }}
+                                    >
+                                        View all products
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="qc-grid">
+                                    {filteredProducts.map((prod) => {
+                                        const off = discountPct(prod.price, prod.mrp);
+                                        return (
+                                            <article
+                                                key={prod.id}
+                                                className="qc-card"
+                                                role="button"
+                                                tabIndex={0}
+                                                onClick={() => openProduct(prod.id)}
+                                                onKeyDown={(event) => {
+                                                    if (event.key === 'Enter' || event.key === ' ') {
+                                                        event.preventDefault();
+                                                        openProduct(prod.id);
+                                                    }
+                                                }}
+                                            >
+                                                <div className="qc-card-media">
+                                                    {off > 0 && <span className="qc-off">{off}% OFF</span>}
+                                                    <span
+                                                        className={`qc-tag ${prod.status === 'For rent' ? 'is-rent' : 'is-sale'}`}
+                                                    >
+                                                        {prod.status === 'For rent' ? 'RENT' : 'SALE'}
+                                                    </span>
+                                                    <img src={prod.image} alt={prod.title} loading="lazy" decoding="async" />
+                                                </div>
+
+                                                <div className="qc-card-body">
+                                                    <span className="qc-eta">📍 {prod.distance}</span>
+                                                    <h3 className="qc-title">{prod.title}</h3>
+                                                    <p className="qc-qty">{prod.qty}</p>
+
+                                                    <div className="qc-rating">
+                                                        <span className="qc-star">★</span> {prod.rating}
+                                                        <span className="qc-reviews">({prod.reviews})</span>
+                                                    </div>
+
+                                                    <div className="qc-foot">
+                                                        <div className="qc-price-wrap">
+                                                            <span className="qc-price">
+                                                                {formatPrice(prod.price)}
+                                                                {prod.unit && <span className="qc-unit">{prod.unit}</span>}
+                                                            </span>
+                                                            {prod.mrp > prod.price && (
+                                                                <span className="qc-mrp">{formatPrice(prod.mrp)}</span>
+                                                            )}
+                                                        </div>
+                                                        <a
+                                                            href={CLIENT_PLAY_STORE_URL}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="qc-add"
+                                                            title="Open app to contact seller"
+                                                            onClick={(event) => event.stopPropagation()}
+                                                        >
+                                                            ADD
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        );
+                                    })}
+                                </div>
+                            )}
+                        </div>
                     </div>
+                    )}
                 </div>
             </section>
 

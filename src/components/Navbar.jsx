@@ -98,16 +98,19 @@ function Navbar({ viewMode, onViewModeChange }) {
                     </div>
 
                     <ul className={`navbar-menu ${mobileMenuOpen ? 'open' : ''}`}>
-                        <li><a href="/#categories" onClick={closeMenu}>Services</a></li>
+                        <li>
+                            <a href="/search" onClick={closeMenu} className={isSearchPage ? 'nav-link-active' : ''}>
+                                Services
+                            </a>
+                        </li>
                         <li>
                             <a href="/store" onClick={closeMenu} className={isStorePage ? 'nav-link-active' : ''}>
                                 Store <span className="nav-store-badge">Homemade</span>
                             </a>
                         </li>
                         <li><a href="/#how-it-works" onClick={closeMenu}>How it works</a></li>
-                        <li><a href="/search" onClick={closeMenu}>Find workers</a></li>
-                        <li><a href="/#testimonials" onClick={closeMenu}>Reviews</a></li>
-                        <li><a href="/#about" onClick={closeMenu}>About</a></li>
+                        <li className="nav-optional"><a href="/#testimonials" onClick={closeMenu}>Reviews</a></li>
+                        <li className="nav-optional"><a href="/#about" onClick={closeMenu}>About</a></li>
                         <li>
                             <a
                                 href="/partner"

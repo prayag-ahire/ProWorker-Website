@@ -63,6 +63,7 @@ export const workerService = {
           message: data.message,
           workers: (data.data.workers || []).map(worker => ({
             id: worker.id,
+            userId: worker.userId || worker.user_id || worker.user?.id || null,
             name: worker.username,
             email: worker.email,
             age: worker.age,
@@ -70,6 +71,7 @@ export const workerService = {
             profileImage: worker.imageUrl,
             bio: worker.description,
             profession: worker.profession,
+            offeringType: worker.offeringType || 'SERVICE',
             hourlyRate: worker.charges_per_visit,
             distanceCharges: worker.distance_charges,
             distance: worker.distance_km,
